@@ -1,0 +1,1054 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap');
+
+/* IFRAME BODY SETTINGS */
+body {
+    box-sizing: border-box;
+    border: 0px solid yellowgreen;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto; 
+    text-align: center; /*Horizontal*/
+    align-items: center; /*Horizontal*/
+    justify-content: flex-start;
+}
+
+
+
+/* IFRAME MAIN SETTINGS */
+main {
+    box-sizing: border-box;
+    border: 0px solid white;
+    background-image:
+        url("../img/main_img.png");
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-link {
+    box-sizing: border-box;
+    border: 0px solid red;
+    text-decoration: none;
+    background-color: none;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+}
+
+.main-h1-assinatura {
+    box-sizing: border-box;
+    font-size: 4rem;
+    color: white;
+    font-family: 
+        "Tangerine", cursive;    
+    font-weight: bold;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 0;
+    margin-top: 60px;
+    margin-bottom: -10px;
+    padding: 0;
+}
+
+.main-h1-nicho {
+    box-sizing: border-box;
+    font-size: 3.5rem;
+    color: white;
+    font-family: 
+        'Times New Roman', Times, serif;   
+    font-weight: bold;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 0;
+    margin-bottom: 60px;
+    padding: 0;
+}
+
+.main-h2 {
+    box-sizing: border-box;
+    font-size: 1.5rem;
+    color: white;
+    font-family: 
+        Georgia, 
+        'Times New Roman', Times, serif;
+    font-weight: normal;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 0;
+}
+
+.main-btn {
+    box-sizing: border-box;
+    color: white;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 0.875rem;
+    letter-spacing: 2px;
+    width: 260px;
+    height: 33px;
+    border-radius: 20px;
+    border: 1px solid dimgray;
+    background: 
+        linear-gradient(
+            to right, 
+            #635648 3%, 
+            #c69f68 25%,
+            #d8ae72 100%);
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    margin-bottom: 80px;
+    transition: transform 0.8s ease;
+}
+
+.main-btn:hover {
+    background:
+        linear-gradient(
+            to right, 
+            #d8ae72 3%, 
+            #c69f68 75%,
+            #635648 100%);
+    border: 1px solid white;
+    transition-duration: 0.8s;
+    cursor: pointer;
+}
+
+/* RECURSIVIDADE MAIN */
+@media only screen and (max-width: 415px) {
+    .main-h1 {
+        font-size: 2.5rem;
+    }
+}
+
+
+
+/***** Section, ícones relevantes *****/
+.relevant-icon {
+    box-sizing: border-box;
+    border: 0px solid yellowgreen;
+    margin: 0;
+    padding: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.rel-infos {
+    box-sizing: border-box;
+    border: 0px solid red;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: auto;
+    height: auto;
+    align-items: center;
+    justify-content: center; 
+}
+
+.rel-infos .fa {
+    box-sizing: border-box;
+    border: 0px solid greenyellow;
+    color: #d2aa70;
+    font-size: 3rem;
+    margin: 5px;
+    padding: 0;
+    cursor: context-menu;
+}
+
+#fa-carro, #fa-id {
+    font-size: 2.7rem;
+}
+
+.rel-p {
+    box-sizing: border-box;
+    border: 0px solid black;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-family: 
+        Georgia, 
+        'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-variant: normal;
+    text-align: left;
+    color: #05243a;
+    margin: 0;
+    padding: 0;
+    cursor: text;
+}
+
+/* RECURSIVIDADE SEÇÃO ÍCONES RELEVANTES */
+@media only screen and (max-width: 1062px) {
+    .rel-infos {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 668px) {
+    .rel-infos {
+        margin: auto;
+        width: 350px;
+        justify-content: space-around;
+    }
+
+    .rel-infos .fa {
+        margin: 5px;
+        margin-right: 5px;
+    }
+
+    .rel-p {
+        width: 250px;
+    }
+}
+
+@media only screen and (max-width: 370px) {
+    .rel-infos {
+        width: 250px;
+        margin-bottom: 5px;
+    }
+
+    .rel-p {
+        text-align: center;
+    }
+
+}
+
+
+
+/* Section Principais Serviços */
+.principais-serviços {
+    box-sizing: border-box;
+    border: 0px solid yellowgreen;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.ps-h1 {
+    box-sizing: border-box;
+    font-size: 2.5rem;
+    color: #05243a;
+    font-family: 
+        'Times New Roman', Times, serif;
+    font-weight: bold;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 0;
+    margin-top: 80px;
+    margin-bottom: 50px;
+    padding: 0;
+}
+
+.ps-p {
+    box-sizing: border-box;
+    border: 0px solid black;
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-family: 
+        Georgia, 
+        'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-variant: normal;
+    text-align: justify;
+    line-height: 20px;
+    max-width: 900px;
+    color: #05243a;
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    cursor: text;
+}
+
+.ps-container-frames {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 0px solid black;
+    max-width: 800px;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.ps-container-frame-link-01 {
+    box-sizing: border-box;
+    border: 2px inset black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-decoration: none;
+    width: 380px;
+    height: 280px;
+    background-image: 
+        url("../img/ser-transfer.png");
+    background-size: 380px 280px;
+    margin: 8px;
+    padding: 0;
+    position: relative;
+}
+
+.ps-container-frame-link-02 {
+    box-sizing: border-box;
+    border: 2px inset black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-decoration: none;
+    width: 380px;
+    height: 280px;
+    background-image: 
+        url("../img/ser-viagem-executiva.png");
+    background-size: 380px 280px;
+    margin: 8px;
+    padding: 0;
+    position: relative;
+}
+
+.ps-container-frame-link-03 {
+    box-sizing: border-box;
+    border: 2px inset black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-decoration: none;
+    width: 380px;
+    height: 280px;
+    background-image: 
+        url("../img/ser-pacotes.png");
+    background-size: 380px 280px;
+    margin: 8px;
+    padding: 0;
+    position: relative;
+}
+
+.ps-container-frame-link-04 {
+    box-sizing: border-box;
+    border: 2px inset black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-decoration: none;
+    width: 380px;
+    height: 280px;
+    background-image: 
+        url("../img/ser-passagens.png");
+    background-size: 380px 280px;
+    margin: 8px;
+    padding: 0;
+    position: relative;
+}
+
+.ps-container-frame-text {
+    box-sizing: border-box;
+    border: 1px solid white;
+    border-left: none;
+    border-right: none;
+    background-color: #05243a;
+    color: white;
+    font-weight: bold;
+    font-family: 
+        Georgia, 
+        'Times New Roman', Times, serif;
+    font-size: 1rem;
+    text-align: left;
+    width: 100%;
+    height: auto;
+    min-height: 25px;
+    letter-spacing: 5px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 10px;
+    padding-left: 5px;
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+}
+
+.ps-p-end {
+    box-sizing: border-box;
+    border: 0px solid black;
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-family: 
+        Georgia, 
+        'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-variant: normal;
+    text-align: center;
+    line-height: 20px;
+    max-width: 700px;
+    color: #05243a;
+    margin: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    cursor: text;
+}
+
+/* RECURSIVIDADE PRINCIPAIS SERVIÇOS */
+@media only screen and (max-width: 412px) {
+    .ps-container-frame-link-01 {
+        width: 280px;
+        height: 180px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: bottom center;
+    }  
+    
+    .ps-container-frame-link-02 {
+        width: 280px;
+        height: 180px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }   
+
+    .ps-container-frame-link-03 {
+        width: 280px;
+        height: 180px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }  
+    
+    .ps-container-frame-link-04 {
+        width: 280px;
+        height: 180px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }   
+}
+
+
+
+/* Section Principais Ferramentas */
+.principais-ferramentas {
+    box-sizing: border-box;
+    border: 0px solid yellowgreen;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.pf-h1 {
+    box-sizing: border-box;
+    font-size: 2.5rem;
+    color: #05243a;
+    font-family: 
+        'Times New Roman', Times, serif;
+    font-weight: bold;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 0;
+    margin-top: 80px;
+    margin-bottom: 30px;
+    padding: 0;
+}
+
+.pf-p {
+    box-sizing: border-box;
+    border: 0px solid black;
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-family: 
+        Georgia, 
+        'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-variant: normal;
+    text-align: center;
+    line-height: 20px;
+    max-width: 600px;
+    color: #05243a;
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    cursor: text;
+}
+
+.pf-container-frames {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 0px solid black;
+    max-width: 1200px;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.pf-container-frame-01 {
+    box-sizing: border-box;
+    border: 2px inset black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-decoration: none;
+    width: 380px;
+    height: 280px;
+    background-image: 
+        url("../img/sedan-standart.png");
+    background-size: cover;
+    margin: 8px;
+    padding: 0;
+    position: relative;
+}
+
+.pf-container-frame-02 {
+    box-sizing: border-box;
+    border: 2px inset black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-decoration: none;
+    width: 380px;
+    height: 280px;
+    background-image: 
+        url("../img/sedan-executivo.png");
+    background-size: cover;
+    margin: 8px;
+    padding: 0;
+    position: relative;
+}
+
+.pf-container-frame-03 {
+    box-sizing: border-box;
+    border: 2px inset black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-decoration: none;
+    width: 380px;
+    height: 280px;
+    background-image: 
+        url("../img/sedan-luxo.png");
+    background-size: cover;
+    margin: 8px;
+    padding: 0;
+    position: relative;
+}
+
+.pf-container-frame-04 {
+    box-sizing: border-box;
+    border: 2px inset black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-decoration: none;
+    width: 380px;
+    height: 280px;
+    background-image: 
+        url("../img/sedan-blindado.png");
+    background-size: cover;
+    margin: 8px;
+    padding: 0;
+    position: relative;
+}
+
+.pf-container-frame-05 {
+    box-sizing: border-box;
+    border: 2px inset black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-decoration: none;
+    width: 380px;
+    height: 280px;
+    background-image: 
+        url("../img/SUV-executivo.png");
+    background-size: cover;
+    margin: 8px;
+    padding: 0;
+    position: relative;
+}
+
+.pf-container-frame-06 {
+    box-sizing: border-box;
+    border: 2px inset black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-decoration: none;
+    width: 380px;
+    height: 280px;
+    background-image: 
+        url("../img/van.png");
+    background-size: cover;
+    margin: 8px;
+    padding: 0;
+    position: relative;
+}
+
+.pf-container-frame-p {
+    box-sizing: border-box;
+    border: 1px solid white;
+    border-left: none;
+    border-right: none;
+    background-color: #05243a;
+    color: white;
+    font-weight: bold;
+    font-family: 
+        Georgia, 
+        'Times New Roman', Times, serif;
+    font-size: 1rem;
+    text-align: left;
+    width: 100%;
+    height: auto;
+    min-height: 25px;
+    letter-spacing: 5px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 10px;
+    padding-left: 5px;
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+}
+
+/* RECURSIVIDADE PRINCIPAIS FERRAMENTAS */
+@media only screen and (max-width: 412px) {
+    .pf-container-frame-01 {
+        width: 280px;
+        height: 180px;
+    }  
+    
+    .pf-container-frame-02 {
+        width: 280px;
+        height: 180px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: bottom center;
+    }   
+
+    .pf-container-frame-03 {
+        width: 280px;
+        height: 180px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }  
+    
+    .pf-container-frame-04 {
+        width: 280px;
+        height: 180px;
+    }  
+    
+    .pf-container-frame-05 {
+        width: 280px;
+        height: 180px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+    } 
+
+    .pf-container-frame-06 {
+        width: 280px;
+        height: 180px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+    } 
+}
+
+
+
+/* Section Agendamento */
+.section-agendamento {
+    box-sizing: border-box;
+    border: 0px solid yellowgreen;
+    margin: 0;
+    margin-top: 80px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    justify-content: flex-start;
+    background-image: 
+        url("../img/agendamento.png");
+    background-size: cover;
+}
+
+.sa-h1 {
+    box-sizing: border-box;
+    font-size: 3.5rem;
+    color: white;
+    font-family: 
+        'Times New Roman', Times, serif;
+    font-weight: bold;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 0;
+    margin-top: 80px;
+    margin-bottom: 50px;
+    padding: 0;
+}
+
+.sa-h2 {
+    box-sizing: border-box;
+    font-size: 1.5rem;
+    color: white;
+    font-family: 
+        Georgia, 
+        'Times New Roman', Times, serif;
+    font-weight: normal;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 0;
+    padding: 0;
+}
+
+.sa-btn {
+    box-sizing: border-box;
+    color: white;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 0.875rem;
+    letter-spacing: 2px;
+    width: 260px;
+    height: 33px;
+    border-radius: 20px;
+    border: 1px solid dimgray;
+    background: 
+        linear-gradient(
+            to right, 
+            #635648 3%, 
+            #c69f68 25%,
+            #d8ae72 100%);
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    transition: transform 0.8s ease;
+    cursor: pointer;
+}
+
+.sa-btn:hover {
+    background:
+        linear-gradient(
+            to right, 
+            #d8ae72 3%, 
+            #c69f68 75%,
+            #635648 100%);
+    border: 1px solid white;
+    transition-duration: 0.8s;
+}
+
+
+
+/* Section Históricos */
+.section-históricos {
+    box-sizing: border-box;
+    border: 0px solid yellowgreen;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.sh-h1 {
+    box-sizing: border-box;
+    font-size: 3rem;
+    color: #05243a;
+    font-family: 
+        'Times New Roman', Times, serif;
+    font-weight: bold;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 0;
+    margin-top: 80px;
+    margin-bottom: 30px;
+    padding: 0;
+}
+
+.sh-p {
+    box-sizing: border-box;
+    border: 0px solid black;
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-family: 
+        Georgia, 
+        'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-variant: normal;
+    text-align: center;
+    line-height: 20px;
+    max-width: 600px;
+    color: #05243a;
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 0;
+    cursor: text;
+}
+
+.sh-container-frames {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 0px solid black;
+    max-width: 1200px;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.sh-container-frame-01 {
+    box-sizing: border-box;
+    border: 2px inset black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-decoration: none;
+    width: 380px;
+    height: 280px;
+    background-image: 
+        url("../img/memória-01.png");
+    background-size: 380px 280px;
+    margin: 8px;
+    padding: 0;
+    position: relative;
+}
+
+.sh-container-frame-02 {
+    box-sizing: border-box;
+    border: 2px inset black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-decoration: none;
+    width: 380px;
+    height: 280px;
+    background-image: 
+        url("../img/memória-02.png");
+    background-size: 380px 280px;
+    margin: 8px;
+    padding: 0;
+    position: relative;
+}
+
+.sh-container-frame-03 {
+    box-sizing: border-box;
+    border: 2px inset black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-decoration: none;
+    width: 380px;
+    height: 280px;
+    background-image: 
+        url("../img/memória-03.png");
+    background-size: 380px 280px;
+    margin: 8px;
+    padding: 0;
+    position: relative;
+}
+
+.sh-container-frame-p {
+    box-sizing: border-box;
+    border: 1px solid white;
+    border-left: none;
+    border-right: none;
+    background-color: #05243a;
+    color: white;
+    font-weight: bold;
+    font-family: 
+        Georgia, 
+        'Times New Roman', Times, serif;
+    font-size: 1rem;
+    text-align: left;
+    width: 100%;
+    height: auto;
+    min-height: 25px;
+    letter-spacing: 5px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 10px;
+    padding-left: 5px;
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+}
+
+/* RECURSIVIDADE PRINCIPAIS FERRAMENTAS */
+@media only screen and (max-width: 412px) {
+    .sh-container-frame-01 {
+        width: 280px;
+        height: 180px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }  
+
+    .sh-container-frame-02 {
+        width: 280px;
+        height: 180px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+    } 
+
+    .sh-container-frame-03 {
+        width: 280px;
+        height: 180px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+    } 
+}
+
+
+
+/* Section Nossos Clientes */
+.nossos-clientes {
+    box-sizing: border-box;
+    border: 0px solid yellowgreen;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.nc-h1 {
+    box-sizing: border-box;
+    font-size: 3rem;
+    color: #05243a;
+    font-family: 
+        'Times New Roman', Times, serif;
+    font-weight: bold;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 0;
+    margin-top: 80px;
+    margin-bottom: 50px;
+    padding: 0;
+}
+
+.nc-container-01-frames {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 0px solid black;
+    max-width: 1250px;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.nc-img {
+    box-sizing: border-box;
+    border: 0px inset black;
+    text-decoration: none;
+    width: 280px;
+    height: 110px;
+    margin: 8px;
+    padding: 0;
+}
+
+.nc-container-02-dots {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 0px solid black;
+    max-width: 250px;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.nc-container-02-dot-01 {
+    box-sizing: border-box;
+    border: 0px solid black;
+    text-decoration: none;
+    font-size: 1.8rem;
+    font-family: 
+        Georgia, 
+        'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-variant: normal;
+    text-align: center;
+    line-height: 20px;
+    max-width: 700px;
+    color: #05243a;
+    margin: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 0;
+    cursor: text;
+}
+
+/* RECURSIVIDADE CLIENTES */
+@media only screen and (max-width: 1202px) {
+    .nc-container-01-frames {
+        max-width: 850px;
+    }
+}
