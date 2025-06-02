@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <!-- Session Storage Verification -->
+        <script>
+            const islocalEnvironment = sessionStorage.getItem('localEnvironment')
+            const statusADM = sessionStorage.getItem('ADMstatus')
+            const intlocalEnvironment = parseInt(islocalEnvironment)
+            const resultInt = (intlocalEnvironment === 1)
+            const resultADM = (statusADM === 'true');
+            console.log(resultInt, resultADM);
+
+            if (resultInt === true && resultADM === false) {
+                
+                // Tag GA4
+                const ga4MeasurementId = 'G-G3C439TK33';
+
+                // Head Element GA4
+                const script1 = document.createElement("script")
+                script1.async = true
+                script1.src = `https://www.googletagmanager.com/gtag/js?id=${ga4MeasurementId}`
+                document.head.appendChild(script1)
+
+                // Data Layer GA4
+                const script2 = document.createElement("script")
+                script2.textContent = `
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+
+                    gtag('config', '${ga4MeasurementId}')
+                `;
+                document.head.appendChild(script2);
+
+                // Google Tag Manager GTM
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','GTM-57JHV98X');
+
+                console.log("transfer-aeroporto.html: GA4 e GTM habilitados para essa sessão!");
+            } else {
+                console.log("transfer-aeroporto.html: Ambiente de testes ou ADM em produção, não habilitar TAGS Google!")
+            }
+        </script>
+
+        <meta charset="UTF-8">
+        <meta 
+            name="viewport" 
+            content="width=device-width, 
+                initial-scale=1.0">
+
+        <title>Transfer Aeroporto em Curitiba | Roberto Gonçalves - Motorista Executivo</title>
+
+        <meta
+            name="description"
+            content="Roberto Gonçalves é um motorista especializado em transporte executivo em Curitiba, PR. Receptivo, translado, passeio turístico e transfer. Solicite um orçamento!">
+
+        <meta 
+            name="keywords" 
+            content="Transporte Executivo, chofer especializado, motorista em Curitiba, motorista profissional, orçamento">
+
+        <link 
+            rel="stylesheet" 
+            href="/assets/02-CSS/04-transfer/0-transfer-aeroporto.css">
+
+        <link rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <body>
+
+        <!-- Iframe GTM -->
+        <script>
+            const islocalEnvironment2 = sessionStorage.getItem('localEnvironment')
+            const statusADM2 = sessionStorage.getItem('ADMstatus')
+            const intlocalEnvironment2 = parseInt(islocalEnvironment2)
+            const resultInt2 = (intlocalEnvironment2 === 1)
+            const resultADM2 = (statusADM2 === 'true');
+
+            if (resultInt2 === true && resultADM2 === false) {
+
+                // Google Tag Manager (noscript)
+                const noScript = document.createElement("noscript")
+                const eliframe = document.createElement("iframe")
+                eliframe.src = "https://www.googletagmanager.com/ns.html?id=GTM-57JHV98X"
+                eliframe.height = "0"
+                eliframe.width = "0"
+                eliframe.style.display = "none"
+                eliframe.style.visibility = "hidden"
+                noScript.appendChild(eliframe)
+                document.body.prepend(noScript)
+
+                console.log("transfer-aeroporto.html: Iframe GTM ativo!!!")
+            } else {
+                console.log("transfer-aeroporto.html: Iframe noscript GTM desativado!")
+            }
+        </script>
+        
+        <h1 class="ta-h1">
+            Transfer Aeroporto
+        </h1>
+
+        <div class="ta-container-01-div">
+
+            <img
+                class="ta-container-01-img"
+                src="/assets/02-CSS/01-home/img/ser-transfer.png"
+                alt="Transfer Aeroporto Roberto Gonçalves Transporte Executivo em Curitiba">
+            </img>
+
+            <div class="ta-container-02-div">
+                <p class="ta-container-02-p">
+                    Atendimento 24h.
+                </p>
+
+                <h2 class="ta-container-02-h2">
+                    Diferenciais na hora
+                    da contratação:
+                </h2>
+
+                <div class="ta-container-03-div">
+
+                    <div class="ta-container-04-align">
+                        <i class="fa">
+                            &#xf017;
+                        </i>
+                        <p class="ta-container-03-p">
+                            Orçamento em até 15 minutos.
+                        </p>
+
+                    </div>
+
+                    <div class="ta-container-04-align">
+                        <i class="fa">
+                            &#xf0a2;
+                        </i>
+                        <p class="ta-container-03-p">
+                            Alerta de Horário.
+                        </p>
+                    </div>
+
+                    <div class="ta-container-04-align">
+                        <i class="fa">
+                            &#xf00d;
+                        </i>
+                        <p class="ta-container-03-p">
+                            Cancelamento grátis até 6 horas<br> antes do horário.
+                        </p>
+                    </div>
+                             
+                </div>
+
+                <p class="ta-container-02-p-below">
+                    <b>
+                        O transfer agendado é uma segurança para quem 
+                        precisa de transporte ágil e seguro.
+                    </b>
+                </p>
+
+                <button 
+                    class="ta-btn"
+                    data-link="ta-btn">
+                    <i class="fa">
+                        &#xf232;
+                    </i>
+                    Atendimento ao Cliente
+                </button>
+            </div>
+        </div>
+
+        
+    </body>
+</html>

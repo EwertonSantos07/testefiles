@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+/* Configurações Main iFrame */
+main {
+    box-sizing: border-box;
+    border: 0px solid yellowgreen;
+    width: 100%;
+    height: auto;
+}
+
+.main-iframe {
+    box-sizing: border-box;
+    border: 0px solid black;
+    display: none;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center; 
+}

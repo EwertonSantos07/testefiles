@@ -1,0 +1,246 @@
+@charset "UTF-8";
+
+.pa-h1 {
+    box-sizing: border-box;
+    font-size: 2.5rem;
+    color: #05243a;
+    text-align: center;
+    font-family: 
+        'Times New Roman', Times, serif;
+    font-weight: bold;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 0;
+    margin-top: 80px;
+    margin-bottom: 50px;
+    padding: 0;
+}
+
+.pa-container-01-div {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 0px solid black;
+    max-width: 1000px;
+    height: auto;
+    margin: 0;
+    margin-bottom: 120px;
+    padding: 0;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.pa-container-01-img {
+    box-sizing: border-box;
+    border: 0px inset black;
+    text-decoration: none;
+    width: 340px;
+    height: 350px;
+    margin: 0;
+    padding: 0;
+}
+
+.pa-container-02-div {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border: 0px solid black;
+    max-width: 580px;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    padding-left: 45px;
+    padding-top: 5px;
+    justify-content: flex-start;
+    align-items: left;
+}
+
+.pa-container-02-p {
+    box-sizing: border-box;
+    border: 0px solid black;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-family: 
+        Georgia, 
+        'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-variant: normal;
+    text-align: justify;
+    line-height: 25px;
+    width: 100%;
+    color: #05243a;
+    margin: 0;
+    margin-bottom: 60px;
+    padding: 0;
+    cursor: text;
+}
+
+.pa-container-02-h2 {
+    box-sizing: border-box;
+    border: 0px solid black;
+    font-size: 1.5rem;
+    color: #05243a;
+    width: 100%;
+    text-align: left;
+    font-family: 
+        'Times New Roman', Times, serif;
+    font-weight: bold;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin: 0;
+    padding: 0;
+}
+
+.pa-container-03-div {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 0px solid black;
+    max-width: 100%;
+    height: auto;
+    margin: 0;
+    margin-left: 25px;
+    margin-top: 25px;
+    margin-bottom: 35px;
+    padding: 0;
+    justify-content: left;
+    align-items: flex-start;
+}
+
+.pa-container-04-align {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 0px solid orangered;
+    max-width: 100%;
+    height: auto;
+    margin: 0;
+    margin-right: 35px;
+    margin-bottom: 20px;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.pa-container-03-div .fa {
+    box-sizing: border-box;
+    border: 0px solid greenyellow;
+    color: #d2aa70;
+    font-size: 2.5rem;
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    cursor: context-menu;
+}
+
+.pa-container-03-p-fa {
+    box-sizing: border-box;
+    border: 0px solid black;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-family: 
+        Georgia, 
+        'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-variant: normal;
+    text-align: left;
+    height: auto;
+    width: 170px;
+    color: #05243a;
+    margin: 0;
+    margin-left: 5px;
+    padding: 0;
+    cursor: text;
+}
+
+.pa-container-02-p-below {
+    box-sizing: border-box;
+    border: 0px solid black;
+    text-decoration: none;
+    font-size: 1rem;
+    font-family: 
+        Georgia, 
+        'Times New Roman', Times, serif;
+    font-weight: normal;
+    font-variant: normal;
+    text-align: justify;
+    line-height: 25px;
+    width: 100%;
+    color: #05243a;
+    margin: 0;
+    margin-bottom: 50px;
+    padding: 0;
+    cursor: text;
+}
+
+.pa-btn {
+    box-sizing: border-box;
+    color: white;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 0.875rem;
+    letter-spacing: 2px;
+    width: 260px;
+    height: 33px;
+    border-radius: 20px;
+    border: 1px solid dimgray;
+    background: #05243a;
+    transition-duration: 0.8s;
+}
+
+.pa-btn:hover {
+    color: #d8ae72;
+    background: #05243a;
+    transition-duration: 0.8s;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+/* RECURSIVIDADE PASSAGENS AEREAS */
+@media only screen and (max-width: 938px) {
+    .pa-container-02-div {
+        padding-left: 0;
+        align-items: center;
+    }
+    
+    .pa-container-02-p {
+        text-align: center;
+    }
+
+    .pa-container-02-h2 {
+        text-align: center;
+    }
+
+    .pa-container-02-p-below {
+        text-align: center;
+    }
+
+    .pa-container-03-div {
+        margin-left: 0;
+        margin-right: 0;
+        max-width: 280px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .pa-container-04-align {
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    .pa-container-03-p-fa {
+        margin-right: 0;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    .pa-container-01-img {
+        width: 240px;
+        height: 250px;
+    }
+}

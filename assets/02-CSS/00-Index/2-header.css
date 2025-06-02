@@ -1,0 +1,137 @@
+@charset "UTF-8";
+
+/* Configurações Header */
+header {
+    box-sizing: border-box;
+    border: 0px solid yellowgreen;
+    margin: 0;
+    padding: 0;
+    display: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto;
+    min-height: 135px;
+    background: #05243a;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-imglink {
+    box-sizing: border-box;
+    border: 0px solid white;
+    display: flex;
+    max-width: 100%;
+    height: auto;
+    margin-left: 5%;
+}
+
+.header-img {
+    box-sizing: border-box;
+    border: 0px solid red;
+    width: 215px;
+    height: 115px;
+    transition-duration: 0.8s;
+}
+
+.header-img:hover {
+    opacity: 0.5;
+    transition-duration: 0.8s;
+}
+
+/* Nav Bar */
+
+.navbar {
+    box-sizing: border-box;
+    border: 0px solid white;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    height: auto;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0;
+    padding: 10px 0;
+}
+
+.navbar-text {
+    box-sizing: border-box;
+    border: 0px solid white;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-family: 
+        Georgia,
+        'Times New Roman', Times, serif;
+    font-weight: normal;
+    text-align: center;
+    margin: 10px;
+    padding: 10px 15px;
+    color: white;
+    transition: all 0.6s ease;
+}
+
+.navbar-text:hover {
+    color: #d2aa70 !important;
+    cursor: pointer;
+}
+
+/* Botão Ação Header */
+
+.header-btn-ação {
+    box-sizing: border-box;
+    color: white;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 0.875rem;
+    letter-spacing: 2px;
+    height: 33px;
+    border-radius: 20px;
+    border: 1px solid dimgray;
+    background: 
+        linear-gradient(
+            to right, 
+            #635648 3%, 
+            #c69f68 25%,
+            #d8ae72 100%);
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    margin-right: 5%;
+    transition: transform 0.8s ease;
+    cursor: pointer;
+}
+
+.header-btn-ação:hover {
+    background: 
+        linear-gradient(
+            to right, 
+            #d8ae72 3%, 
+            #c69f68 75%,
+            #635648 100%);
+    border: 1px solid white;
+    transform: translateY(3px);
+    cursor: pointer;
+}
+
+/* RECURSIVIDADE CABEÇALHO */
+@media only screen and (max-width: 1093px) {
+    .navbar {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .header-btn-ação {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 529px) {
+    header {
+        flex-direction: column;
+    }
+
+    .header-imglink {
+        margin-left: 0%;
+        margin-top: 2%;
+    }
+}

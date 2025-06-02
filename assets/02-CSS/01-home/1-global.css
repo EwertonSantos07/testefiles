@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+/* IFRAME BODY SETTINGS */
+body {
+    box-sizing: border-box;
+    border: 0px solid yellowgreen;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    height: auto; 
+    text-align: center; /*Horizontal*/
+    align-items: center; /*Horizontal*/
+    justify-content: flex-start;
+}
