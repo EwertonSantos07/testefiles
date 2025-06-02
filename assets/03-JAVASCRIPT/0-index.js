@@ -41,7 +41,8 @@ import { roteadorURL } from './7-roteamento-urls.js';
         footerLayout.style.display = "block";
 
         //Condição para roteamento de links
-        console.log(this.window.location.origin);
+        console.log(window.location.origin);
+        console.log(window.location.pathname)
         if(window.location.origin == "http://127.0.0.1:5500" || window.location.origin == "http://robertog") {
             history.replaceState({ Page: 'home' }, 'Home', '');
             console.log(window.history.state, "Localhost")
