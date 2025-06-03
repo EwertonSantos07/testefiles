@@ -11,20 +11,44 @@ export async function roteadorURL(keyValue, pathURL) {
         //Redirecionando de acordo com a chave da operação
         if(keyValue == 0) {
 
-            //Atualizando url navegador ao iniciar site ou atualizar página
-            if(pathURL == "/RG-transporte-executivo/") {
-                const homeUrl = `${window.location.pathname}home`;
-                const newState = {page: 'home'};
-                const newTitle = 'home';
-                window.history.pushState(newState, newTitle, homeUrl);
-                console.log("Site foi atualizado com url padrão!!!")
-            } else {
-                const homeUrl = "/RG-transporte-executivo/home";
-                const newState = {page: 'home'};
-                const newTitle = 'home';
-                window.history.pushState(newState, newTitle, homeUrl);
-                console.log("Site foi atualizado com url diferente do inicial!")
+            const currentEnvironment = sessionStorage.getItem("proEnvironment")
+            const intproEnvironment = parseInt(currentEnvironment)
+            if (intproEnvironment === 0) {
+
+                //Atualizando url navegador ao iniciar site ou atualizar página
+                if(pathURL == "/testefiles/") {
+                    const homeUrl = `${window.location.pathname}home`;
+                    const newState = {page: 'home'};
+                    const newTitle = 'home';
+                    window.history.pushState(newState, newTitle, homeUrl);
+                    console.log("Site foi atualizado com url padrão!!!")
+                } else {
+                    const homeUrl = "/testefiles/home";
+                    const newState = {page: 'home'};
+                    const newTitle = 'home';
+                    window.history.pushState(newState, newTitle, homeUrl);
+                    console.log("Site foi atualizado com url diferente do inicial!")
+                }
+
+            } else if (intproEnvironment === 1) {
+
+                //Atualizando url navegador ao iniciar site ou atualizar página
+                if(pathURL == "/rg-transporte-executivo/") {
+                    const homeUrl = `${window.location.pathname}home`;
+                    const newState = {page: 'home'};
+                    const newTitle = 'home';
+                    window.history.pushState(newState, newTitle, homeUrl);
+                    console.log("Site foi atualizado com url padrão!!!")
+                } else {
+                    const homeUrl = "/rg-transporte-executivo/home";
+                    const newState = {page: 'home'};
+                    const newTitle = 'home';
+                    window.history.pushState(newState, newTitle, homeUrl);
+                    console.log("Site foi atualizado com url diferente do inicial!")
+                }
             }
+
+            
 
         } else if(keyValue == 1) {
             const targetUrl = pathURL;
