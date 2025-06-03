@@ -1,12 +1,14 @@
 <!-- Estrutura Inicial da Página-->
-<!-- Última atualização em: 02/06/2025 as 16:30 -->
+<!-- Último Deploy: 03/06/2025 as 10:12-->
+<!-- Última atualização em: 03/06/2025 as 10:12 -->
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
 
         <!-- Local Environment Test sessionStorage -->
         <script>
-            const localEnvironment = 1
+            const proEnvironment = 0; //Zero somente para /testefiles/
+            const localEnvironment = 1 //Zero somente para live server
             const cookieADM = "GA_EXCLUDE_ADM";
             const tipoADM = typeof cookieADM;
             let ADMstatus = null;
@@ -21,6 +23,7 @@
                     ADMstatus = partsCookies[1].trim();
                 }
             }
+            sessionStorage.setItem("proEnvironment", proEnvironment);
             sessionStorage.setItem("localEnvironment", localEnvironment);
             sessionStorage.setItem("ADMstatus", ADMstatus);
         </script>
@@ -75,7 +78,21 @@
 
         <title>Transporte Executivo em Curitiba | Roberto Gonçalves - Motorista Executivo</title>
 
-        <base href="/rg-transporte-executivo/">
+        <script>
+            const currentEnvironment = sessionStorage.getItem("proEnvironment")
+            const intproEnvironment = parseInt(currentEnvironment)
+            let baseURL = null;
+            if (intproEnvironment === 0) {
+                baseURL = "/testefiles/";
+            } else if (intproEnvironment === 1) {
+                baseURL = "/rg-transporte-executivo/";
+            }
+
+            let baseTag = document.createElement('base');
+            baseTag.href = baseURL;
+            document.head.prepend(baseTag);
+            console.log(`Base href definido como: ${baseURL}`)
+        </script>
 
         <meta
             name="description"

@@ -53,7 +53,21 @@
 
         <title>Passagens Aéreas em Curitiba | Roberto Gonçalves - Motorista Executivo</title>
 
-        <base href="/rg-transporte-executivo/">
+        <script>
+            const currentEnvironment = sessionStorage.getItem("proEnvironment")
+            const intproEnvironment = parseInt(currentEnvironment)
+            let baseURL = null;
+            if (intproEnvironment === 0) {
+                baseURL = "/testefiles/";
+            } else if (intproEnvironment === 1) {
+                baseURL = "/rg-transporte-executivo/";
+            }
+
+            let baseTag = document.createElement('base');
+            baseTag.href = baseURL;
+            document.head.prepend(baseTag);
+            console.log(`Base href definido como: ${baseURL}`)
+        </script>
 
         <meta
             name="description"
