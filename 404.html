@@ -1,14 +1,23 @@
 <!-- Estrutura Inicial da Página-->
 <!-- Último Deploy: 03/06/2025 as 10:12-->
-<!-- Última atualização em: 03/06/2025 as 11:23 -->
+<!-- Última atualização em: 03/06/2025 as 15:06 -->
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
 
         <!-- Local Environment Test sessionStorage -->
         <script>
-            const proEnvironment = 0; //Zero somente para /testefiles/
-            const localEnvironment = 1 //Zero somente para live server
+
+            //Legenda proEnvironment
+            // -1 live server
+            // 0 /testefiles/
+            // 1 /rg-transporte-executivo/
+            const proEnvironment = 0;
+
+            //Legenda localEnvironment
+            // 0 ambiente de testes
+            // 1 ambiente de produção
+            const localEnvironment = 0
             const cookieADM = "GA_EXCLUDE_ADM";
             const tipoADM = typeof cookieADM;
             let ADMstatus = null;

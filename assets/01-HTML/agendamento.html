@@ -53,24 +53,6 @@
 
         <title>Agendamento Transporte Executivo em Curitiba | Roberto Gonçalves - Motorista Executivo</title>
 
-        <script>
-            const currentEnvironment = sessionStorage.getItem("proEnvironment")
-            const intproEnvironment = parseInt(currentEnvironment)
-            let baseURL = null;
-            if (intproEnvironment === -1) {
-                baseURL = "/";
-            } else if (intproEnvironment === 0) {
-                baseURL = "/testefiles/";
-            } else if (intproEnvironment === 1) {
-                baseURL = "/rg-transporte-executivo/";
-            }
-
-            let baseTag = document.createElement('base');
-            baseTag.href = baseURL;
-            document.head.prepend(baseTag);
-            console.log(`Base href definido como: ${baseURL}`)
-        </script>
-
         <meta
             name="description"
             content="Roberto Gonçalves é um motorista especializado em transporte executivo em Curitiba, PR. Receptivo, translado, passeio turístico e transfer. Solicite um orçamento!">
@@ -79,9 +61,22 @@
             name="keywords" 
             content="Transporte Executivo, chofer especializado, motorista em Curitiba, motorista profissional, orçamento">
 
-        <link 
-            rel="stylesheet" 
-            href="assets/02-CSS/03-agendamento/0-agendamento.css">
+        <script>
+            const currentEnvironment = sessionStorage.getItem("proEnvironment")
+            const intproEnvironment = parseInt(currentEnvironment)
+            const linkElement = document.createElement('link');
+            linkElement.rel = 'stylesheet';
+            linkElement.type = 'text/css';
+            if (intproEnvironment === -1) { //Live Server
+                linkElement.href = "/assets/02-CSS/03-agendamento/0-agendamento.css";
+            } else if (intproEnvironment === 0) { //testefiles
+                linkElement.href = "/testefiles/assets/02-CSS/03-agendamento/0-agendamento.css";
+            } else if (intproEnvironment === 1) {
+                linkElement.href = "/rg-transporte-executivo/assets/02-CSS/03-agendamento/0-agendamento.css";
+            }
+            document.head.appendChild(linkElement);
+            console.log("LinkElement: ", linkElement)
+        </script> 
 
         <link rel="stylesheet" 
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
