@@ -87,10 +87,12 @@ export async function startsOp(nameID, X, varsArray) {
         const currentEnvironment = sessionStorage.getItem("proEnvironment")
         const intproEnvironment = parseInt(currentEnvironment)
         let baseURL = null;
-        if(intproEnvironment === 0) {
-            baseURL = '/testefiles/';
-        } else if(intproEnvironment === 1) {
-            baseURL = '/rg-transporte-executivo/'
+        if (intproEnvironment === -1) {
+            baseURL = "/";
+        } else if (intproEnvironment === 0) {
+            baseURL = "/testefiles/";
+        } else if (intproEnvironment === 1) {
+            baseURL = "/rg-transporte-executivo/";
         }
 
         //Condição para roteamento de links - Live Server

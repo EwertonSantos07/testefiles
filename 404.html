@@ -1,6 +1,6 @@
 <!-- Estrutura Inicial da Página-->
 <!-- Último Deploy: 03/06/2025 as 10:12-->
-<!-- Última atualização em: 03/06/2025 as 10:46 -->
+<!-- Última atualização em: 03/06/2025 as 11:23 -->
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -82,7 +82,9 @@
             const currentEnvironment = sessionStorage.getItem("proEnvironment")
             const intproEnvironment = parseInt(currentEnvironment)
             let baseURL = null;
-            if (intproEnvironment === 0) {
+            if (intproEnvironment === -1) {
+                baseURL = "/";
+            } else if (intproEnvironment === 0) {
                 baseURL = "/testefiles/";
             } else if (intproEnvironment === 1) {
                 baseURL = "/rg-transporte-executivo/";
