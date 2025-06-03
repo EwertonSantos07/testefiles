@@ -83,6 +83,16 @@ export async function startsOp(nameID, X, varsArray) {
             console.log(statusLoading, nameID);
         }
 
+        //Condição Base href Environment
+        const currentEnvironment = sessionStorage.getItem("proEnvironment")
+        const intproEnvironment = parseInt(currentEnvironment)
+        let baseURL = null;
+        if(intproEnvironment === 0) {
+            baseURL = '/testefiles/';
+        } else if(intproEnvironment === 1) {
+            baseURL = '/rg-transporte-executivo/'
+        }
+
         //Condição para roteamento de links - Live Server
         if(window.location.origin == "http://127.0.0.1:5500" || window.location.origin == "http://robertog") {
             history.pushState({ Page: nameID }, nameID, '');
@@ -90,13 +100,13 @@ export async function startsOp(nameID, X, varsArray) {
 
         //Condição para roteamento de links - Servidor    
         } else {
-            let urlID = `/rg-transporte-executivo/${nameID}`;
+            let urlID = `${baseURL}${nameID}`;
             const statusURL = await roteadorURL(1, urlID);
             console.log(statusURL);
         }
 
         //Caminho para atualização DOM
-        let SRCiframe = `/rg-transporte-executivo/assets/01-HTML/${nameID}.html`;
+        let SRCiframe = `${baseURL}assets/01-HTML/${nameID}.html`;
         const statusDOM = await atualizaIframe(SRCiframe, nameID);
         console.log(statusDOM, nameID);
 
