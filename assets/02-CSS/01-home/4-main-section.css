@@ -76,7 +76,7 @@
     width: 380px;
     height: 280px;
     background-image: 
-        url("/assets/02-CSS/01-home/img/ser-transfer.png");
+        url("img/ser-transfer.png");
     background-size: 380px 280px;
     margin: 8px;
     padding: 0;
@@ -93,7 +93,7 @@
     width: 380px;
     height: 280px;
     background-image: 
-        url("/assets/02-CSS/01-home/img/ser-viagem-executiva.png");
+        url("img/ser-viagem-executiva.png");
     background-size: 380px 280px;
     margin: 8px;
     padding: 0;
@@ -110,7 +110,7 @@
     width: 380px;
     height: 280px;
     background-image: 
-        url("/assets/02-CSS/01-home/img/ser-pacotes.png");
+        url("img/ser-pacotes.png");
     background-size: 380px 280px;
     margin: 8px;
     padding: 0;
@@ -127,7 +127,7 @@
     width: 380px;
     height: 280px;
     background-image: 
-        url("/assets/02-CSS/01-home/img/ser-passagens.png");
+        url("img/ser-passagens.png");
     background-size: 380px 280px;
     margin: 8px;
     padding: 0;

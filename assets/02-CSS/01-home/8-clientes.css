@@ -43,7 +43,45 @@
     align-items: flex-start;
 }
 
-.nc-img {
+.nc-img-01 {
+    background-image: 
+        url("img/cliente-01.png");
+    box-sizing: border-box;
+    border: 0px inset black;
+    text-decoration: none;
+    width: 280px;
+    height: 110px;
+    margin: 8px;
+    padding: 0;
+}
+
+.nc-img-02 {
+    background-image: 
+        url("img/cliente-02.png");
+    box-sizing: border-box;
+    border: 0px inset black;
+    text-decoration: none;
+    width: 280px;
+    height: 110px;
+    margin: 8px;
+    padding: 0;
+}
+
+.nc-img-03 {
+    background-image: 
+        url("img/cliente-03.png");
+    box-sizing: border-box;
+    border: 0px inset black;
+    text-decoration: none;
+    width: 280px;
+    height: 110px;
+    margin: 8px;
+    padding: 0;
+}
+
+.nc-img-04 {
+    background-image: 
+        url("img/cliente-04.png");
     box-sizing: border-box;
     border: 0px inset black;
     text-decoration: none;

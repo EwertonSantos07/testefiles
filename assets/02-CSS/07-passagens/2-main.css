@@ -32,6 +32,9 @@
 }
 
 .pa-container-01-img {
+    background-image: 
+        url("../01-home/img/ser-passagens.png");
+    background-size: 340px 350px;
     box-sizing: border-box;
     border: 0px inset black;
     text-decoration: none;
@@ -136,6 +139,12 @@
     margin: 0;
     padding: 0;
     cursor: context-menu;
+}
+
+#fa-hotel {
+    background-image: 
+        url("img/hotel-solid.png");
+    background-size: 40px 40px;
 }
 
 .pa-container-03-p-fa {

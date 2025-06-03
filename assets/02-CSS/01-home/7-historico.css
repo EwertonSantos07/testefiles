@@ -74,7 +74,7 @@
     width: 380px;
     height: 280px;
     background-image: 
-        url("/assets/02-CSS/01-home/img/memória-01.png");
+        url("img/memória-01.png");
     background-size: 380px 280px;
     margin: 8px;
     padding: 0;
@@ -91,7 +91,7 @@
     width: 380px;
     height: 280px;
     background-image: 
-        url("/assets/02-CSS/01-home/img/memória-02.png");
+        url("img/memória-02.png");
     background-size: 380px 280px;
     margin: 8px;
     padding: 0;
@@ -108,7 +108,7 @@
     width: 380px;
     height: 280px;
     background-image: 
-        url("/assets/02-CSS/01-home/img/memória-03.png");
+        url("img/memória-03.png");
     background-size: 380px 280px;
     margin: 8px;
     padding: 0;

@@ -33,6 +33,9 @@
 }
 
 .am-img {
+    background-image: 
+        url("img/logo-assinatura3.png");
+    background-size: 300px 252px;
     box-sizing: border-box;
     border: 0px inset black;
     text-decoration: none;

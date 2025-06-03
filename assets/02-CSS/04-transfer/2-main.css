@@ -32,6 +32,9 @@
 }
 
 .ta-container-01-img {
+    background-image: 
+        url("../01-home/img/ser-transfer.png");
+    background-size: 340px 350px;
     box-sizing: border-box;
     border: 0px inset black;
     text-decoration: none;

@@ -76,7 +76,7 @@
     width: 380px;
     height: 280px;
     background-image: 
-        url("/assets/02-CSS/01-home/img/sedan-standart.png");
+        url("img/sedan-standart.png");
     background-size: cover;
     margin: 8px;
     padding: 0;
@@ -93,7 +93,7 @@
     width: 380px;
     height: 280px;
     background-image: 
-        url("/assets/02-CSS/01-home/img/sedan-executivo.png");
+        url("img/sedan-executivo.png");
     background-size: cover;
     margin: 8px;
     padding: 0;
@@ -110,7 +110,7 @@
     width: 380px;
     height: 280px;
     background-image: 
-        url("/assets/02-CSS/01-home/img/sedan-luxo.png");
+        url("img/sedan-luxo.png");
     background-size: cover;
     margin: 8px;
     padding: 0;
@@ -127,7 +127,7 @@
     width: 380px;
     height: 280px;
     background-image: 
-        url("/assets/02-CSS/01-home/img/sedan-blindado.png");
+        url("img/sedan-blindado.png");
     background-size: cover;
     margin: 8px;
     padding: 0;
@@ -144,7 +144,7 @@
     width: 380px;
     height: 280px;
     background-image: 
-        url("/assets/02-CSS/01-home/img/SUV-executivo.png");
+        url("img/SUV-executivo.png");
     background-size: cover;
     margin: 8px;
     padding: 0;
@@ -161,7 +161,7 @@
     width: 380px;
     height: 280px;
     background-image: 
-        url("/assets/02-CSS/01-home/img/van.png");
+        url("img/van.png");
     background-size: cover;
     margin: 8px;
     padding: 0;

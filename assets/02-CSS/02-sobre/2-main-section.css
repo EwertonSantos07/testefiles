@@ -47,6 +47,9 @@
 }
 
 .ap-img {
+    background-image: 
+        url("img/roberto-goncalves.png");
+    background-size: 300px 252px;
     box-sizing: border-box;
     border: 0px inset black;
     text-decoration: none;

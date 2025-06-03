@@ -17,6 +17,9 @@
 }
 
 .pt-container-01-img {
+    background-image: 
+        url("img/sugestão-almoço.png");
+    background-size: 340px 350px;
     box-sizing: border-box;
     border: 0px inset black;
     text-decoration: none;
@@ -184,6 +187,18 @@
     margin: 0;
     padding: 0;
     cursor: context-menu;
+}
+
+#fa-baby {
+    background-image: 
+        url("img/baby-carriage-solid.png");
+    background-size: 40px 40px;
+}
+
+#fa-hamburger {
+    background-image: 
+        url("img/hamburger-solid.png");
+    background-size: 40px 40px;
 }
 
 #fa-camera {
