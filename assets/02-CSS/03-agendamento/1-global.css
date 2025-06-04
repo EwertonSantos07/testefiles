@@ -2,9 +2,10 @@
 
 body {
     box-sizing: border-box;
-    border: 0px solid yellowgreen;
+    border: 1px solid black;
     margin: 0;
     padding: 0;
+    padding-bottom: 20px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;

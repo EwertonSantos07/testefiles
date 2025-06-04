@@ -2,16 +2,25 @@
 export async function alteraAlturaIframe() {
     return new Promise((resolve) => {
         let iframe = document.querySelector(".main-iframe");
-        let iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
-        try {
-            if (iframe && iframe.contentWindow && iframe.contentWindow.document && iframe.contentWindow.document.body) {
-                iframe.style.height = iframe.contentWindow.document.body.clientHeight + "px";
-                console.log(iframe)
-                resolve(iframeDocument);
+        iframe.style.height = "0px";
+        if(iframe) {
+            if(iframe.contentWindow) {
+                if(iframe.contentDocument) {
+                    if(iframe.contentWindow.document) {
+                        if(iframe.contentWindow.document.body) {
+                            if(iframe.contentWindow.document.body.clientHeight) {
+                                let iframeDoc = iframe.contentDocument || iframe.contentWindow.document
+                                iframe.style.height = iframe.contentWindow.document.body.clientHeight + "px";
+                                console.log(iframe)
+                                resolve(iframeDoc)
+                            }
+                        }
+                    }
+                }
             }
-        } catch (error) {
-            console.log("Erro ao acessar conteúdo do iframe!", error);
         }
+        //let statusLoad = iframe.contentWindow.document.readystate;
+        //console.log(statusLoad, "statusLoad");
     })
 }
 
