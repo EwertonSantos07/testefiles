@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /* IFRAME BODY SETTINGS */
-body {
+html, body {
     box-sizing: border-box;
     border: 0px solid black;
     margin: 0;
@@ -14,4 +14,5 @@ body {
     height: auto; 
     align-items: center; /*Horizontal*/
     justify-content: flex-start;
+    overflow-x: hidden;
 }

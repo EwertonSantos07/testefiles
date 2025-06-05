@@ -1,12 +1,17 @@
 <!-- Estrutura Inicial da Página-->
 <!-- Último Deploy: 03/06/2025 as 10:12-->
-<!-- Última atualização em: 04/06/2025 as 10:21 -->
+<!-- Última atualização em: 05/06/2025 as 11:22 -->
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
 
         <!-- Local Environment Test sessionStorage -->
         <script>
+
+            //Legenda statusHome
+            //false - Carregamento inicial
+            //true - Operação interna de páginas
+            sessionStorage.setItem("statusHome", "false");
 
             //Legenda proEnvironment
             // -1 live server
@@ -35,6 +40,7 @@
             sessionStorage.setItem("proEnvironment", proEnvironment);
             sessionStorage.setItem("localEnvironment", localEnvironment);
             sessionStorage.setItem("ADMstatus", ADMstatus);
+            
         </script>
 
         <!-- Session Storage Verification -->
@@ -104,6 +110,23 @@
             document.head.prepend(baseTag);
             console.log(`Base href definido como: ${baseURL}`)
         </script>
+
+        <!-- <script>
+            import { alteraAlturaIframe } from './1-iframe-propriedades.js';
+            window.addEventListener('message', (event) => {
+                const allowedOrigins = [
+                    "http://127.0.0.1:550"
+                ];
+
+                // Verifica o tipo de dado recebido
+                if (event.data === 'iframeContentReady') {
+                    console.log("Mensagem 'iframeContentReady' recebida do iframe. Ajustando altura...");
+                    // Chama a função para ajustar a altura do iframe
+                    // Use await se alteraAlturaIframe for async e você quiser esperar
+                    alteraAlturaIframe(); 
+                }
+            })
+        </script> -->
 
         <meta
             name="description"

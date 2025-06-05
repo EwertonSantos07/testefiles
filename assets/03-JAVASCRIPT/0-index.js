@@ -2,7 +2,7 @@
 import { alteraAlturaIframe } from './1-iframe-propriedades.js';
 import { varsEnvironment } from './2-variaveis-de-ambiente.js';
 import { goTochat, turnOFFDrop } from './3-starts-op.js';
-import { startsOp } from './3-starts-op.js';
+import { startsOp, endsOp } from './3-starts-op.js';
 import { closeHideMenu } from './6-menu-oculto.js';
 import { roteadorURL } from './7-roteamento-urls.js';
 
@@ -11,12 +11,13 @@ import { roteadorURL } from './7-roteamento-urls.js';
     'use strict';
 
     //Iniciando Sistema com tela de carregamento...
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log("%cIniciando JavaScript RG Transporte Executivo", "color: blue")
+    document.addEventListener('DOMContentLoaded', async function() {
         console.log("\n")
-    });
+        console.log("%cIniciando JavaScript após DOM", "color: white")
 
-    window.addEventListener("load", async function() {
+        //Capturando largura da tela!!!
+        const larguraScreen = screen.width;
+        console.log(`%cWidth Screen Start: ${larguraScreen} px`, "color: white");
 
         // Ativando tela de carregamento...
         const loadingScreen0 = document.querySelector('.loading-screen');
@@ -24,15 +25,12 @@ import { roteadorURL } from './7-roteamento-urls.js';
         loadingScreen0.style.display = 'flex';
         loadingScreen0.style.opacity = '1';
         loadingScreen0.style.left = '0';
-        console.log("%cTela de Carregamento ativo...", "color: green")
-
-        //Capturando largura da tela!!!
-        const larguraScreen = screen.width;
-        console.log(`%cWidth Screen Start: ${larguraScreen} px`, "color: silver");
+        console.log("%cTela de Carregamento ativo...", "color: white")
 
         //Capturando elementos index!!!
         const headerLayout = document.querySelector('header');
         const iframeLayout = document.querySelector('.main-iframe');
+        const iframeDoc = iframeLayout.contentWindow.document
         const footerLayout = document.querySelector('footer');
 
         //Alterando display none para flex!!!
@@ -41,8 +39,8 @@ import { roteadorURL } from './7-roteamento-urls.js';
         footerLayout.style.display = "block";
 
         //Condição para roteamento de links
-        console.log(window.location.origin);
-        console.log(window.location.pathname)
+        console.log(window.location.origin, "Origem");
+        console.log(window.location.pathname, "Repositório Atual")
         if(window.location.origin == "http://127.0.0.1:5500" || window.location.origin == "http://robertog") {
             history.replaceState({ Page: 'home' }, 'Home', '');
             console.log(window.history.state, "Localhost")
@@ -50,11 +48,7 @@ import { roteadorURL } from './7-roteamento-urls.js';
             const statusURL = await roteadorURL(0, window.location.pathname);
             console.log(statusURL);
         }
-        
-        //Alterando altura iframe
-        const statusIframe = await alteraAlturaIframe();
-        console.log(statusIframe, "Altura Inicial Iframe Ajustada");
-        
+
         //Chamando Função Variáveis de Ambientes
         const varsArray = await varsEnvironment();
 
@@ -62,19 +56,8 @@ import { roteadorURL } from './7-roteamento-urls.js';
             console.log(i, varsArray[i]);
         }
 
-        //Encerrando tela de loading inicial
-        const loadingScreen = document.querySelector('.loading-screen');
-        setTimeout(() => {
-            loadingScreen.style.opacity = '0';
-            loadingScreen.style.left = '100vw';
-            window.scrollTo(0, 0);
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';    
-            }, 900);
-        }, 900);
-
         // Evento Click Frame TRANSFER AEROPORTO - DEFAULT HOME
-        const frameTransSer = statusIframe.querySelector(".ps-container-frame-link-01")
+        const frameTransSer = iframeDoc.querySelector(".ps-container-frame-link-01")
         if (frameTransSer) {
             frameTransSer.addEventListener('click', async function() {
                 console.clear();
@@ -88,7 +71,7 @@ import { roteadorURL } from './7-roteamento-urls.js';
         }
 
         // Evento Click Frame VIAGENS EXECUTIVAS - DEFAULT HOME
-        const frameViagSer = statusIframe.querySelector(".ps-container-frame-link-02")
+        const frameViagSer = iframeDoc.querySelector(".ps-container-frame-link-02")
         if (frameViagSer) {
             frameViagSer.addEventListener('click', async function() {
                 console.clear();
@@ -102,7 +85,7 @@ import { roteadorURL } from './7-roteamento-urls.js';
         }
 
         // Evento Click Frame PACOTES TURÍSTICOS - DEFAULT HOME
-        const framePacoSer = statusIframe.querySelector(".ps-container-frame-link-03")
+        const framePacoSer = iframeDoc.querySelector(".ps-container-frame-link-03")
         if (framePacoSer) {
             framePacoSer.addEventListener('click', async function() {
                 console.clear();
@@ -116,7 +99,7 @@ import { roteadorURL } from './7-roteamento-urls.js';
         }
 
         // Evento Click Frame PASSAGENS AÉREAS - DEFAULT HOME
-        const framePassSer = statusIframe.querySelector(".ps-container-frame-link-04")
+        const framePassSer = iframeDoc.querySelector(".ps-container-frame-link-04")
         if (framePassSer) {
             framePassSer.addEventListener('click', async function() {
                 console.clear();
@@ -139,7 +122,7 @@ import { roteadorURL } from './7-roteamento-urls.js';
         }
 
         // Evento click botão AÇÃO MAIN - DEFAULT
-        let btnMainAction = statusIframe.querySelector(".main-btn")
+        let btnMainAction = iframeDoc.querySelector(".main-btn")
         if (btnMainAction) {
             btnMainAction.addEventListener('click', async function() {
                 let nameID = btnMainAction.dataset.link;
@@ -149,7 +132,7 @@ import { roteadorURL } from './7-roteamento-urls.js';
         }
 
         // Evento click botão AÇÃO SECTION AGENDAMENTO HOME - DEFAULT
-        let btnSAHAction = statusIframe.querySelector(".sa-btn")
+        let btnSAHAction = iframeDoc.querySelector(".sa-btn")
         if (btnSAHAction) {
             btnSAHAction.addEventListener('click', async function() {
                 let nameID = btnSAHAction.dataset.link;
@@ -172,6 +155,8 @@ import { roteadorURL } from './7-roteamento-urls.js';
             varsArray[3].addEventListener('click', async function() {
                 console.clear();
                 console.log(Date());
+
+                sessionStorage.setItem("statusHome", "true");
 
                 //Capturando data-link
                 let nameID = varsArray[3].dataset.link;
@@ -283,6 +268,8 @@ import { roteadorURL } from './7-roteamento-urls.js';
             varsArray[11].addEventListener('click', async function() {
                 console.clear();
                 console.log(Date());
+
+                sessionStorage.setItem("statusHome", "true");
 
                 //Capturando data-link
                 let nameID = varsArray[11].dataset.link;
@@ -417,6 +404,8 @@ import { roteadorURL } from './7-roteamento-urls.js';
                 console.clear();
                 console.log(Date());
 
+                sessionStorage.setItem("statusHome", "true");
+
                 //Capturando data-link
                 let nameID = varsArray[22].dataset.link;
                 const statusOp = await startsOp(nameID, 5, varsArray)
@@ -501,7 +490,38 @@ import { roteadorURL } from './7-roteamento-urls.js';
                 console.log(statusOp) // FIM
             })
         }
+        
     });
+
+    window.addEventListener("load", async function() {
+        console.log("\n")
+        console.log("%cIniciando JavaScript após Loading Completo", "color: white")        
+
+        //Alterando altura iframe
+        const statusIframe = await alteraAlturaIframe();
+        console.log(statusIframe, "Altura Inicial Iframe Ajustada");
+    
+        //Encerrando tela de loading inicial
+        const loadingScreen = document.querySelector('.loading-screen');
+        setTimeout(() => {
+            loadingScreen.style.opacity = '0';
+            loadingScreen.style.left = '100vw';
+            window.scrollTo(0, 0);
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';    
+            }, 900);
+        }, 900);
+    });
+
+    window.addEventListener('message', async function(event) {
+        const nameID = sessionStorage.getItem('nameID')
+        let X = sessionStorage.getItem('X')
+        const iframe = document.querySelector(".main-iframe")
+        let iframeDoc = iframe.contentWindow.document
+        const varsArray = await varsEnvironment();
+        const statusOp = await endsOp(nameID, X, varsArray, iframeDoc)
+        console.log(statusOp) // FIM
+    })
 
     window.addEventListener("resize", function() {
         alteraAlturaIframe();

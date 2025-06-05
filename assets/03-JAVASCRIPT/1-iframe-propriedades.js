@@ -2,25 +2,19 @@
 export async function alteraAlturaIframe() {
     return new Promise((resolve) => {
         let iframe = document.querySelector(".main-iframe");
-        iframe.style.height = "0px";
-        if(iframe) {
-            if(iframe.contentWindow) {
-                if(iframe.contentDocument) {
-                    if(iframe.contentWindow.document) {
-                        if(iframe.contentWindow.document.body) {
-                            if(iframe.contentWindow.document.body.clientHeight) {
-                                let iframeDoc = iframe.contentDocument || iframe.contentWindow.document
-                                iframe.style.height = iframe.contentWindow.document.body.clientHeight + "px";
-                                console.log(iframe)
-                                resolve(iframeDoc)
-                            }
-                        }
-                    }
-                }
+        let iframeDoc = iframe.contentWindow.document
+        iframe.height = "0px";
+        resolve(iframeDoc);
+        setTimeout(() => {
+            const statusIframeLoad = iframe.contentWindow.document.readyState === 'complete';
+            if(statusIframeLoad === true) {
+                const contentHeight = iframeDoc.documentElement.scrollHeight;
+                const contentHeight2 = iframe.contentWindow.document.body.clientHeight;
+                iframe.height = contentHeight + "px";
+                console.log(contentHeight)
+                console.log(contentHeight2)
             }
-        }
-        //let statusLoad = iframe.contentWindow.document.readystate;
-        //console.log(statusLoad, "statusLoad");
+        }, 400)
     })
 }
 
@@ -30,10 +24,9 @@ export async function atualizaIframe(path) {
         let iframe = document.querySelector(".main-iframe");
         iframe.src = path; 
         if (iframe) {
+            console.log(iframe.src, "Novo Dom")
             iframe.onload = function(){
-                console.log(iframe.src, "Novo Dom")
-                let statusResult = "iFrame foi atualizado";
-                resolve(statusResult);
+                resolve(iframe);
             }
         }
     })

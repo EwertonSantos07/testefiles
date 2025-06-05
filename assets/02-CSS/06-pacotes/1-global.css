@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-body {
+html, body {
     box-sizing: border-box;
     border: 0px solid black;
     margin: 0;
@@ -12,6 +12,7 @@ body {
     height: auto;
     align-items: center;
     justify-content: flex-start;
+    overflow-x: hidden;
 }
 
 .pt-h1 {

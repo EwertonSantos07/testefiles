@@ -83,34 +83,8 @@ export async function startsOp(nameID, X, varsArray) {
             console.log(statusLoading, nameID);
         }
 
-        //Condição Base href Environment
-        const currentEnvironment = sessionStorage.getItem("proEnvironment")
-        const intproEnvironment = parseInt(currentEnvironment)
-        let baseURL = null;
-        if (intproEnvironment === -1) {
-            baseURL = "/";
-        } else if (intproEnvironment === 0) {
-            baseURL = "/testefiles/";
-        } else if (intproEnvironment === 1) {
-            baseURL = "/rg-transporte-executivo/";
-        }
-
-        //Condição para roteamento de links - Live Server
-        if(window.location.origin == "http://127.0.0.1:5500" || window.location.origin == "http://robertog") {
-            history.pushState({ Page: nameID }, nameID, '');
-            console.log(window.history.state, "Internal Pages");
-
-        //Condição para roteamento de links - Servidor    
-        } else {
-            let urlID = `${baseURL}${nameID}`;
-            const statusURL = await roteadorURL(1, urlID);
-            console.log(statusURL);
-        }
-
-        //Caminho para atualização DOM
-        let SRCiframe = `${baseURL}assets/01-HTML/${nameID}.html`;
-        const statusDOM = await atualizaIframe(SRCiframe, nameID);
-        console.log(statusDOM, nameID);
+        sessionStorage.setItem("nameID", nameID);
+        sessionStorage.setItem("X", X);
 
         // Atualizando propriedades CSS HOME
         if (nameID === "home") {
@@ -160,13 +134,47 @@ export async function startsOp(nameID, X, varsArray) {
             console.log(statusCSS, nameID);
         }
 
-        //Atualizando altura do iframe
-        const statusAltura = await alteraAlturaIframe();
-        console.log(statusAltura, nameID);
+        //Condição Base href Environment
+        const currentEnvironment = sessionStorage.getItem("proEnvironment")
+        const intproEnvironment = parseInt(currentEnvironment)
+        let baseURL = null;
+        if (intproEnvironment === -1) {
+            baseURL = "/";
+        } else if (intproEnvironment === 0) {
+            baseURL = "/testefiles/";
+        } else if (intproEnvironment === 1) {
+            baseURL = "/rg-transporte-executivo/";
+        }
+
+        //Condição para roteamento de links - Live Server
+        if(window.location.origin == "http://127.0.0.1:5500" || window.location.origin == "http://robertog") {
+            history.pushState({ Page: nameID }, nameID, '');
+            console.log(window.history.state, "Internal Pages");
+
+        //Condição para roteamento de links - Servidor    
+        } else {
+            let urlID = `${baseURL}${nameID}`;
+            const statusURL = await roteadorURL(1, urlID);
+            console.log(statusURL);
+        }
+
+        //Caminho para atualização DOM
+        let SRCiframe = `${baseURL}assets/01-HTML/${nameID}.html`;
+        if (SRCiframe) {
+            const statusDOM = await atualizaIframe(SRCiframe);
+            console.log(statusDOM, nameID);
+            return 
+        }
+    })
+}
+        
+// Função principal para operação páginas internas conclusão!
+export async function endsOp(nameID, X, varsArray, iframeDoc) {
+    return new Promise(async (resolve) => {
 
         // Capturando Objetos Específicos
         if (nameID === "home") {
-            let btnMainAction = statusAltura.querySelector(".main-btn");
+            let btnMainAction = iframeDoc.querySelector(".main-btn");
             console.log(btnMainAction, nameID);
             if (btnMainAction) {
                 btnMainAction.addEventListener('click', async function() {
@@ -177,7 +185,7 @@ export async function startsOp(nameID, X, varsArray) {
                 })
             }
 
-            let btnAgenHAction = statusAltura.querySelector(".sa-btn");
+            let btnAgenHAction = iframeDoc.querySelector(".sa-btn");
             console.log(btnAgenHAction, nameID);
             if (btnAgenHAction) {
                 btnAgenHAction.addEventListener('click', async function() {
@@ -189,7 +197,7 @@ export async function startsOp(nameID, X, varsArray) {
             }
 
             // Evento Click Frame TRANSFER AEROPORTO - DEFAULT HOME
-            let frameTransSer = statusAltura.querySelector(".ps-container-frame-link-01");
+            let frameTransSer = iframeDoc.querySelector(".ps-container-frame-link-01");
             console.log(frameTransSer, nameID);
             if (frameTransSer) {
                 frameTransSer.addEventListener('click', async function() {
@@ -204,7 +212,7 @@ export async function startsOp(nameID, X, varsArray) {
             }
 
             // Evento Click Frame VIAGENS EXECUTIVAS - DEFAULT HOME
-            let frameViagSer = statusAltura.querySelector(".ps-container-frame-link-02")
+            let frameViagSer = iframeDoc.querySelector(".ps-container-frame-link-02")
             console.log(frameViagSer, nameID);
             if (frameViagSer) {
                 frameViagSer.addEventListener('click', async function() {
@@ -219,7 +227,7 @@ export async function startsOp(nameID, X, varsArray) {
             }
 
             // Evento Click Frame PACOTES TURÍSTICOS - DEFAULT HOME
-            let framePacoSer = statusAltura.querySelector(".ps-container-frame-link-03")
+            let framePacoSer = iframeDoc.querySelector(".ps-container-frame-link-03")
             console.log(framePacoSer, nameID);
             if (framePacoSer) {
                 framePacoSer.addEventListener('click', async function() {
@@ -234,7 +242,7 @@ export async function startsOp(nameID, X, varsArray) {
             }
 
             // Evento Click Frame PASSAGENS AÉREAS - DEFAULT HOME
-            let framePassSer = statusAltura.querySelector(".ps-container-frame-link-04")
+            let framePassSer = iframeDoc.querySelector(".ps-container-frame-link-04")
             console.log(framePassSer, nameID);
             if (framePassSer) {
                 framePassSer.addEventListener('click', async function() {
@@ -251,21 +259,21 @@ export async function startsOp(nameID, X, varsArray) {
 
         // Capturando Objetos Específicos
         if (nameID === "sobre") {
-            let btnSobreAction = statusAltura.querySelector(".am-btn");
+            let btnSobreAction = iframeDoc.querySelector(".am-btn");
             console.log(btnSobreAction, nameID);
             if (btnSobreAction) {
                 btnSobreAction.addEventListener('click', async function() {
                     //window.alert(`Botão AÇÃO ${nameID} foi acionado!`)
                     let name2ID = btnSobreAction.dataset.link;
                     const statusOp = await goTochat(name2ID);
-                    console.log(statusOp)
+                    console.log(statusOp);
                 })
             }
         }
 
         // Capturando Objetos Específicos
         if (nameID === "agendamento") {
-            let btnAgenAction = statusAltura.querySelector(".aba-sa-btn");
+            let btnAgenAction = iframeDoc.querySelector(".aba-sa-btn");
             console.log(btnAgenAction, nameID);
             if (btnAgenAction) {
                 btnAgenAction.addEventListener('click', async function() {
@@ -279,7 +287,7 @@ export async function startsOp(nameID, X, varsArray) {
 
         // Capturando Objetos Específicos
         if (nameID === "transfer-aeroporto") {
-            let btnTransAction = statusAltura.querySelector(".ta-btn")
+            let btnTransAction = iframeDoc.querySelector(".ta-btn")
             console.log(btnTransAction, nameID);
             if (btnTransAction) {
                 btnTransAction.addEventListener('click', async function() {
@@ -293,7 +301,7 @@ export async function startsOp(nameID, X, varsArray) {
 
         // Capturando Objetos Específicos
         if (nameID === "viagens-executivas") {
-            let btnViagAction = statusAltura.querySelector(".ve-btn")
+            let btnViagAction = iframeDoc.querySelector(".ve-btn")
             console.log(btnViagAction, nameID);
             if (btnViagAction) {
                 btnViagAction.addEventListener('click', async function() {
@@ -307,7 +315,7 @@ export async function startsOp(nameID, X, varsArray) {
 
         // Capturando Objetos Específicos
         if (nameID === "pacotes-turisticos") {
-            let btnPaco01Action = statusAltura.querySelector(".pt-btn-01")
+            let btnPaco01Action = iframeDoc.querySelector(".pt-btn-01")
             console.log(btnPaco01Action, nameID);
             if (btnPaco01Action) {
                 btnPaco01Action.addEventListener('click', async function() {
@@ -318,7 +326,7 @@ export async function startsOp(nameID, X, varsArray) {
                 })
             }
 
-            let btnPaco02Action = statusAltura.querySelector(".pt-btn-02")
+            let btnPaco02Action = iframeDoc.querySelector(".pt-btn-02")
             console.log(btnPaco02Action, nameID);
             if (btnPaco02Action) {
                 btnPaco02Action.addEventListener('click', async function() {
@@ -329,7 +337,7 @@ export async function startsOp(nameID, X, varsArray) {
                 })
             }
 
-            let btnPaco03Action = statusAltura.querySelector(".pt-btn-03")
+            let btnPaco03Action = iframeDoc.querySelector(".pt-btn-03")
             console.log(btnPaco03Action, nameID);
             if (btnPaco03Action) {
                 btnPaco03Action.addEventListener('click', async function() {
@@ -343,7 +351,7 @@ export async function startsOp(nameID, X, varsArray) {
 
         // Capturando Objetos Específicos
         if (nameID === "passagens-aereas") {
-            let btnPassAction = statusAltura.querySelector(".pa-btn")
+            let btnPassAction = iframeDoc.querySelector(".pa-btn")
             console.log(btnPassAction, nameID);
             if (btnPassAction) {
                 btnPassAction.addEventListener('click', async function() {
@@ -360,6 +368,10 @@ export async function startsOp(nameID, X, varsArray) {
         divDropMenu.style.opacity = "";
         divDropMenu.style.visibility = "";
         console.log("Drop Ativo!")
+
+        //Atualizando altura do iframe
+        const statusAltura = await alteraAlturaIframe();
+        console.log(statusAltura, nameID);
 
         //Encerrando Screen Loading...
         if(X == 0 || X == 13 || X == 20) {
