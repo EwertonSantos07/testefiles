@@ -1,6 +1,6 @@
 <!-- Estrutura Inicial da Página-->
 <!-- Último Deploy: 03/06/2025 as 10:12-->
-<!-- Última atualização em: 05/06/2025 as 11:22 -->
+<!-- Última atualização em: 06/06/2025 as 14:57 -->
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -109,24 +109,12 @@
             baseTag.href = baseURL;
             document.head.prepend(baseTag);
             console.log(`Base href definido como: ${baseURL}`)
+            
+            // Montando Domínio
+            sessionStorage.setItem("currentDomain", `${window.location.origin}${baseURL}`)
+            console.log("Current Domain: ", sessionStorage.getItem("currentDomain"))
+            
         </script>
-
-        <!-- <script>
-            import { alteraAlturaIframe } from './1-iframe-propriedades.js';
-            window.addEventListener('message', (event) => {
-                const allowedOrigins = [
-                    "http://127.0.0.1:550"
-                ];
-
-                // Verifica o tipo de dado recebido
-                if (event.data === 'iframeContentReady') {
-                    console.log("Mensagem 'iframeContentReady' recebida do iframe. Ajustando altura...");
-                    // Chama a função para ajustar a altura do iframe
-                    // Use await se alteraAlturaIframe for async e você quiser esperar
-                    alteraAlturaIframe(); 
-                }
-            })
-        </script> -->
 
         <meta
             name="description"

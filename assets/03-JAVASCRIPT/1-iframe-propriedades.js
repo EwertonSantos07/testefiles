@@ -3,18 +3,17 @@ export async function alteraAlturaIframe() {
     return new Promise((resolve) => {
         let iframe = document.querySelector(".main-iframe");
         let iframeDoc = iframe.contentWindow.document
-        iframe.height = "0px";
         resolve(iframeDoc);
         setTimeout(() => {
             const statusIframeLoad = iframe.contentWindow.document.readyState === 'complete';
             if(statusIframeLoad === true) {
                 const contentHeight = iframeDoc.documentElement.scrollHeight;
                 const contentHeight2 = iframe.contentWindow.document.body.clientHeight;
-                iframe.height = contentHeight + "px";
+                iframe.style.height = contentHeight2 + "px";
                 console.log(contentHeight)
                 console.log(contentHeight2)
             }
-        }, 400)
+        }, 750)
     })
 }
 

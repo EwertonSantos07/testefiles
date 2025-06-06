@@ -35,7 +35,10 @@
 .am-img {
     background-image: 
         url("img/logo-assinatura3.png");
-    background-size: 300px 252px;
+    background-size: cover;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     box-sizing: border-box;
     border: 0px inset black;
     text-decoration: none;
@@ -99,9 +102,12 @@
 }
 
 /* RECURSIVIDADE MARKETING */
-@media only screen and (max-width: 321px) {
+@media only screen and (max-width: 336px) {
     .am-img {
         width: 280px;
         height: 180px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
     }   
 }

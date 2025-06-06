@@ -172,6 +172,8 @@ export async function startsOp(nameID, X, varsArray) {
 export async function endsOp(nameID, X, varsArray, iframeDoc) {
     return new Promise(async (resolve) => {
 
+        console.log(`%cFinalizando Operação páginas internas após sinal DOM ${nameID}`, "text-decoration: underline")
+
         // Capturando Objetos Específicos
         if (nameID === "home") {
             let btnMainAction = iframeDoc.querySelector(".main-btn");

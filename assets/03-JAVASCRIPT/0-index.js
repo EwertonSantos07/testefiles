@@ -10,6 +10,56 @@ import { roteadorURL } from './7-roteamento-urls.js';
 (function(win, doc){
     'use strict';
 
+    window.addEventListener('message', async function(event) {
+
+        //Definindo Domínio Atual
+        const currentDomain = sessionStorage.getItem("currentDomain")
+        console.log(currentDomain)
+
+        //Corrigindo Domínio
+        const newDomain = `${event.origin}/`
+        console.log(newDomain)
+
+        // Permited Origins
+        const allowedOrigins = [
+            newDomain
+        ];
+
+        // Verifica se a ORIGEM da mensagem recebida (event.origin) está na lista de origens permitidas.
+        if (!allowedOrigins.includes(newDomain)) {
+            console.warn(`%cMensagem bloqueada de origem desconhecida: ${newDomain}`, "color: orange; font-weight: bold;");
+            return; // Ignora e não processa mensagens de origens não confiáveis.
+        }
+
+        // Se a origem é confiável, processa a mensagem.
+        if (event.data === 'iframeContentReady') {
+            const nameID = sessionStorage.getItem('nameID')
+            let X = sessionStorage.getItem('X')
+            const iframe = document.querySelector(".main-iframe")
+            let iframeDoc = iframe.contentWindow.document
+            const varsArray = await varsEnvironment();
+            const statusOp = await endsOp(nameID, X, varsArray, iframeDoc)
+            console.log(statusOp) // FIM
+        }
+    })
+
+    window.addEventListener('popstate', function(event) {
+        window.location.reload();
+    }, false);
+
+    window.addEventListener("resize", function() {
+        let iframe = document.querySelector(".main-iframe");
+        let iframeDoc = iframe.contentWindow.document
+        const statusIframeLoad = iframe.contentWindow.document.readyState === 'complete';
+        if(statusIframeLoad === true) {
+            const contentHeight = iframeDoc.documentElement.scrollHeight;
+            const contentHeight2 = iframe.contentWindow.document.body.clientHeight;
+            iframe.style.height = contentHeight2 + "px";
+        }
+        void iframe.offsetHeight;
+        console.log("Altura iframe redefinida sem carregamento!"); 
+    });
+
     //Iniciando Sistema com tela de carregamento...
     document.addEventListener('DOMContentLoaded', async function() {
         console.log("\n")
@@ -42,13 +92,22 @@ import { roteadorURL } from './7-roteamento-urls.js';
         console.log(window.location.origin, "Origem");
         console.log(window.location.pathname, "Repositório Atual")
         if(window.location.origin == "http://127.0.0.1:5500" || window.location.origin == "http://robertog") {
-            history.replaceState({ Page: 'home' }, 'Home', '');
+            history.pushState({ Page: 'home' }, 'Home', `${window.location.origin}/`);
             console.log(window.history.state, "Localhost")
         } else {
             const statusURL = await roteadorURL(0, window.location.pathname);
             console.log(statusURL);
         }
+        
+    });
 
+    window.addEventListener("load", async function() {
+        console.log("\n")
+        console.log("%cIniciando JavaScript após Loading Completo", "color: white")    
+
+        const iframe = document.querySelector('.main-iframe');
+        const iframeDoc = iframe.contentWindow.document
+        
         //Chamando Função Variáveis de Ambientes
         const varsArray = await varsEnvironment();
 
@@ -490,12 +549,6 @@ import { roteadorURL } from './7-roteamento-urls.js';
                 console.log(statusOp) // FIM
             })
         }
-        
-    });
-
-    window.addEventListener("load", async function() {
-        console.log("\n")
-        console.log("%cIniciando JavaScript após Loading Completo", "color: white")        
 
         //Alterando altura iframe
         const statusIframe = await alteraAlturaIframe();
@@ -513,24 +566,11 @@ import { roteadorURL } from './7-roteamento-urls.js';
         }, 900);
     });
 
-    window.addEventListener('message', async function(event) {
-        const nameID = sessionStorage.getItem('nameID')
-        let X = sessionStorage.getItem('X')
-        const iframe = document.querySelector(".main-iframe")
-        let iframeDoc = iframe.contentWindow.document
-        const varsArray = await varsEnvironment();
-        const statusOp = await endsOp(nameID, X, varsArray, iframeDoc)
-        console.log(statusOp) // FIM
-    })
+    
 
-    window.addEventListener("resize", function() {
-        alteraAlturaIframe();
-        console.log("Altura iframe redefinida sem carregamento!"); 
-    });
+    
 
-    window.addEventListener('popstate', function(event) {
-        window.location.reload();
-    }, false);
+    
 
     //window.history.back()
 })()

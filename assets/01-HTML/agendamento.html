@@ -171,14 +171,23 @@
             function notifyParentIframeReady() {
                 // Verifica se a janela atual está dentro de um iframe e se tem um pai
                 if (window.parent && window.parent !== window) {
-                    // Envia a mensagem 'iframeContentReady' para o documento pai.
-                    // O segundo argumento é o 'targetOrigin' (origem alvo).
-                    // Usar '*' permite enviar para qualquer origem, mas o RECEPTOR DEVE VALIDAR.
-                    // Para maior segurança, você pode tentar obter a origem do pai dinamicamente
-                    // ou usar os domínios específicos do seu site local/produção (ex: 'http://rg-transporte-executivo.local', 'https://seunome.github.io').
-                    // No entanto, para simplificar e garantir que funcione em todos os seus ambientes de teste, '*' é comum no desenvolvimento.
-                    window.parent.postMessage('iframeContentReady', '*'); 
-                    console.log("%cMensagem 'iframeContentReady' enviada do iframe para o pai.", "color: blue;");
+                    
+                    //Definindo Domínio Atual
+                    const currentDomain = sessionStorage.getItem("currentDomain")
+
+                    // Permissions Origins
+                    const parentOrigins = [
+                        currentDomain
+                    ];
+
+                    //Enviando sinal para origem
+                    parentOrigins.forEach(origin => {
+                        window.parent.postMessage('iframeContentReady', origin); 
+                        console.log(`%cTentando enviar 'iframeContentReady' para origem: ${origin}`, "color: gray;");
+                    })
+
+                    // Status
+                    console.log("%cNotificação 'iframeContentReady' enviada para o pai (verifique o console do pai para confirmação).", "color: blue;");
                 }
             }
             window.addEventListener('load', notifyParentIframeReady);

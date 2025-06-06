@@ -34,7 +34,7 @@
 .ve-container-01-img {
     background-image: 
         url("../01-home/img/ser-viagem-executiva.png");
-    background-size: 340px 350px;    
+    background-size: cover;    
     box-sizing: border-box;
     border: 0px inset black;
     text-decoration: none;
