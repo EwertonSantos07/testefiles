@@ -33,14 +33,14 @@ export async function roteadorURL(keyValue, pathURL) {
             } else if (intproEnvironment === 1) {
 
                 //Atualizando url navegador ao iniciar site ou atualizar página
-                if(pathURL == "/rg-transporte-executivo/") {
+                if(pathURL == "/RG-transporte-executivo/") {
                     const homeUrl = `${window.location.pathname}home`;
                     const newState = {page: 'home'};
                     const newTitle = 'home';
                     window.history.pushState(newState, newTitle, homeUrl);
                     console.log("Site foi atualizado com url padrão!!!")
                 } else {
-                    const homeUrl = "/rg-transporte-executivo/home";
+                    const homeUrl = "/RG-transporte-executivo/home";
                     const newState = {page: 'home'};
                     const newTitle = 'home';
                     window.history.pushState(newState, newTitle, homeUrl);

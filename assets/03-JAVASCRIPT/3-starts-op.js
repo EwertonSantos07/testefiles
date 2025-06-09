@@ -143,7 +143,7 @@ export async function startsOp(nameID, X, varsArray) {
         } else if (intproEnvironment === 0) {
             baseURL = "/testefiles/";
         } else if (intproEnvironment === 1) {
-            baseURL = "/rg-transporte-executivo/";
+            baseURL = "/RG-transporte-executivo/";
         }
 
         //Condição para roteamento de links - Live Server

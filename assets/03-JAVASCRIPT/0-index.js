@@ -564,6 +564,15 @@ import { roteadorURL } from './7-roteamento-urls.js';
                 loadingScreen.style.display = 'none';    
             }, 900);
         }, 900);
+
+        // Verificando ADM session
+        const statusADM = sessionStorage.getItem('ADMstatus')
+        const resultADM = (statusADM === 'true');
+        if (resultADM === true) {
+            setTimeout(() => {
+                alert("ADM Ativo!!!")
+            }, 2300)
+        }
     });
 
     

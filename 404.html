@@ -1,31 +1,42 @@
-<!-- Estrutura Inicial da Página-->
-<!-- Último Deploy: 03/06/2025 as 10:12-->
-<!-- Última atualização em: 06/06/2025 as 14:57 -->
+<!-- Estrutura Inicial da Página -->
+<!-- Última atualização em: 09/06/2025 as 18:27 -->
+<!-- Último Deploy: 09/06/2025 as 09:22 -->
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
 
-        <!-- Local Environment Test sessionStorage -->
+        <!-- Main Variables Definition -->
         <script>
-
-            //Legenda statusHome
-            //false - Carregamento inicial
-            //true - Operação interna de páginas
-            sessionStorage.setItem("statusHome", "false");
-
-            //Legenda proEnvironment
-            // -1 live server
-            // 0 /testefiles/
-            // 1 /rg-transporte-executivo/
-            const proEnvironment = 0;
 
             //Legenda localEnvironment
             // 0 ambiente de testes
             // 1 ambiente de produção
-            const localEnvironment = 0
+            sessionStorage.setItem("localEnvironment", 1);
+
+            //Legenda proEnvironment
+            // -1 live server
+            // 0 /testefiles/
+            // 1 /RG-transporte-executivo/
+            sessionStorage.setItem("proEnvironment", 0);
+
+            //Legenda statusHome
+            //false - Carregamento inicial
+            //true - Operação interna de páginas
+            sessionStorage.setItem("statusHome", "false"); //Always keep false
+
+            //Legenda statusADM
+            //false - ADM is not logged
+            //true - ADM is logged
+            sessionStorage.setItem("ADMstatus", null)
+
+        </script>
+        
+        <!-- Verificando se COOKIE ADM ESTÁ NO NAVEGADOR -->
+        <script>
+
             const cookieADM = "GA_EXCLUDE_ADM";
             const tipoADM = typeof cookieADM;
-            let ADMstatus = null;
             const arrayCookies = document.cookie.split(';'); //Array separador
             const lenCookies = arrayCookies.length; //Quantidade
 
@@ -34,19 +45,43 @@
                 const tipoParts = typeof partsCookies[0]; //Verifica o tipo valor
                 const statusFindout = (cookieADM === partsCookies[0].trim())
                 if (statusFindout === true) {
-                    ADMstatus = partsCookies[1].trim();
+                    sessionStorage.setItem("ADMstatus", partsCookies[1].trim()); 
+                    console.log("ADM ATIVO COOKIE NAVEGADOR")
                 }
+            }    
+
+            // Função auxiliar para obter um parâmetro da URL MAGIC LINK
+            function getUrlParameter(name) {
+                name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+                var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+                var results = regex.exec(location.search);
+                return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
             }
-            sessionStorage.setItem("proEnvironment", proEnvironment);
-            sessionStorage.setItem("localEnvironment", localEnvironment);
-            sessionStorage.setItem("ADMstatus", ADMstatus);
-            
+
+            // Identificando se link inserindo é magic ?set_adm_cookie=true
+            const setAdmCookieParam = getUrlParameter('set_adm_cookie');
+
+            // Se o parâmetro for encontrado e tiver o valor 'true'
+            if (setAdmCookieParam === 'true') { 
+                
+                if (window.history.replaceState) {
+                    const cleanUrl = window.location.origin + window.location.pathname + window.location.hash;
+                    window.history.replaceState({path: cleanUrl}, '', cleanUrl);
+                } else {
+                    // Fallback para navegadores mais antigos (causará um recarregamento completo)
+                    window.location.href = window.location.origin + window.location.pathname + window.location.hash;
+                }
+
+                sessionStorage.setItem("ADMstatus", true);
+                console.log("MAGIC LINK ADM IS UP")
+            }
         </script>
 
         <!-- Session Storage Verification -->
         <script>
             const islocalEnvironment = sessionStorage.getItem('localEnvironment')
             const statusADM = sessionStorage.getItem('ADMstatus')
+            console.log(statusADM, "statsADM")
             const intlocalEnvironment = parseInt(islocalEnvironment)
             const resultInt = (intlocalEnvironment === 1)
             const resultADM = (statusADM === 'true');
@@ -102,7 +137,7 @@
             } else if (intproEnvironment === 0) {
                 baseURL = "/testefiles/";
             } else if (intproEnvironment === 1) {
-                baseURL = "/rg-transporte-executivo/";
+                baseURL = "/RG-transporte-executivo/";
             }
 
             let baseTag = document.createElement('base');
