@@ -1,0 +1,699 @@
+<!-- Estrutura Inicial da Página-->
+<!-- Last Deploy: 27/06/2025 as 15:38 -->
+<!-- Last update: 02/06/2025 as 15:38 -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+
+        <!-- Main Variables Definition -->
+        <script>
+
+            //Legenda localEnvironment
+            // 0 ambiente de testes
+            // 1 ambiente de produção
+            sessionStorage.setItem("localEnvironment", 0);
+
+            //Legenda proEnvironment
+            // -1 live server
+            // 0 /testefiles/
+            // 1 /criacao-de-sites/ ***htaccess***
+            sessionStorage.setItem("proEnvironment", 0);
+
+            //Legenda statusHome
+            //false - Carregamento inicial
+            //true - Operação interna de páginas
+            sessionStorage.setItem("statusHome", "false"); //Always keep false
+
+            //Legenda statusADM
+            //false - ADM is not logged
+            //true - ADM is logged
+            sessionStorage.setItem("ADMstatus", null) //Always keep null
+
+            //Legenda scroll status
+            //false - home, carregamento padrão
+            //true - home, carregar e ir para âncora
+            sessionStorage.setItem("scrollStatus", false); //Always keep false
+
+            //Legenda statusConsole
+            //false - No messages in the console
+            //true - Print messages status in the console
+            sessionStorage.setItem("statusConsole", true)
+
+        </script>
+
+        <!-- Verificando se COOKIE ADM ESTÁ NO NAVEGADOR -->
+        <script>
+
+            const cookieADM = "GA_EXCLUDE_ADM";
+            const tipoADM = typeof cookieADM;
+            const arrayCookies = document.cookie.split(';'); //Array separador
+            const lenCookies = arrayCookies.length; //Quantidade
+
+            for (let i = 0; i < lenCookies; i++) {
+                const partsCookies = arrayCookies[i].split('='); //Separa valores
+                const tipoParts = typeof partsCookies[0]; //Verifica o tipo valor
+                const statusFindout = (cookieADM === partsCookies[0].trim())
+                if (statusFindout === true) {
+                    sessionStorage.setItem("ADMstatus", partsCookies[1].trim()); 
+                    if(sessionStorage.getItem("statusConsole") === 'true') {
+                        console.log("ADM ATIVO COOKIE NAVEGADOR")
+                    }
+                }
+            }    
+
+            // Função auxiliar para obter um parâmetro da URL MAGIC LINK
+            function getUrlParameter(name) {
+                name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+                var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+                var results = regex.exec(location.search);
+                return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+            }
+
+            // Identificando se link inserindo é magic ?set_adm_cookie=true
+            const setAdmCookieParam = getUrlParameter('set_adm_cookie');
+
+            // Se o parâmetro for encontrado e tiver o valor 'true'
+            if (setAdmCookieParam === 'true') { 
+                
+                if (window.history.replaceState) {
+                    const cleanUrl = window.location.origin + window.location.pathname + window.location.hash;
+                    window.history.replaceState({path: cleanUrl}, '', cleanUrl);
+                } else {
+                    // Fallback para navegadores mais antigos (causará um recarregamento completo)
+                    window.location.href = window.location.origin + window.location.pathname + window.location.hash;
+                }
+
+                sessionStorage.setItem("ADMstatus", true);
+                if(sessionStorage.getItem("statusConsole") === 'true') {
+                    console.log("MAGIC LINK ADM IS UP")
+                } 
+            }
+        </script>
+
+        <!-- Session Storage Verification -->
+        <script>
+            const islocalEnvironment = sessionStorage.getItem('localEnvironment')
+            const statusADM = sessionStorage.getItem('ADMstatus')
+            const intlocalEnvironment = parseInt(islocalEnvironment)
+            const resultInt = (intlocalEnvironment === 1)
+            const resultADM = (statusADM === 'true');
+
+            if(sessionStorage.getItem("statusConsole") === 'true') {
+                console.log("Environment: ", resultInt);
+                console.log("ADM: ", resultADM);
+            } 
+            
+            if (resultInt === true && resultADM === false) {
+                
+                // Tag GA4
+                const ga4MeasurementId = 'G-28WKJ8L6QV';
+
+                // Head Element GA4
+                const script1 = document.createElement("script")
+                script1.async = true
+                script1.src = `https://www.googletagmanager.com/gtag/js?id=${ga4MeasurementId}`
+                document.head.appendChild(script1)
+
+                // Data Layer GA4
+                const script2 = document.createElement("script")
+                script2.textContent = `
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+
+                    gtag('config', '${ga4MeasurementId}')
+                `;
+                document.head.appendChild(script2);
+
+                // Google Tag Manager GTM
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','G-28WKJ8L6QV');
+
+                if(sessionStorage.getItem("statusConsole") === 'true') {
+                    console.log("Index.html: GA4 e GTM habilitados para essa sessão!");
+                } 
+            } else {
+                if(sessionStorage.getItem("statusConsole") === 'true') {
+                    console.log("Index.html: Ambiente de testes ou ADM em produção, não habilitar TAGS Google!")
+                } 
+            }
+        </script>
+
+        <!-- Dominio -->
+        <script>
+            const currentEnvironment = sessionStorage.getItem("proEnvironment")
+            const intproEnvironment = parseInt(currentEnvironment)
+            let baseURL = null;
+            if (intproEnvironment === -1) {
+                baseURL = "/";
+            } else if (intproEnvironment === 0) {
+                baseURL = "/testefiles/";
+            } else if (intproEnvironment === 1) {
+                baseURL = "/criacao-de-sites/";
+            }
+
+            let baseTag = document.createElement('base');
+            baseTag.href = baseURL;
+            document.head.prepend(baseTag);
+            if(sessionStorage.getItem("statusConsole") === 'true') {
+                console.log(`Base href definido como: ${baseURL}`)
+            }
+            
+            // Montando Domínio
+            sessionStorage.setItem("currentDomain", `${window.location.origin}${baseURL}`)
+            if(sessionStorage.getItem("statusConsole") === 'true') {
+                console.log("Current Domain: ", sessionStorage.getItem("currentDomain"))
+            }
+        </script>
+        
+        <meta charset="UTF-8">
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0">
+
+        <meta 
+            name="keywords" 
+            content="criação de sites, desenvolvimento web, web designer Curitiba, sites profissionais, orçamento sites">
+
+        <meta
+            name="description"
+            content="Ewerton Santos é um profissional especializado em criação de sites em Curitiba, PR. Desenvolvemos websites personalizados e responsivos para empresas e indivíduos. Solicite um orçamento!">
+
+        <title>Criação de Sites em Curitiba | Ewerton Santos</title>
+
+        <link 
+            rel="shortcut icon" 
+            type="image/png" 
+            href="assets/IMG/favicon.png">
+
+        <link rel="stylesheet"
+            type="text/css"
+            href="assets/CSS/0-index/0-index.css">
+
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <body>
+
+        <script>
+            const islocalEnvironment2 = sessionStorage.getItem('localEnvironment')
+            const statusADM2 = sessionStorage.getItem('ADMstatus')
+            const intlocalEnvironment2 = parseInt(islocalEnvironment2)
+            const resultInt2 = (intlocalEnvironment2 === 1)
+            const resultADM2 = (statusADM2 === 'true');
+
+            if (resultInt2 === true && resultADM2 === false) {
+
+                // Google Tag Manager (noscript)
+                const noScript = document.createElement("noscript")
+                const eliframe = document.createElement("iframe")
+                eliframe.src = "https://www.googletagmanager.com/ns.html?id=GTM-KDCXQ28J"
+                eliframe.height = "0"
+                eliframe.width = "0"
+                eliframe.style.display = "none"
+                eliframe.style.visibility = "hidden"
+                noScript.appendChild(eliframe)
+                document.body.prepend(noScript)
+
+                if(sessionStorage.getItem("statusConsole") === 'true') {
+                    console.log("Index.html: Iframe GTM ativo!!!")
+                }
+            } else {
+                if(sessionStorage.getItem("statusConsole") === 'true') {
+                    console.log("Index.html: Iframe noscript GTM desativado!")
+                }
+            }
+        </script>
+        
+        <!-- Cabeçalho do Site -->
+        <header>
+            
+            <!-- Barra de Navegação -->
+            <div class="navbar">
+                <a  
+                    id="navbar-home"
+                    class="navbar-text"
+                    target="bloco_central"
+                    data-link="home"
+                    role="button"
+                    style="color: yellowgreen"
+                    title="Criação de Sites">
+                    HOME
+                </a>
+
+                <a  
+                    id="navbar-historico"
+                    class="navbar-text"
+                    target="bloco_central"
+                    data-link="historico"
+                    role="button"
+                    title="Histórico de Sites">
+                    HISTÓRICO
+                </a>
+
+                <a  
+                    id="navbar-blog"
+                    class="navbar-text"
+                    target="bloco_central"
+                    data-link="blog"
+                    role="button"
+                    title="Gestão & Finanças">
+                    BLOG
+                </a>
+
+                <div 
+                    class="navbar-dropdown">
+                    <a  
+                        id="navbar-servicos"
+                        class="navbar-text"
+                        target="bloco_central"
+                        data-link="servicos"
+                        role="button"
+                        title="Outros Serviços">
+                            SERVIÇOS
+                            <i class="fa fa-angle-down" id="icon-angle-down"></i>
+                    </a>
+
+                    <div
+                        class="dropdown-content">
+                        <a 
+                            id="dropdown-software"
+                            class="dropdown-content-text" 
+                            target="bloco_central"
+                            data-link="software"
+                            role="button"
+                            style="cursor: pointer"
+                            title="Sistema de Gestão">
+                            Software
+                        </a>
+                    </div>
+
+                </div>
+
+                <a  
+                    id="navbar-updates"
+                    class="navbar-text"
+                    target="bloco_central"
+                    data-link="updates"
+                    role="button"
+                    title="Controle de Atualizações">
+                    UPDATES
+                </a>
+
+                <a  
+                    id="navbar-contato"
+                    class="navbar-text"
+                    target="bloco_central"
+                    data-link="contato"
+                    role="button"
+                    title="Contato Criação de Sites">
+                    CONTATO
+                </a>
+            </div> 
+
+            <!-- BTN Open Menu Oculto -->
+            <button 
+                class="open-menu">
+                &#9776;
+            </button>
+
+            <!-- Média de Avaliações -->
+            <p class="media-info-head">
+                Média de Avaliações: 5.0<br>
+                <i class="fa">
+                    &#xf005;
+                </i>
+                <i class="fa">
+                    &#xf005;
+                </i>
+                <i class="fa">
+                    &#xf005;
+                </i>
+                <i class="fa">
+                    &#xf005;
+                </i>
+                <i class="fa">
+                    &#xf005;
+                </i>
+            </p>
+        </header>
+
+        <!-- Section Loading durante processamentos -->
+        <section class="section-screen-loading">
+            <div
+                class="loading-screen">
+                <h1
+                    class="loading-text">
+                    Loading...
+                </h1>
+            </div>
+        </section>
+
+        <!-- Section Menu Oculto Menu -->
+        <section class="section-menu-oculto">
+
+            <!-- Menu Oculto Navegação -->
+            <div class="menu-oculto">
+                <button 
+                    class="close-menu">
+                    X
+                </button>
+
+                <a  
+                    id="menu-oculto-home"
+                    class="menu-oculto-text"
+                    target="bloco_central"
+                    style="color: yellowgreen"
+                    data-link="home"
+                    role="button"
+                    title="Criação de Sites">
+                    HOME
+                </a>
+
+                <a  
+                    id="menu-oculto-historico"
+                    class="menu-oculto-text"
+                    target="bloco_central"
+                    data-link="historico"
+                    role="button"
+                    title="Histórico de Sites">
+                    HISTÓRICO
+                </a>
+
+                <a  
+                    id="menu-oculto-blog"
+                    class="menu-oculto-text"
+                    target="bloco_central"
+                    data-link="blog"
+                    role="button"
+                    title="Gestão & Finanças">
+                    BLOG
+                </a>
+
+                <a 
+                    id="menu-oculto-software"
+                    class="menu-oculto-text" 
+                    target="bloco_central"
+                    data-link="software"
+                    role="button"
+                    style="cursor: pointer"
+                    title="Software de Gestão">
+                    Software
+                </a>
+
+                <a  
+                    id="menu-oculto-updates"
+                    class="menu-oculto-text"
+                    target="bloco_central"
+                    data-link="updates"
+                    role="button"
+                    title="Controle de Atualizações">
+                    UPDATES
+                </a>
+
+                <a  
+                    id="menu-oculto-contato"
+                    class="menu-oculto-text"
+                    target="bloco_central"
+                    data-link="contato"
+                    role="button"
+                    title="Contato Criação de Sites">
+                    CONTATO
+                </a>
+
+                <h1
+                    id="loading-text"
+                    class="menu-oculto-loading"
+                    style="display: none;">
+                    Loading...
+                </h1>
+            </div>
+        </section>
+            
+        <!-- Iframe exibição de conteúdos -->
+        <iframe
+            class="main-iframe"
+            scrolling="no"
+            name="bloco_central"
+            src="assets/HTML/home.html">
+        </iframe>
+
+        <!-- Footer -->
+        <footer>
+            <div class="ft-container-01">
+                
+                <!-- <div class="ft-container-01-lista">
+                    <a 
+                        class="footer-imglink"
+                        title="Logotipo Ewerton Santos Criação de Sites Curitiba">
+                        <img
+                            class="footer-img"
+                            src="assets/CSS/0-index/footer.png"
+                            alt="Logotipo Ewerton Santos Criação de Sites Curitiba">
+                        </img>
+                    </a>
+                </div> -->
+                
+
+                <div class="ft-container-01-lista">
+                    <p 
+                        id="ft-menu"
+                        class="ft-container-01-head">
+                        Menu
+                    </p>
+
+                    <a 
+                        class="ft-container-01-link"
+                        target="bloco_central"
+                        title="Criação de Sites">
+                        <p 
+                            id="ft-home"
+                            class="ft-container-01-text"
+                            data-link="home"
+                            role="button">
+                            HOME
+                        </p>
+                    </a>
+
+                    <a 
+                        class="ft-container-01-link"
+                        target="bloco_central"
+                        title="Histórico Criação de Sites">
+                        <p 
+                            id="ft-historico"
+                            class="ft-container-01-text"
+                            data-link="historico"
+                            role="button">
+                            HISTÓRICO
+                        </p>
+                    </a>
+
+                    <a  
+                        class="ft-container-01-link"
+                        target="bloco_central"
+                        title="Gestão & Finanças">
+                        <p 
+                            id="ft-blog"
+                            class="ft-container-01-text"
+                            data-link="blog"
+                            role="button">
+                            BLOG
+                        </p>
+                    </a>
+
+                    <a  
+                        class="ft-container-01-link"
+                        target="bloco_central"
+                        title="Controle de Atualizações">
+                        <p 
+                            id="ft-updates"
+                            class="ft-container-01-text"
+                            data-link="updates"
+                            role="button">
+                            UPDATES
+                        </p>
+                    </a>
+
+                    <a  
+                        class="ft-container-01-link"
+                        target="bloco_central"
+                        title="Contato Criação de Sites">
+                        <p 
+                            id="ft-contato"
+                            class="ft-container-01-text"
+                            data-link="contato"
+                            role="button">
+                            CONTATO
+                        </p>
+                    </a>
+
+                </div>
+
+                <div 
+                    id="ft-frame-01-topicos"
+                    class="ft-container-01-lista">
+                    <p
+                        id="ft-topicos"
+                        class="ft-container-01-head">Tópicos
+                    </p>
+
+                    <a 
+                        class="ft-container-01-link"
+                        target="bloco_central"
+                        title="Criação de Sites">
+                        <p 
+                            id="ft-sites"
+                            class="ft-container-01-text"
+                            data-link="sites"
+                            role="button">
+                            CRIAÇÃO DE SITES
+                        </p>
+                    </a>
+
+                    <a  
+                        class="ft-container-01-link"
+                        target="bloco_central"
+                        title="Clientes Históricos">
+                        <p 
+                            id="ft-clientes"
+                            class="ft-container-01-text"
+                            data-link="clientes"
+                            role="button">
+                            CLIENTES
+                        </p>
+                    </a>
+
+                    <a 
+                        class="ft-container-01-link"
+                        target="bloco_central"
+                        title="Hospedagem Sites">
+                        <p 
+                            id="ft-hospedagem"
+                            class="ft-container-01-text"
+                            data-link="hospedagem"
+                            role="button">
+                            HOSPEDAGEM
+                        </p>
+                    </a>
+
+                    <a 
+                        class="ft-container-01-link"
+                        target="bloco_central"
+                        title="Web Designer Curitiba">
+                        <p 
+                            id="ft-sobre"
+                            class="ft-container-01-text"
+                            data-link="sobre-mim"
+                            role="button">
+                            SOBRE MIM
+                        </p>
+                    </a>
+
+                </div>
+
+                <!-- Menu Outros Serviços -->
+                <div class="ft-container-01-lista">
+                    <p 
+                        id="ft-menu"
+                        class="ft-container-01-head">
+                        Outros Serviços
+                    </p>
+
+                    <a 
+                        class="ft-container-01-link"
+                        target="bloco_central"
+                        title="Sistema de Gestão">
+                        <p 
+                            id="ft-software"
+                            class="ft-container-01-text"
+                            data-link="software"
+                            role="button">
+                            SOFTWARE
+                        </p>
+                    </a>
+                </div>
+
+                <!-- Menu Política e Privacidade -->
+                <div
+                    id="ft-frame-01-politica"
+                    class="ft-container-01-lista">
+                    <p
+                        id="ft-h1-politica"
+                        class="ft-container-01-head">Políticas
+                    </p>
+
+                    <a 
+                        class="ft-container-01-link"
+                        target="bloco_central"
+                        title="Privacidade & Cookies">
+                        <p 
+                            id="ft-política"
+                            class="ft-container-01-text"
+                            data-link="politica"
+                            role="button">
+                            POLÍTICA DE PRIVACIDADE<br>
+                            & COOKIES
+                        </p>
+                    </a>
+
+                    <div class="ft-container-01-contato">
+                        <p 
+                            class="ft-container-01-head">Contato
+                        </p>
+                        
+                        <a
+                            href="https://tinyurl.com/2sunmwe2"
+                            target="_blank"
+                            title="Contato Criação de Sites"
+                            class="ft-contato-icon-whats">
+                            <i 
+                                class="fa">
+                                &#xf232;
+                            </i>
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="ft-container-direitos">
+                <p class="ft-container-direitos-slogan">
+                    <i>Expanda seus negócios agora mesmo!</i>
+                </p>
+
+                <p class="ft-container-direitos-text">
+                    Nenhuma parte deste web site poderá ser reproduzida por qualquer meio ou forma sem a prévia autorização do proprietário Ewerton Santos.
+                    A violação dos direitos autorais é crime estabelecido na Lei nº 9.610/98 e punido pelo art. 184 do Código Penal.
+                </p>
+            </div>
+
+            <div class="ft-container-02">
+                <p class="ft-container-02-p">
+                    Criação de Sites 2025
+                    &copy; Todos os direitos reservados.
+                </p>
+
+                <p class="ft-container-02-p">
+                    Desenvolvido por Ewerton Santos 
+                    <i class="fa" title="@ewer.web.ton">&#xf16d;</i>  
+                    v1.0.1
+                </p>
+
+            </div>
+        </footer>
+
+        <!-- JavaScript Automações-->
+        <script 
+            type="module"
+            src="assets/JAVA/0-index.js?v=1.0.1">
+        </script>
+
+    </body>
+
+</html>

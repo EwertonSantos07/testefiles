@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+/* #7b68ee cor default*/
+
+/* Import Configs global */
+@import url('1-global.css');
+
+/* Import Configs Main */
+@import url('2-main.css');

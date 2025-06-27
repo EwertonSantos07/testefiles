@@ -1,0 +1,215 @@
+<!-- Estrutura Inicial da Página-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <!-- Session Storage Verification -->
+        <script>
+            const islocalEnvironment = sessionStorage.getItem('localEnvironment')
+            const statusADM = sessionStorage.getItem('ADMstatus')
+            const intlocalEnvironment = parseInt(islocalEnvironment)
+            const resultInt = (intlocalEnvironment === 1)
+            const resultADM = (statusADM === 'true');
+            
+            if(sessionStorage.getItem("statusConsole") === 'true') {
+                console.log("Environment: ", resultInt);
+                console.log("ADM: ", resultADM);
+            } 
+
+            if (resultInt === true && resultADM === false) {
+                
+                // Tag GA4
+                const ga4MeasurementId = 'G-28WKJ8L6QV';
+
+                // Head Element GA4
+                const script1 = document.createElement("script")
+                script1.async = true
+                script1.src = `https://www.googletagmanager.com/gtag/js?id=${ga4MeasurementId}`
+                document.head.appendChild(script1)
+
+                // Data Layer GA4
+                const script2 = document.createElement("script")
+                script2.textContent = `
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+
+                    gtag('config', '${ga4MeasurementId}')
+                `;
+                document.head.appendChild(script2);
+
+                // Google Tag Manager GTM
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','GTM-KDCXQ28J');
+
+                
+                if(sessionStorage.getItem("statusConsole") === 'true') {
+                    console.log("sobre.html: GA4 e GTM habilitados para essa sessão!");
+                } 
+            } else {
+                if(sessionStorage.getItem("statusConsole") === 'true') {
+                    console.log("sobre.html: Ambiente de testes ou ADM em produção, não habilitar TAGS Google!")
+                }
+            }
+        </script>
+
+        <script>
+            const currentEnvironment = sessionStorage.getItem("proEnvironment")
+            const intproEnvironment = parseInt(currentEnvironment)
+            const linkElement = document.createElement('link');
+            linkElement.rel = 'stylesheet';
+            linkElement.type = 'text/css';
+            if (intproEnvironment === -1) { //Live Server
+                linkElement.href = "/assets/CSS/3-contato/0-contato.css";
+            } else if (intproEnvironment === 0) { //testefiles
+                linkElement.href = "/testefiles/assets/CSS/3-contato/0-contato.css";
+            } else if (intproEnvironment === 1) {
+                linkElement.href = "/criacao-de-sites/assets/CSS/3-contato/0-contato.css";
+            }
+            document.head.appendChild(linkElement);
+            if(sessionStorage.getItem("statusConsole") === 'true') {
+                console.log("LinkElement: ", linkElement)
+            }
+        </script>        
+
+        <meta charset="UTF-8">
+        <meta 
+            name="viewport" 
+            content="width=device-width, 
+                initial-scale=1.0">
+
+        <meta
+            name="description"
+            content="Ewerton Santos é um profissional especializado em criação de sites em Curitiba, PR. Desenvolvemos websites personalizados e responsivos para empresas e indivíduos. Solicite um orçamento!">
+
+        <meta 
+            name="keywords" 
+            content="criação de sites, desenvolvimento web, web designer Curitiba, sites profissionais, orçamento sites">
+
+        <title>Criação de Sites Contato Curitiba PR | Ewerton Santos - Web Designer Profissional</title>
+
+        <link rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <body>
+
+        <!-- Iframe GTM -->
+        <script>
+            const islocalEnvironment2 = sessionStorage.getItem('localEnvironment')
+            const statusADM2 = sessionStorage.getItem('ADMstatus')
+            const intlocalEnvironment2 = parseInt(islocalEnvironment2)
+            const resultInt2 = (intlocalEnvironment2 === 1)
+            const resultADM2 = (statusADM2 === 'true');
+
+            if (resultInt2 === true && resultADM2 === false) {
+
+                // Google Tag Manager (noscript)
+                const noScript = document.createElement("noscript")
+                const eliframe = document.createElement("iframe")
+                eliframe.src = "https://www.googletagmanager.com/ns.html?id=GTM-KDCXQ28J"
+                eliframe.height = "0"
+                eliframe.width = "0"
+                eliframe.style.display = "none"
+                eliframe.style.visibility = "hidden"
+                noScript.appendChild(eliframe)
+                document.body.prepend(noScript)
+
+                if(sessionStorage.getItem("statusConsole") === 'true') {
+                    console.log("sobre.html: Iframe GTM ativo!!!")
+                }
+            } else {
+                if(sessionStorage.getItem("statusConsole") === 'true') {
+                    console.log("sobre.html: Iframe noscript GTM desativado!")
+                }
+            }
+        </script>
+
+        <h1 class="sa-h1">
+            Criação de Sites
+        </h1>
+
+        <p class="sa-p">
+            Dúvidas, sugestões ou reclamações?<br>
+            Entre em contato através dos canais
+            de atendimento.
+        </p>
+
+        <p class="sa-p-infos">
+            <br>
+            <i class="fa" style="font-size: 24px">
+                &#xf095;
+            </i>
+            <br>
+            (41) 9 9826-6060<br><br>
+        </p>
+
+        <p class="sa-p-infos">
+            <i class="fa" style="font-size: 24px">
+                &#xf0e0;
+            </i>
+            <br>
+            santos.7.ton@gmail.com<br><br>
+        </p>
+
+        <p class="sa-p-infos">
+            <i class="fa" style="font-size: 24px">
+                &#xf16d;
+            </i>
+            <br>
+            Veja meus últimos trabalhos no Instagram<br>
+            @ewer.web.ton<br><br>
+        </p>
+
+        <p class="sa-p-infos">
+            <i class="fa" style="font-size: 24px">
+                &#xf041;
+            </i>
+            <br>
+            Curitiba, PR.<br><br>
+        </p>
+
+        <button 
+            class="sa-btn">
+            &lt;
+            <i class="fa">
+                &#xf232;
+            </i>
+            Informações &gt;
+        </button>
+
+        <script>
+            // Função para notificar o documento pai que o conteúdo do iframe está pronto
+            function notifyParentIframeReady() {
+                // Verifica se a janela atual está dentro de um iframe e se tem um pai
+                if (window.parent && window.parent !== window) {
+                    
+                    //Definindo Domínio Atual
+                    const currentDomain = sessionStorage.getItem("currentDomain")
+
+                    // Permissions Origins
+                    const parentOrigins = [
+                        currentDomain
+                    ];
+
+                    //Enviando sinal para origem
+                    parentOrigins.forEach(origin => {
+                        window.parent.postMessage('iframeContentReady', origin); 
+                        if(sessionStorage.getItem("statusConsole") === 'true') {
+                            console.log(`%cTentando enviar 'iframeContentReady' para origem: ${origin}`, "color: gray;");
+                        }
+                    })
+
+                    // Status
+                    if(sessionStorage.getItem("statusConsole") === 'true') {
+                        console.log("%cNotificação 'iframeContentReady' enviada para o pai (verifique o console do pai para confirmação).", "color: blue;");
+                    }
+                }
+            }
+            window.addEventListener('load', notifyParentIframeReady);
+        </script>
+    </body>
+
+</html>

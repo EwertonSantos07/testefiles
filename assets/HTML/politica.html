@@ -1,0 +1,533 @@
+<!-- Estrutura Inicial da Página-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <!-- Session Storage Verification -->
+        <script>
+            const islocalEnvironment = sessionStorage.getItem('localEnvironment')
+            const statusADM = sessionStorage.getItem('ADMstatus')
+            const intlocalEnvironment = parseInt(islocalEnvironment)
+            const resultInt = (intlocalEnvironment === 1)
+            const resultADM = (statusADM === 'true');
+            
+            if(sessionStorage.getItem("statusConsole") === 'true') {
+                console.log("Environment: ", resultInt);
+                console.log("ADM: ", resultADM);
+            } 
+
+            if (resultInt === true && resultADM === false) {
+                
+                // Tag GA4
+                const ga4MeasurementId = 'G-28WKJ8L6QV';
+
+                // Head Element GA4
+                const script1 = document.createElement("script")
+                script1.async = true
+                script1.src = `https://www.googletagmanager.com/gtag/js?id=${ga4MeasurementId}`
+                document.head.appendChild(script1)
+
+                // Data Layer GA4
+                const script2 = document.createElement("script")
+                script2.textContent = `
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+
+                    gtag('config', '${ga4MeasurementId}')
+                `;
+                document.head.appendChild(script2);
+
+                // Google Tag Manager GTM
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','GTM-KDCXQ28J');
+
+                
+                if(sessionStorage.getItem("statusConsole") === 'true') {
+                    console.log("sobre.html: GA4 e GTM habilitados para essa sessão!");
+                } 
+            } else {
+                if(sessionStorage.getItem("statusConsole") === 'true') {
+                    console.log("sobre.html: Ambiente de testes ou ADM em produção, não habilitar TAGS Google!")
+                }
+            }
+        </script>
+
+        <script>
+            const currentEnvironment = sessionStorage.getItem("proEnvironment")
+            const intproEnvironment = parseInt(currentEnvironment)
+            const linkElement = document.createElement('link');
+            linkElement.rel = 'stylesheet';
+            linkElement.type = 'text/css';
+            if (intproEnvironment === -1) { //Live Server
+                linkElement.href = "/assets/CSS/4-politica/0-politica.css";
+            } else if (intproEnvironment === 0) { //testefiles
+                linkElement.href = "/testefiles/assets/CSS/4-politica/0-politica.css";
+            } else if (intproEnvironment === 1) {
+                linkElement.href = "/criacao-de-sites/assets/CSS/4-politica/0-politica.css";
+            }
+            document.head.appendChild(linkElement);
+            if(sessionStorage.getItem("statusConsole") === 'true') {
+                console.log("LinkElement: ", linkElement)
+            }
+        </script>
+
+        <meta charset="UTF-8">
+        <meta 
+            name="viewport" 
+            content="width=device-width, initial-scale=1.0">
+
+        <meta
+            name="description"
+            content="Ewerton Santos é um profissional especializado em criação de sites em Curitiba, PR. Desenvolvemos websites personalizados e responsivos para empresas e indivíduos. Solicite um orçamento!">
+
+        <meta 
+            name="keywords" 
+            content="criação de sites, desenvolvimento web, web designer Curitiba, sites profissionais, orçamento sites">
+
+        <meta 
+            name="keywords" 
+            content="criação de sites, desenvolvimento web, web designer Curitiba, sites profissionais, orçamento sites">
+
+        <title>Criação de Sites em Curitiba | Ewerton Santos - Web Designer Profissional</title>
+
+        <link rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <body>
+
+        <!-- Iframe GTM -->
+        <script>
+            const islocalEnvironment2 = sessionStorage.getItem('localEnvironment')
+            const statusADM2 = sessionStorage.getItem('ADMstatus')
+            const intlocalEnvironment2 = parseInt(islocalEnvironment2)
+            const resultInt2 = (intlocalEnvironment2 === 1)
+            const resultADM2 = (statusADM2 === 'true');
+
+            if (resultInt2 === true && resultADM2 === false) {
+
+                // Google Tag Manager (noscript)
+                const noScript = document.createElement("noscript")
+                const eliframe = document.createElement("iframe")
+                eliframe.src = "https://www.googletagmanager.com/ns.html?id=GTM-KDCXQ28J"
+                eliframe.height = "0"
+                eliframe.width = "0"
+                eliframe.style.display = "none"
+                eliframe.style.visibility = "hidden"
+                noScript.appendChild(eliframe)
+                document.body.prepend(noScript)
+
+                if(sessionStorage.getItem("statusConsole") === 'true') {
+                    console.log("sobre.html: Iframe GTM ativo!!!")
+                }
+            } else {
+                if(sessionStorage.getItem("statusConsole") === 'true') {
+                    console.log("sobre.html: Iframe noscript GTM desativado!")
+                }
+            }
+        </script>
+
+        <h1 class="pp-h1">
+            Política de Privacidade & Cookies
+        </h1>
+
+        <h2 class="pp-container-01-h2">
+            1. DADOS DO CONTROLADOR
+        </h2>
+
+        <h3 class="pp-container-01-h3">
+            1.1. RESPONSÁVEL PELO TRATAMENTO
+        </h3>
+
+        <p class="pp-container-01-p">
+            Os dados abrangidos por esta política de privacidade são controlados pelo administrador Ewerton Santos.
+        </p>
+
+        <br>
+
+        <h3 class="pp-container-01-h3">
+            1.2. RESPEITO AO USUÁRIO
+        </h3>
+
+        <p class="pp-container-01-p">
+            Um dos fundamentos da Lei Geral de Proteção de Dados (LGPD) é o respeito à privacidade. A privacidade dos nossos TITULARES (“Usuário”, “você”, “titular”) é muito importante e, por esta razão, não medimos esforços para cumprir os propósitos da LGPD e proteger os dados pessoais que tratamos. Desse modo, esta Política de Privacidade tem o propósito de informar, de maneira objetiva e transparente, a você, titular de dados, como este site trata seus dados pessoais.
+        </p>
+
+        <br><br>
+
+        <h2 class="pp-container-01-h2">
+            2. APLICABILIDADE DESTA POLÍTICA
+        </h2>
+
+        <p class="pp-container-01-p">
+            Essa Política se aplica para aqueles que interagem com este site, seja de forma virtual, por meio do website, produtos ou de maneira física.<br><br>
+            
+            Alguns serviços ou aplicativos disponibilizados para os Usuários podem apresentar avisos de privacidade próprios, que serão apresentadas quando do acesso destes serviços ou aplicativos.
+        </p>
+
+        <br><br>
+
+        <h2 class="pp-container-01-h2">
+            3. DADOS COLETADOS
+        </h2>
+
+        <p class="pp-container-01-p">
+            Este site coleta as informações fornecidas pelo Usuário quando este (i) acessa os websites; (ii) torna-se um apoiador ou registra-se em uma de nossas contas de serviços; (iii) participa dos eventos relacionados a este site; (iv) participa de competições e/ou pesquisas; (v) se inscreve nos e-mails; (vi) interage nas comunidades online; (vii) se inscreve nas comunicações de marketing; (viii) usa dispositivos móveis para acessar o conteúdo deste site; (ix) interage via email ou mídias sociais; (x) menciona o conteúdo deste site nas mídias sociais; (xi) interage com terceiros parceiros, que estejam conectados com as plataformas eletrônicas de conteúdo.<br><br>
+
+            A finalidade precípua da coleta de informações é a de identificar o Usuário e conhecer suas preferências; por isso, quanto mais informações corretas o Usuário fornecer, melhor será a personalização da sua experiência.<br><br>
+
+            Este site empregará as seguintes categorias, sem prejuízo do uso de outras, no desempenho de suas atividades:<br><br>
+
+            <b>Dados da Conta:</b> tais como, nome, CPF, e-mail, telefone, endereço e data de nascimento.<br><br>
+
+            <b>Dados de Navegação:</b> tais como número de visitantes; código de identificação do usuário; geolocalização aproximada através do ip (país, cidade, latitude e longitude da cidade); informações do dispositivo e navegador; páginas visitadas e tempo gasto em cada uma delas; dados demográficos (gênero, faixa etária e interesses).<br><br>
+
+            <b>Dados de Terceiros:</b> dados fornecidos por fontes disponíveis ao público, prestadores de serviços e parceiros, sempre em conformidade com a legislação vigente.<br><br>
+        </p>
+
+        <h3 class="pp-container-01-h3">
+            3.1. Categoria de dados pessoais
+        </h3>
+
+        <h3 class="pp-container-01-h3">
+            a) DADOS DA CONTA
+        </h3>
+
+        <p class="pp-container-01-p">
+            <b>Base Legal:</b> Execução de contrato e cumprimento de obrigação legal.<br>
+            
+            <b>Propósito:</b><br>
+            &emsp;•Identificar e individualizar o Usuário;
+        </p>
+
+        <br>
+
+        <h3 class="pp-container-01-h3">
+            b) DADOS DE NAVEGAÇÃO
+        </h3>
+
+        <p class="pp-container-01-p">
+            <b>Base Legal:</b> Com consentimento.<br>
+
+            <b>Propósito:</b><br>
+            &emsp;• Responder as dúvidas, reclamações e solicitações sobre produtos e/ou serviços;<br>
+            &emsp;• Promover os produtos e/ou serviços oferecidos neste site;<br>
+            &emsp;• Desenvolver novas funcionalidades e melhorias, aprimorando a sua experiência com os produtos e serviços;<br>
+            &emsp;• Compreender como o usuário utiliza os Serviços;<br>
+            &emsp;• Fornecer, customizar e recomendar conteúdos e serviços e/ou produtos;<br>
+            &emsp;• Ofertar novos Produtos e/ou Serviços ao Usuário;<br>
+            &emsp;• Avaliar o desempenho e aprimorar os Serviços e Produtos;<br>
+            &emsp;• Ajudar parceiros a avaliar a efetividade e alcance dos projetos e também para entender os perfis de pessoas que participam;<br>
+            &emsp;• Realizar atividades de pesquisa e inovação relacionadas à performance e aprimoramento dos Serviços e Produtos;<br>
+            &emsp;• Monitorar atividades e tendências de uso;<br>
+            &emsp;• Enviar ofertas, informações sobre promoções, eventos e/ou anúncios em sua conta de e-mail, por mensagem de texto, aplicativo de mensagens, ligação telefônica e notificação instantânea (push);<br>
+            &emsp;• Identificar e corrigir problemas técnicos, como erros no carregamento de páginas, e proteger o site contra atividades maliciosas, como ataques DDoS.<br><br>
+
+            Ao aceitar esta Política, o Usuário declara: (a) que este site poderá realizar o tratamento dos dados pessoais coletados durante o acesso e/ou preenchimento de formulários com seus dados; (b) ser maior de 18 (dezoito) anos e que fez a leitura completa e atenta das regras dessa Política, estando plenamente ciente do seu teor e conferindo sua manifestação livre, informada e inequívoca pela qual concorda com o tratamento de seus dados pessoais para uma das finalidades estabelecidas no item 3. Caso não esteja de acordo com o conteúdo dessa Política, não poderá acessar o site e demais plataformas oferecidas; (c) se for representante legal de uma empresa, possuir os poderes necessários e específicos para aceitar esta Política.<br><br>
+
+            O Usuário é o único responsável pela exatidão, clareza, atualização e veracidade dos dados que informar no ato de preenchimento do formulário de cadastro. Caso identificada falsidade de informações cadastradas, o administrador poderá solicitar ao Usuário esclarecimentos, podendo, suspender ou bloquear seu acesso se julgá-las inadequadas, se assim for necessário.<br><br>
+
+            Caso o administrador identifique o mau uso do site, causando a violação de direitos da propriedade intelectual de sua propriedade ou de terceiros, poderá ser solicitado ao Usuário esclarecimentos, podendo bloquear ou encerrar seu acesso e tomar as medidas jurídicas e administrativas cabíveis.<br><br>
+
+            Na hipótese de mudanças da finalidade para o tratamento de dados pessoais não compatíveis com o propósito original, o administrador informará previamente o Usuário sobre as mudanças de finalidade por meio do e-mail informado no momento do cadastramento. Se o tratamento dos dados for realizado com fundamento na base legal “com consentimento”, o Usuário poderá revogá-lo caso discorde das alterações. No mesmo ato, o administrador informará as consequências caso o Usuário não concorde com a nova finalidade de tratamento de seus dados pessoais.<br><br>
+
+            Este site pode conter links para outros sites que não são de sua responsabilidade. Este site não controla estes sites e não é responsável, sem se limitar, por seu conteúdo, segurança e/ou práticas de privacidade. Se o Usuário seguir um link que não seja do conteúdo oferecido por este site, recomenda-se a leitura da política de privacidade dos sites e/ou aplicativos para os quais foi direcionado.<br><br>
+
+            O login e senha gerado pelo Usuário é de uso pessoal e intransferível. O Usuário deverá manter sua senha sob sigilo e em ambiente seguro. O Usuário que utilizar login e senha de outra pessoa ou cedê-la a outrem para que dela se utilize poderá incorrer no crime tipificado no art. 308, do Código Penal.<br><br>
+
+            Caso o Usuário identifique ou desconfie que um terceiro tenha acesso indevido ao seu login e/ou senha, ele deverá alterar os referidos dados diretamente no(s) site(s) e/ou aplicação(ões). O compartilhamento de Credenciais decorrente de ação do USUÁRIO configura violação a esta Política de Privacidade.
+        </p>
+
+        <br>
+
+        <h3 class="pp-container-01-h3">
+            3.2. Informações adicionais sobre o tratamento de dados de navegação
+        </h3>
+
+        <p class="pp-container-01-p">
+            Este site também oferece um aplicativo móvel para melhorar a experiência do Usuário, logo, é importante destacar que o aplicativo móvel não coleta dados pessoais, exceto para fins de rastreamento através do Firebase Analytics, uma ferramenta de análise fornecida pelo Google.<br><br>
+
+            O Firebase Analytics nos fornece informações essenciais sobre como nosso aplicativo é utilizado, como a frequência de uso, tempo de sessão e eventos do usuário. Estes dados nos ajudam a entender melhor o comportamento dos usuários e aprimorar nossos serviços.<br><br>
+
+            É importante observar que o Firebase Analytics não coleta informações de identificação pessoal e opera estritamente dentro dos limites das políticas de privacidade do Google.<br><br>
+
+            As publicações localizadas em nossas páginas também podem conter conteúdos obtidos de outros sites e/ou serviços, como: vídeos do Youtube, postagem do Instagram, matérias de sites parceiros, etc. Neste caso, para saber mais sobre o tratamento dos seus dados, recomendamos que consulte a política específica de cada um desses serviços.<br><br>
+
+            Este site busca a melhoria de seus produtos e serviços e, ao utilizar nossos serviços e plataformas, você concorda que podemos recolher e utilizar estes dados.<br><br>
+        </p>
+
+        <br>
+
+        <h2 class="pp-container-01-h2">
+            4. FORMA DE ARMAZENAMENTO E PRAZO
+        </h2>
+
+        <p class="pp-container-01-p">
+            Os dados coletados e os registros de atividades serão armazenados em ambiente seguro e controlado pelo período mínimo abaixo indicado, sem prejuízo de serem observados outros prazos previstos em legislação específica:
+        </p>
+
+        <p class="pp-container-01-p">
+            <b>Dados Cadastrais:</b>
+        </p>
+        <ul class="pp-container-01-ul">
+            <li>05 anos após o término da relação
+                com o usuário;</li>
+
+            <li>Art. 27 do Código Penal de
+                Defesa do Consumidor;</li>
+        </ul>
+
+        <p class="pp-container-01-p">
+            <b>Dados Comportamentais:</b>
+        </p>
+        <ul class="pp-container-01-ul">
+            <li>6 meses;</li>
+
+            <li>Art. 15 do Marco Civil da Internet.</li>
+        </ul>
+
+        <p class="pp-container-01-p">
+            Este site poderá ser acessado em qualquer país e, por esta razão, este site poderá transferir seus dados para operadores localizados em outros países ou jurisdições do mundo que proporcionem grau de proteção de dados pessoais adequado ao previsto na LGPD.<br><br>
+
+            Os dados coletados poderão ser armazenados em datacenter localizados nos Estados Unidos da América por meio da tecnologia denominada cloud computing. Nesse caso, o Usuário se declara ciente de que ocorrerá a transferência de seus dados pessoais para país estrangeiro com a finalidade de tratamento de seus dados, especialmente para armazenamento. A transferência internacional de dados será realizada apenas para atender a propósitos legítimos, específicos, explícitos e informados ao Usuário e desde que amparada em (i) uma das hipóteses legais previstas no art. 7º ou no art. 11 da LGPD e (ii) um dos seguintes mecanismos válidos de realização da transferência internacional: a) para países ou organismos internacionais que proporcionem grau de proteção de dados pessoais adequados ao previsto na LGPD; b) cláusulas-padrão contratuais, normas corporativas globais ou cláusulas contratuais específicas, na forma da Resolução CD/ANPD nº 19, de 23 de agosto de 2024; ou c) nas hipóteses previstas nos incisos II, “d”, e III a IX do art. 33 da LGPD. Caso a transferência internacional seja amparada na adoção de cláusulas-padrão, este site disponibilizará em seu site informações sobre a realização da transferência internacional de dados, nos termos do art. 17, §2º, da Resolução CD/ANPD nº 19, de 23 de agosto de 2024.<br><br>
+
+            Visando à proteção da privacidade do Usuário, este site poderá utilizar recursos criptográficos na operação com dados pessoais realizada com os provedores de hospedagem. Este site declara que apenas os provedores de hospedagem que passaram na sua verificação de segurança e confiabilidade realizarão o tratamento dos dados pessoais do Usuário.
+        </p>
+
+        <br><br>
+
+        <h2 class="pp-container-01-h2">
+            5. O QUE SÃO COOKIES E QUAL SUA UTILIDADE
+        </h2>
+
+        <p class="pp-container-01-p">
+            Este site poderá utilizar “Cookies” no site com a finalidade de facilitar o uso da aplicação pelo Usuário.<br><br>
+
+            Os cookies são necessários para oferecer funcionalidades básicas enquanto o Usuário navega no site.<br><br>
+
+            O Usuário se declara ciente de que, ao bloquear o uso de Cookies, alguns serviços web poderão ser, parcial ou totalmente, afetados e comprometer a navegação no website.<br><br>
+
+            Segundo o Guia Orientativo: Cookies e proteção de dados pessoais, publicado no ano de 2022 pela ANPD, existem os seguintes tipos de Cookies:<br><br>
+
+            (a) De acordo com a entidade responsável pela sua gestão:<br><br>
+
+            &emsp;• (i) Cookies próprios ou primários: são os cookies definidos diretamente pelo site ou aplicação que o Usuário está visitando. Os cookies primários geralmente não podem ser usados para rastrear a atividade em outro site que não seja o site original em que foi colocado. Esses tipos de cookies podem incluir informações como credenciais de login, itens do carrinho de compras ou idioma preferido.<br><br>
+
+            &emsp;• (ii) Cookies de terceiros: são cookies criados por um domínio diferente daquele que o Usuário está visitando. Decorrem de funcionalidades de outros domínios que são incorporadas a uma página eletrônica, a exemplo da exibição de anúncios.<br><br>
+
+            (b) De acordo com a necessidade:<br><br>
+
+            &emsp;• (i) Cookies necessários: são aqueles utilizados para que o site ou aplicação realize funções básicas e opere corretamente. Por isso, a coleta da informação é essencial para assegurar o funcionamento da página eletrônica ou para a adequada prestação do serviço. Dessa forma, as atividades abrangidas como estritamente necessárias incluem aquelas relacionadas à funcionalidade específica do serviço, ou seja, sem elas o usuário não seria capaz de realizar as principais atividades do site ou aplicação. Essa categoria se restringe ao essencial para prestar o serviço solicitado pelo Usuário, não contemplando finalidades não essenciais, que atendam a outros interesses do controlador.<br><br>
+
+            &emsp;• (ii) Cookies não necessários: são cookies que não se enquadram na definição de cookies necessários e cuja desabilitação não impede o funcionamento do site, aplicação e/ou a utilização dos serviços pelo usuário. Nesse sentido, cookies não necessários estão relacionados com funcionalidades não essenciais do serviço, da aplicação ou da página eletrônica. Exemplos de cookies não necessários incluem, entre outros, aqueles utilizados para rastrear comportamentos, medir o desempenho da página ou serviço, além de exibir anúncios ou outros conteúdos incorporados.<br><br>
+
+            (c) De acordo com a finalidade:<br><br>
+
+            &emsp;• (i) Cookies analíticos ou de desempenho: possibilitam coletar dados e informações sobre como os usuários utilizam o site, quais páginas visitam com mais frequência naquele site, a ocorrência de erros ou informações sobre o próprio desempenho do site ou da aplicação.<br><br>
+
+            &emsp;• (ii) Cookies de funcionalidade: são usados para fornecer os serviços básicos solicitados pelo usuário e possibilitam lembrar preferências do site ou aplicação, como nome de usuário, região ou idioma. Os cookies de funcionalidade podem incluir cookies próprios, de terceiros, persistentes ou de sessão.<br><br>
+
+            &emsp;• (iii) Cookies de publicidade: são utilizados para coletar informações do Usuário com a finalidade de exibir anúncios. Mais especificamente, a partir da coleta de informações relativas aos hábitos de navegação do usuário, os cookies de publicidade permitem sua identificação, a construção de perfis e a exibição de anúncios personalizados de acordo com os seus interesses.<br><br>
+
+            (d) De acordo com o período de retenção das informações:<br><br>
+
+            &emsp;• (i) Cookies de sessão ou temporários: são projetados para coletar e armazenar informações enquanto os Usuários acessam um site. Costumam ser descartados após o encerramento da sessão, isto é, após o usuário fechar o navegador. São utilizados regularmente para armazenar informações que só são relevantes para a prestação de um serviço solicitado pelos usuários ou com uma finalidade específica temporária, como ocorre, em geral, com uma lista de produtos no carrinho de um site de compras.<br><br>
+
+            &emsp;• (ii) Cookies persistentes: os dados coletados por meio desses cookies ficam armazenados e podem ser acessados e processados por um período definido pelo controlador, que pode variar de alguns minutos há vários anos. O uso de cookies persistentes é limitado a duração no tempo, considerando a finalidade para a qual foram coletados.<br><br>
+
+            &emsp;• (iii) Cookies persistentes: permanecem no dispositivo por muito mais tempo ou até que sejam excluídos manualmente pelo Usuário (o tempo de permanência desse tipo de Cookies nos dispositivos vai depender da duração ou da “vida” do cookie específico).<br><br>
+
+            Este site poderá utilizar os seguintes tipos de Cookies e demais ferramentas de coleta de dados:<br><br>
+
+            (a) Cookies de sessão: são cookies temporários, que permanecerão no dispositivo do Usuário até que ele saia do site.<br><br>
+
+            (b) Cookies persistentes: permanecem no dispositivo por muito mais tempo ou até que sejam excluídos manualmente pelo Usuário (o tempo de permanência desse tipo de Cookie nos dispositivos vai depender da duração ou da “vida” do cookie específico).<br><br>
+
+            (c) Cookies de Preferências: coletam informações sobre suas escolhas e preferências, permitindo-nos recordar o idioma ou outras configurações locais, e personalizar o Site de acordo com as mesmas, como: (i) Cookies de localização: armazena o endereço aproximado do Usuário (cidade, estado, país, código postal), conforme determinado pelo endereço IP, é armazenado para permitir selecionar automaticamente o país, mostrando assim quais os estabelecimentos mais próximos do Usuário. Meios que este site poderá utilizar: (a) Check-in: check-in do Usuário na rede social por meio da disponibilização pela empresa de wi-fi gratuito ou da criação de uma fanpage bem estruturada; (b) Geofencing: é o conteúdo apresentado em tempo real conforme a movimentação do internauta detectada pelo GPS; (c) Geotargeting: é a segmentação, por meio do endereço IP, de público pela localização; ou, (ii) Cookies de idioma: usados para armazenar a língua que o Usuário selecionou e para mostrar as opções corretas.<br><br>
+
+            (d) Cookies de Plug-ins Sociais: utilizados para detectar o Usuário – ou não – de redes de mídias sociais para análise de pesquisa de mercado e desenvolvimento de produtos.<br><br>
+
+            (e) Etiquetas De Pixels (Tag de pixel): é um tipo de tecnologia utilizada em um site ou no corpo de um e-mail com a finalidade de rastrear determinadas atividades, como visualizações de um site ou quando um e-mail é aberto. As tags de pixel costumam ser usadas acompanhado de cookies e as informações de utilização do site pelos Usuários podem ser compartilhadas com um operador e/ou controlador como, por exemplo, uma agência de publicidade para que ela possa direcionar anúncios nos banners no website.<br><br>
+
+            (f) Google Analytics: Serviço de análise web fornecido pela Google, Inc. (“Google”). O Google Analytics coleta cookies primários, dados relacionados ao dispositivo/navegador, ao endereço IP e às atividades no site para avaliar e informar estatísticas sobre as interações dos Usuários. A informação gerada pelo Cookie acerca da sua utilização do site será transmitida e armazenada em um servidor da Google nos EUA. Este site ativou o método de coleta “analytics.js” ou “gtag.js” para controlar o uso dos cookies para armazenar um identificador de cliente pseudônimo ou aleatório. As informações armazenadas no cookie primário local são reduzidas a um identificador aleatório (por exemplo, 12345.67890).<br><br>
+
+            (g) Google Ad Manager e Google AdSense: O Google Ad Manager e o Google AdSense são ferramentas fornecidas pelo Google para a gestão e exibição de anúncios em sites e aplicativos. Este site utiliza essas plataformas para monetizar o site por meio de anúncios personalizados e relevantes, exibidos com base no comportamento de navegação e nos interesses dos Usuários. Além disso, também existem parcerias com outras plataformas de publicidade, como a Premium Ads, Just Click Ads, entre outras.<br><br>
+
+            (h) Google Ads: Google Ads (que era conhecido como Google AdWords e Google AdWords Express) é uma solução de publicidade on-line que este site poderá utilizar para promover os seus produtos e serviços na Pesquisa Google, no YouTube e em outros sites na web. A ferramenta também permite que este site escolha metas específicas para os anúncios, como gerar mais chamadas telefônicas ou visitas ao site. Este site poderá interromper a exibição de anúncios quando desejar.<br><br>
+
+            (i) Meta Ads: Meta Ads é uma plataforma de anúncios online fornecida pela Meta Platforms Inc. que permite a este site promover seus produtos e serviços no Facebook, Instagram, Messenger e na Audience Network. Este site poderá utilizar o Meta Pixel, uma ferramenta que coleta informações sobre o comportamento do Usuário em seu site, como páginas visitadas, produtos visualizados, compras realizadas e preenchimento de formulários. Essas informações são utilizadas para medir o desempenho dos anúncios, criar públicos personalizados e exibir anúncios relevantes por meio de campanhas de remarketing.<br><br>
+
+            (j) Google reCAPTCHA: Este site utiliza o Google reCAPTCHA em seu site para proteger os formulários contra acessos automatizados (bots) e prevenir atividades maliciosas. O reCAPTCHA é uma ferramenta fornecida pela Google LLC que verifica se as interações realizadas no site são provenientes de humanos ou de sistemas automatizados. Para isso, ele analisa informações sobre o comportamento do Usuário no site para determinar se ele é humano. Essas informações podem incluir: endereço IP, tipo e versão do navegador, sistema operacional, cookies, data e hora do acesso, idioma, comportamento do cursor e interações no site.<br><br>
+
+            As informações obtidas por meio dos Cookies de conversão têm como objetivo criar estatísticas para os clientes Ads que utilizam o rastreamento de conversões. Por meio das estatísticas geradas pelo Google Ads, será possível para este site descobrir o número de Usuários que clicaram no anúncio exibido pela Google e que acessaram a página assinalada pela etiqueta de rastreamento de conversões.<br><br>
+
+            Este site poderá utilizar a função de remarketing do Google Ads. O remarketing nada mais é que uma ferramenta que marca e identifica os Usuários que já visitaram o site e passa a exibir seus anúncios com mais frequência quando o Usuário visitar sites que aceitam anúncios na rede de display do Google. Isto é, por meio da função de remarketing este site poderá apresentar anúncios a Usuários que visitaram o seu website adicionando-lhe a etiqueta global do site para remarketing e fragmentos de eventos. Uma vez instalada a etiqueta global do site, ela irá capturar informações sobre as páginas visualizadas pelos Usuários do site. Essas informações incluem o URL e o título da página e são utilizadas para criar listas de remarketing. O fragmento do evento pode ser utilizado para transmitir dados específicos para o Google Ads acerca dos visitantes do site e das ações que realizam no seu site, como, por exemplo, a visualização de um produto, a realização de compras, o preenchimento de formulários online e a configuração do registro. Os dados transmitidos para o fragmento do evento também podem ser utilizados para criar listas de remarketing.<br><br>
+
+            Ao usar o site, o Usuário permite a introdução das ferramentas acima listadas e, consequentemente, a coleta, o armazenamento e o uso dos seus dados de uso na forma acima descrita e para os fins especificados. Além disso, aceita que seus dados sejam armazenados em Cookies mesmo depois de encerrar sessão no navegador e que seja possível, por exemplo, acessá-los novamente na sua próxima visita ao site.<br><br>
+
+            Os Cookies podem ser bloqueados, recusados ou eliminados pelo Usuário a qualquer momento por meio dos recursos disponibilizados pelo navegador de sua preferência (Chrome, Firefox, Edge, etc.).
+        </p>
+
+        <br><br>
+
+        <h2 class="pp-container-01-h2">
+            6. COMPARTILHAR DADOS PESSOAIS
+        </h2>
+
+        <h3 class="pp-container-01-h3">
+            6.1. Com empresas relacionadas
+        </h3>
+
+        <p class="pp-container-01-p">
+            Os dados pessoais tratados em razão desta Política poderão ser compartilhados com "Empresas Relacionadas".<br><br>
+
+            Seus dados também poderão ser utilizados por estas Empresas Relacionadas para (i) identificar produtos e serviços que possam ser do interesse do usuário; (ii) criar um perfil mais personalizado sobre o usuário com o propósito de ajudar a personalizar a sua experiência em nossos Serviços ou nas plataformas destas empresas; (iii) ofertar publicidade baseada em seus interesses; (iv) realizar pesquisas e análises para auxiliar na melhoria dos nossos Serviços ou os Serviços das demais empresas (por exemplo, recomendando a Você programas ou notícias que possam ser do seu interesse); e (v) comunicar promoções conduzidas por este site e/ou pelas demais sociedades integrantes.<br><br>
+
+            Este site e as empresas garantem que somente os empregados devidamente autorizados terão acesso aos dados pessoais coletados e sempre respeitando os princípios de proporcionalidade, necessidade e relevância para cumprir as finalidades descritas no item 3 acima, além do compromisso de confidencialidade e preservação da privacidade nos termos dessa Política.<br><br>
+
+            Todas as transferências de dados entre as empresas são realizadas com a adoção das melhores técnicas de segurança e visando a proteção dos dados pessoais.<br><br>
+        </p>
+
+        <h3 class="pp-container-01-h3">
+            6.2. Com terceiros
+        </h3>
+
+        <p class="pp-container-01-p">
+            Este site não tem como prática a divulgação de informações que possam identificar o Usuário, salvo quando legalmente autorizado, por consentimento, por disposição legal, por decisão judicial, ou em circunstâncias previstas nesta Política, ou quando possível, para identificar Usuário que esteja agindo ilicitamente ou causando prejuízos a quaisquer direitos das Empresas Relacionadas e de outro Usuário, dependendo das circunstâncias. De igual modo, este site não irá comercializar, alugar, ceder, emprestar os dados pessoais dos Usuários, salvo quando devidamente autorizado por lei ou pelo próprio usuário.<br><br>
+
+            No entanto, este site utiliza serviços e tecnologias de terceiros confiáveis que seguem padrões de segurança aceitáveis e que estão sujeitos à obrigação de confidencialidade.<br><br>
+
+            Os Dados dos usuários serão compartilhados com tais terceiros sempre de acordo com essa Política, o termo de uso do respectivo Serviço (quando houver) e a legislação aplicável, para as seguintes finalidades:<br><br>
+
+            <b>Patrocinadores e Parceiros Comerciais:</b> Para fins de cumprimento de exigências de promoções ou concursos, no caso de promoções ou concursos patrocinados por outras empresas ou por meio de parcerias com este site, desde que o usuário tenha concordado em participar de tais promoções.<br><br>
+
+            <b>Empresas de pesquisa:</b> Para oferecer um serviço mais adequado ao perfil do usuário, entraremos em contato com ele para realizar enquetes e pesquisas com o intuito de testar, resolver problemas ou avaliar nossos Serviços.<br><br>
+
+            <b>Prestadores de Serviços de Tecnologia da Informação:</b> Para (i) prestar serviços de nuvem para a nossa plataforma; (ii) hospedar os Serviços e participar da criação de nosso conteúdo; e (iii) fornecer suporte técnico e operacional para os Serviços. Nestas circunstâncias, seus Dados serão armazenados e processados em plataformas de terceiros.<br><br>
+
+            <b>Prestador de Serviços de Suporte Técnico:</b> Para que terceiros que nos prestam serviços de suporte técnico forneçam assistência aos usuários ou assinantes. Nestas circunstâncias, seus Dados serão processados por tais terceiros.<br><br>
+
+            <b>Prestadores de Serviços de Marketing:</b> Para oferecer anúncio relevante ao seu perfil, e-mail marketing, SMS, notificação instantânea (push).<br><br>
+
+            <b>Autoridades Governamentais:</b> Para (i) cumprir determinações legais, judiciais e administrativas e também cumprir ofícios de autoridades competentes e (ii) tomar ou provocar medidas legais, judiciais e administrativas para defender nossos direitos previstos nesta Política, inclusive em qualquer processo judicial ou administrativo. Por Autoridades Governamentais entendem-se autoridades policiais, entidades públicas e/ou outras organizações governamentais.<br><br>
+
+            <b>Entidades de segurança e prevenção a fraudes:</b> Para (i) cumprir obrigação contratual; (ii) fazer valer os termos e condições desta Política e/ou de termos de uso de Serviços específicos contratados pelo usuário; (iii) prevenir atividades ilegais, fraudulentas ou suspeitas; (iv) prevenir problemas técnicos ou de segurança; e (v) denunciar violações e/ou proteger nossos direitos e propriedades.<br><br>
+
+            <b>Parceiros de Mensuração:</b> Para realizar análises de audiência, alcance e relevância e relatório de mensuração dos Serviços.<br><br>
+
+            <b>Parceiros e compradores de novas companhias e/ou ativos:</b> Para venda de negócios, ativos ou participações societárias e/ou constituição de novas companhias e realização de investimentos.<br><br>
+
+            <b>Parceiros de Negócios:</b> Para (i) aprimorar nossos Produtos e Serviços; (ii) ampliar nossos negócios; e/ou (iii) desenvolver novos negócios.
+        </p>
+
+        <br><br>
+
+        <h2 class="pp-container-01-h2">
+            7. DOS DIREITOS DO USUÁRIO
+        </h2>
+
+        <p class="pp-container-01-p">
+            Você poderá exercer seus direitos diretamente ou por meio de representante legalmente constituído.<br><br>
+
+            Os seus direitos consistem em:<br><br>
+
+            &emsp;• (i) solicitar a confirmação da existência do tratamento de Dados Pessoais;<br><br>
+
+            &emsp;• (ii) acesso aos dados;<br><br>
+
+            &emsp;• (iii) correção de dados incompletos, inexatos ou desatualizados;<br><br>
+
+            &emsp;• (iv) anonimização;<br><br>
+
+            &emsp;• (v) bloqueio ou eliminação de dados desnecessários, excessivos ou tratados em desconformidade com a legislação vigente;<br><br>
+
+            &emsp;• (vi) a portabilidade dos dados para outro fornecedor de serviços ou produtos;<br><br>
+
+            &emsp;• (vii) informações a respeito das entidades públicas ou privadas com quem compartilhamos os seus dados.<br><br>
+
+            Os Encarregados deste site estarão disponíveis para receber e atender as requisições dos Usuário por meio dos canais disponíveis.<br><br>
+
+            Nas ausências, impedimentos e vacâncias do Encarregado, a função será exercida por substituto formalmente designado pelo administrador.<br><br>
+
+            Para atender seus direitos, podemos precisar confirmar que a pessoa que está exercendo esses direitos é de fato “Você” ou uma pessoa que esteja autorizada a agir em seu nome. Em razão disso, alguns documentos podem ser solicitados.<br><br>
+        </p>
+
+        <br><br>
+
+        <h2 class="pp-container-01-h2">
+            8. SEGURANÇA DOS DADOS PESSOAIS DOS USUÁRIOS
+        </h2>
+
+        <p class="pp-container-01-p">
+            Todos os dados fornecidos pelo Usuário serão armazenados e tratados de acordo com os protocolos de segurança e de tecnologia recomendados pelas boas práticas de mercado, a fim de garantir a privacidade, confidencialidade e proteção dos dados pessoais de cada Usuário, sem prejuízo da inviolabilidade da intimidade e da vida privada do Usuário.<br><br>
+
+            Este site adota sólidas práticas de Segurança da Informação, passíveis de revisão constantes por inspeções, e atualizadas de forma consistente com os melhores exercícios de segurança de informação.<br><br>
+
+            Este site utiliza e adota processos, técnicas, mecanismos e procedimentos de segurança visando prevenir e dar a devida proteção, incluindo em sua transmissão medidas contra eventuais incidentes de segurança, ocorrências ou suspeitas de acessos, utilizações, alterações, apropriação e destruição não-autorizada por terceiros, passível de comprometer ou ameaçar a integridade, confidencialidade, autenticidade e disponibilidade dos Dados Pessoais.<br><br>
+
+            O Usuário se declara ciente de que nenhum método de transmissão pela Internet ou método de armazenamento eletrônico é 100% seguro. Este site se compromete a realizar os melhores esforços para proteger os dados pessoais do Usuário; no entanto, Este site não pode garantir a segurança absoluta. Caso suas informações pessoais sejam comprometidas com uma violação da segurança, o administrador notificará, no prazo razoável, o(s) Usuário(s) afetados e a ANPD, conforme determina a LGPD.
+        </p>
+
+        <br><br>
+
+        <h2 class="pp-container-01-h2">
+            9. ALTERAÇÕES DESTA POLÍTICA
+        </h2>
+
+        <p class="pp-container-01-p">
+            As informações desta política de privacidade servem para que o Usuário saiba dos compromissos da deste site com a proteção de dados, na qualidade de responsável pelo tratamento dos seus Dados Pessoais.<br><br>
+
+            Estamos sempre melhorando nossa Política e as mudanças são refletidas nesta página.<br><br>
+
+            Então, antes de acessar o(s) site(s) e/ou Aplicação(ões) deste site, recomenda-se consultar a Política de Privacidade.<br><br>
+
+            Se decidirmos mudar nossa política de privacidade, publicaremos as alterações no site. Se as alterações forem significativas, também podemos optar por comunicar o Usuário por email ou quando este acessar alguma de nossas páginas.
+        </p>
+
+        <br><br>
+
+        <h2 class="pp-container-01-h2">
+            10. FORO E LEGISLAÇÃO APLICÁVEL
+        </h2>
+
+        <p class="pp-container-01-p">
+            Este instrumento será regido e interpretado de acordo com a legislação brasileira, sendo eleito o Foro da Comarca de Curitiba, Estado Paraná, para questões a ele relativas, com renúncia expressa a qualquer outro.
+        </p>
+
+        <script>
+            // Função para notificar o documento pai que o conteúdo do iframe está pronto
+            function notifyParentIframeReady() {
+                // Verifica se a janela atual está dentro de um iframe e se tem um pai
+                if (window.parent && window.parent !== window) {
+                    
+                    //Definindo Domínio Atual
+                    const currentDomain = sessionStorage.getItem("currentDomain")
+
+                    // Permissions Origins
+                    const parentOrigins = [
+                        currentDomain
+                    ];
+
+                    //Enviando sinal para origem
+                    parentOrigins.forEach(origin => {
+                        window.parent.postMessage('iframeContentReady', origin); 
+                        if(sessionStorage.getItem("statusConsole") === 'true') {
+                            console.log(`%cTentando enviar 'iframeContentReady' para origem: ${origin}`, "color: gray;");
+                        }
+                    })
+
+                    // Status
+                    if(sessionStorage.getItem("statusConsole") === 'true') {
+                        console.log("%cNotificação 'iframeContentReady' enviada para o pai (verifique o console do pai para confirmação).", "color: blue;");
+                    }
+                }
+            }
+            window.addEventListener('load', notifyParentIframeReady);
+        </script>
+
+    </body>
+
+</html>
