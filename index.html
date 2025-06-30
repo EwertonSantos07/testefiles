@@ -1,6 +1,6 @@
 <!-- Estrutura Inicial da Página-->
 <!-- Last Deploy: 27/06/2025 as 15:38 -->
-<!-- Last update: 30/06/2025 as 09:45 -->
+<!-- Last update: 30/06/2025 as 10:31 -->
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -12,7 +12,7 @@
             //Legenda localEnvironment
             // 0 ambiente de testes
             // 1 ambiente de produção
-            sessionStorage.setItem("localEnvironment", 0);
+            sessionStorage.setItem("localEnvironment", 1);
 
             //Legenda proEnvironment
             // -1 live server
@@ -63,6 +63,7 @@
             }    
 
             // Função auxiliar para obter um parâmetro da URL MAGIC LINK
+            // Usar o pós link para adm: ?set_adm_cookie=true
             function getUrlParameter(name) {
                 name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
                 var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
