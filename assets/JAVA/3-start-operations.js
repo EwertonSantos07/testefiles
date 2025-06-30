@@ -155,13 +155,7 @@ export async function startOperations(nameID, X, varsArray) {
             history.pushState({ Page: nameID }, nameID, '');
             if(sessionStorage.getItem("statusConsole") === 'true') {
                 console.log(window.history.state, "Internal Pages Live Server");
-            }
-
-        } else if(window.location.origin == "http://ewersites") {
-            history.pushState({ Page: nameID }, nameID, nameID);
-            if(sessionStorage.getItem("statusConsole") === 'true') {
-                console.log(window.history.state, "Intrnal Pages Apache");
-            }  
+            } 
 
         //Condição para roteamento de links - Servidor    
         } else {

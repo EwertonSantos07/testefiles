@@ -1,6 +1,6 @@
 <!-- Estrutura Inicial da Página-->
 <!-- Last Deploy: 27/06/2025 as 15:38 -->
-<!-- Last update: 02/06/2025 as 15:38 -->
+<!-- Last update: 30/06/2025 as 09:45 -->
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -158,6 +158,7 @@
             let baseTag = document.createElement('base');
             baseTag.href = baseURL;
             document.head.prepend(baseTag);
+            sessionStorage.setItem("pathDomain", baseURL);
             if(sessionStorage.getItem("statusConsole") === 'true') {
                 console.log(`Base href definido como: ${baseURL}`)
             }

@@ -117,18 +117,18 @@ import {closeHideMenu} from './6-menu-oculto.js';
         footerLayout.style.display = "block";
 
         //Condição para roteamento de links
-        const patternApache = /^http:\/\/ewersites\/.*/;
+        // const patternApache = /^http:\/\/ewersites\/.*/;
         if(window.location.origin == "http://127.0.0.1:5500") {
             history.pushState({ Page: 'home' }, 'Home', `${window.location.origin}/`);
             if(sessionStorage.getItem("statusConsole") === 'true') {
                 console.log(window.history.state, "Localhost")
             }
 
-        } else if(patternApache.test(`${window.location.origin}${window.location.pathname}`) === true) {
-            history.pushState({ Page: 'home' }, 'Home', `${window.location.origin}/criacao-de-sites/home`);
-            if(sessionStorage.getItem("statusConsole") === 'true') {
-                console.log(window.history.state, "Apache")
-            }
+        // } else if(patternApache.test(`${window.location.origin}${window.location.pathname}`) === true) {
+        //     history.pushState({ Page: 'home' }, 'Home', `${window.location.origin}/criacao-de-sites/home`);
+        //     if(sessionStorage.getItem("statusConsole") === 'true') {
+        //         console.log(window.history.state, "Apache")
+        //     }
 
         } else {
             const statusURL = await roteadorURL(0, window.location.pathname);
