@@ -92,9 +92,10 @@ import {closeHideMenu} from './6-menu-oculto.js';
 
         //Capturando largura da tela!!!
         const larguraScreen = screen.width;
-        console.log("Width Screen Start:", larguraScreen, "px");
-
-
+        if(sessionStorage.getItem("statusConsole") === 'true') {
+            console.log("Width Screen Start:", larguraScreen, "px");
+        }
+        
         // Ativando tela de carregamento!!!
         const loadingScreen = document.querySelector('.loading-screen');
         loadingScreen.style.cursor = 'wait';
@@ -170,7 +171,9 @@ import {closeHideMenu} from './6-menu-oculto.js';
         if(btnMainAction) {
             btnMainAction.addEventListener("click", async function(event) {
                 const statusMain = await homeStartActions("Main");
-                console.log(statusMain);
+                if(sessionStorage.getItem("statusConsole") === 'true') {
+                    console.log(statusMain);
+                } 
             })
         }
 
@@ -179,7 +182,9 @@ import {closeHideMenu} from './6-menu-oculto.js';
         if(btnContatoAction) {
             btnContatoAction.addEventListener("click", async function(event) {
                 const statusContato = await homeStartActions("Contato");
-                console.log(statusContato);
+                if(sessionStorage.getItem("statusConsole") === 'true') {
+                    console.log(statusContato);
+                }
             })
         }
 

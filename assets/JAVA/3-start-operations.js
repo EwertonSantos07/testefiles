@@ -10,7 +10,7 @@ import {roteadorURL} from './roteamento-links.js';
 
 export async function scrollScreenTopic(topicScroll) {
     return new Promise(async (resolve) => {
-        console.log(topicScroll);
+        
         //Ajustando Scroll Seção Criação de Sites
         if(topicScroll == "sites") {
             const statusAltura = await alteraAlturaIframe();
@@ -84,9 +84,11 @@ export async function homeStartActions(Action) {
 export async function startOperations(nameID, X, varsArray) {
     return new Promise(async (resolve) => {
 
-        console.clear();
-        console.log(Date());
-        
+        if(sessionStorage.getItem("statusConsole") === 'true') {
+            console.clear();
+            console.log(Date());
+        }
+
         // Ativa tela temporaria de carregamento...
         if (X === 0 || X === 13 || X === 20) {
             const statusLoading = await showLoadingScreen(nameID);
@@ -109,33 +111,44 @@ export async function startOperations(nameID, X, varsArray) {
         //Atualizando stilos CSS
         if(nameID == "home") {
             const statusCSS = await abaHome(varsArray, nameID);
-            console.log(statusCSS);
+            if(sessionStorage.getItem("statusConsole") === 'true') {
+                console.log(statusCSS);
+            }
         }
 
         if(nameID == "historico") {
             const statusCSS = await abaHistorico(varsArray, nameID);
-            console.log(statusCSS);
+            if(sessionStorage.getItem("statusConsole") === 'true') {
+                console.log(statusCSS);
+            } 
         }
 
         if(nameID == "contato") {
             const statusCSS = await abaContato(varsArray, nameID);
-            console.log(statusCSS);
+            if(sessionStorage.getItem("statusConsole") === 'true') {
+                console.log(statusCSS);
+            }
         }
 
         if(nameID == "politica") {
             const statusCSS = await abaPolitica(varsArray, nameID);
-            console.log(statusCSS);
+            if(sessionStorage.getItem("statusConsole") === 'true') {
+                console.log(statusCSS);
+            }
         }
 
         if(nameID == "updates") {
             const statusCSS = await abaUpdates(varsArray, nameID);
-            console.log(statusCSS);
+            if(sessionStorage.getItem("statusConsole") === 'true') {
+                console.log(statusCSS);
+            }
         }
 
         if(nameID == "software") {
-            console.log("Software registrado...")
             const statusCSS = await abaSoft(varsArray, nameID);
-            console.log(statusCSS);
+            if(sessionStorage.getItem("statusConsole") === 'true') {
+                console.log(statusCSS);
+            }
         }
 
         //Condição Base href Environment
@@ -190,9 +203,11 @@ export async function endsOp(nameID, X, varsArray, iframeDoc) {
         if(nameID == "home") {
             let btnMainAction = iframeDoc.querySelector(".main-btn");
             let btnContatoAction = iframeDoc.querySelector(".ctt-btn");
-            console.log(btnMainAction);
-            console.log(btnContatoAction);
-    
+            if(sessionStorage.getItem("statusConsole") === 'true') {
+                console.log(btnMainAction);
+                console.log(btnContatoAction);
+            }
+            
             //Capturando event click btn Main ação
             if (btnMainAction) {
                 btnMainAction.addEventListener("click", async function() {
@@ -213,7 +228,9 @@ export async function endsOp(nameID, X, varsArray, iframeDoc) {
         //Capturando objetos específicos
         if(nameID == "historico") {
             let btnHistoricoAction = iframeDoc.querySelector(".hist-btn");
-            console.log(btnHistoricoAction);
+            if(sessionStorage.getItem("statusConsole") === 'true') {
+                console.log(btnHistoricoAction);
+            }
 
             //Capturando event click btn ação
             if (btnHistoricoAction) {
@@ -227,7 +244,9 @@ export async function endsOp(nameID, X, varsArray, iframeDoc) {
         //Capturando objetos específicos
         if(nameID == "updates") {
             let btnUpdatesAction = iframeDoc.querySelector(".up-btn");
-            console.log(btnUpdatesAction);
+            if(sessionStorage.getItem("statusConsole") === 'true') {
+                console.log(btnUpdatesAction);
+            }
 
             //Capturando event click btn ação
             if (btnUpdatesAction) {
@@ -241,7 +260,9 @@ export async function endsOp(nameID, X, varsArray, iframeDoc) {
         //Capturando objetos específicos
         if(nameID == "contato") {
             let btnContatoAction = iframeDoc.querySelector(".sa-btn");
-            console.log(btnContatoAction);
+            if(sessionStorage.getItem("statusConsole") === 'true') {
+                console.log(btnContatoAction);
+            }
 
             //Capturando event click btn ação
             if (btnContatoAction) {

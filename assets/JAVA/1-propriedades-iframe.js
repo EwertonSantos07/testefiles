@@ -31,7 +31,9 @@ export async function atualizaIframe(path, pagina) {
 
         if (iframe) {
             iframe.onload = function(){
-                console.log(iframe.src, "Novo DOM");
+                if(sessionStorage.getItem("statusConsole") === 'true') {
+                    console.log(iframe.src, "Novo DOM");
+                }
                 let statusResult = "iFrame foi atualizado";
                 resolve(statusResult);
             }
