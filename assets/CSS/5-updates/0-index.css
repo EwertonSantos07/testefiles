@@ -1,7 +1,0 @@
-@charset "UTF-8";
-
-/* Import Configs global */
-@import url('1-global.css');
-
-/* Import Configs updates */
-@import url('2-updates.css');
