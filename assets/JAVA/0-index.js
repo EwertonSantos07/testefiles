@@ -28,21 +28,17 @@ import {varsEnvironment} from './2-variaveis-ambientes.js';
         console.log("aqui", fullPath)
 
         //Roteador
-        const patternApache = /^http:\/\/(businesscoding\.local|bc\.local)\/.*/;
-        if(window.location.origin == "http://127.0.0.1:5500") {
-            history.pushState({ Page: 'home' }, 'Home', `${window.location.origin}${baseURL}`);
-            if(sessionStorage.getItem("statusConsole") === 'true') {
-                console.log("LiveServer", window.history.state)
-            }
-        } else if(patternApache.test(`${window.location.origin}${window.location.pathname}`) === true) {
-            history.pushState({ Page: 'home' }, 'Home', `${window.location.origin}${baseURL}`);
-            if(sessionStorage.getItem("statusConsole") === 'true') {
-                console.log("Apache", window.history.state)
-            }
-        } else {
-            history.pushState({ Page: 'home' }, 'Home', `${window.location.origin}${baseURL}`);
-            if(sessionStorage.getItem("statusConsole") === 'true') {
-                console.log("Produção", window.history.state)
+        // Ação única para todos os ambientes, pois a baseURL já está calibrada
+        history.pushState({ Page: 'home' }, 'Home', `${window.location.origin}${baseURL}`);
+
+        // Logs apenas para seu controle de P&D
+        if(sessionStorage.getItem("statusConsole") === 'true') {
+            if(window.location.origin == "http://127.0.0.1:5500") {
+                console.log("LiveServer", window.history.state);
+            } else if(patternApache.test(`${window.location.origin}${window.location.pathname}`)) {
+                console.log("Apache", window.history.state);
+            } else {
+                console.log("Produção", window.history.state);
             }
         }
 
@@ -126,7 +122,8 @@ import {varsEnvironment} from './2-variaveis-ambientes.js';
                         } else if(sessionStorage.getItem("proEnvironment") === "0") {
                             window.history.pushState({ pagina: "" }, "", "politica");
                         } else {
-                            window.history.pushState({ pagina: ""}, "", "politica");
+                            // Produção GitHub: URL fica .../testefiles/?p=politica
+                            window.history.pushState({ pagina: "politica" }, "Política", "?p=politica");
                         }
                         console.log("Navegando para: Política de Privacidade");
                     }, 600)
@@ -150,7 +147,8 @@ import {varsEnvironment} from './2-variaveis-ambientes.js';
                         } else if(sessionStorage.getItem("proEnvironment") === "0") {
                             window.history.pushState({ pagina: "" }, "", "home");
                         } else {
-                            window.history.pushState({ pagina: "" }, "", "home");
+                            // Produção GitHub: URL fica .../testefiles/?p=politica
+                            window.history.pushState({ pagina: "home" }, "Política", "?p=home");
                         }
                     }, 600)
                 }
@@ -168,13 +166,20 @@ import {varsEnvironment} from './2-variaveis-ambientes.js';
         if(statusConsole) console.log("🎭 Todos os recursos carregados. Finalizando palco...");
 
         // 2. O ROTEADOR: Atualiza a URL no navegador
-        // history.pushState(estado, titulo, url_exibida)
-        if(sessionStorage.getItem("proEnvironment") === "-1") {
+        const environment = sessionStorage.getItem("proEnvironment");
+
+        if (environment === "-1") {
+            // LiveServer: Usa a hashtag (F5 funciona nativamente)
             window.history.pushState({ pagina: "#" }, "#", "#home");
-        } else if(sessionStorage.getItem("proEnvironment") === "0") {
-            window.history.pushState({ pagina: "" }, "", "home");
+        } else if (environment === "0") {
+            // Apache Local: O .htaccess cuida do F5, então podemos usar "home" limpo
+            window.history.pushState({ pagina: "home" }, "Home", "home");
         } else {
-            window.history.pushState({ pagina: "" }, "", "home");
+            // Produção (GitHub): ATENÇÃO! 
+            // Se usarmos apenas "home", o F5 vai dar 404. 
+            // Recomendação: Deixe a URL limpa ou use um parâmetro de busca (?page=home)
+            // Para manter a segurança do seu deploy agora, vamos deixar a raiz:
+            window.history.pushState({ pagina: "home" }, "Home", `${baseURL}`); 
         }
             
         //Declarando elementos index (Header - Iframe - Footer)
