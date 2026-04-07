@@ -343,13 +343,19 @@ import {varsEnvironment} from './2-variaveis-ambientes.js';
                 const statusIframeLoad = iframeDoc.readyState === 'complete';
 
                 if (statusIframeLoad) {
-                    // Removemos o "0px" que causava o pulo para o topo
-                    // Em vez de zerar, apenas chamamos a função que ajusta a altura
-                    const statusIframe = await alteraAlturaIframe();
+                    // 1. O TRUQUE: Em vez de 0px (que joga pro topo), 
+                    // reduzimos para um valor pequeno mas existente, ou apenas removemos a altura fixa
+                    // para permitir que o conteúdo interno dite o novo tamanho.
+                    iframe.style.height = "100px"; 
+
+                    // 2. Aguardamos um micro-milissegundo para o DOM entender o reset
+                    requestAnimationFrame(async () => {
+                        const statusIframe = await alteraAlturaIframe();
                     
-                    if(sessionStorage.getItem("statusConsole") === 'true') {
-                        console.log(statusIframe, "Iframe recalibrado após resize de largura!");
-                    }
+                        if(sessionStorage.getItem("statusConsole") === 'true') {
+                            console.log(statusIframe, "Iframe recalibrado com sucesso!");
+                        }
+                    });
                 }
             } catch (error) {
                 console.error("Erro ao tentar recalcular a altura do Iframe:", error);
