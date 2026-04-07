@@ -1,0 +1,395 @@
+<!-- Estrutura Inicial da LandPage -->
+<!-- Last Deploy: 00/00/2026 as 00:00 -->
+<!-- Last update: 20/03/2026 as 09:33 -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+
+        <!-- Informações Iniciais -->
+        <meta charset="UTF-8">
+
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0">
+
+        <!-- Bloco para importar font-awesome icons para usar -->
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- Chaves de Operação (Teste Local, Servidor Apache, Servidor Produção) -->
+        <script>
+            
+            //Legenda statusConsole
+            //false - No messages in the console
+            //true - Print messages status in the console - Debugging
+            sessionStorage.setItem("statusConsole", true)
+
+            //Legenda localEnvironment
+            // 0 ambiente de testes
+            // 1 ambiente de produção
+            sessionStorage.setItem("localEnvironment", 0);
+
+            //Legenda proEnvironment
+            // -1 / - live server - URL c/#
+            // 0 / - Apache ***htaccess***
+            // 1 /testefiles/ ***404.html***
+            sessionStorage.setItem("proEnvironment", 1);
+
+            //Legenda statusHome
+            //false - Carregamento inicial
+            //true - Operação interna de páginas - Apenas testar páginas específicas!
+            sessionStorage.setItem("statusHome", "false"); //Always keep false
+
+            //Legenda statusADM
+            //false - ADM is not logged
+            //true - ADM is logged
+            sessionStorage.setItem("ADMstatus", null) //Always keep null
+
+            //Legenda scroll status
+            //false - home, carregamento padrão
+            //true - home, carregar e ir para âncora
+            sessionStorage.setItem("scrollStatus", false); //Always keep false
+        </script>
+
+        <!-- Dominio - ROTEADOR -->
+        <script>
+
+            // Definindo Raiz do Diretório
+            const currentEnvironment = sessionStorage.getItem("proEnvironment")
+            const intproEnvironment = parseInt(currentEnvironment)
+            let baseURL = null;
+            if (intproEnvironment === -1) {
+                // Pega o caminho da pasta atual dinamicamente
+                baseURL = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+            } else if (intproEnvironment === 0) {
+                baseURL = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+            } else if (intproEnvironment === 1) {
+                baseURL = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/testefiles/') + 1);
+            }
+
+            // Montando Base URL do Diretório
+            let baseTag = document.createElement('base');
+            baseTag.href = baseURL; 
+            document.head.prepend(baseTag);
+            sessionStorage.setItem("pathDomain", baseURL);
+            
+            // Montando Domínio
+            sessionStorage.setItem("currentDomain", `${window.location.origin}${baseURL}`)
+        </script>
+
+        <!-- Verificando se COOKIE ADM ESTÁ NO NAVEGADOR -->
+        <script>
+            //console.log("Navegador Cookie: Desativado!")
+            //const cookieADM = "GA_EXCLUDE_ADM";
+            //const tipoADM = typeof cookieADM;
+            //const arrayCookies = document.cookie.split(';'); //Array separador
+            //const lenCookies = arrayCookies.length; //Quantidade
+
+            //for (let i = 0; i < lenCookies; i++) {
+                //const partsCookies = arrayCookies[i].split('='); //Separa valores
+                //const tipoParts = typeof partsCookies[0]; //Verifica o tipo valor
+                //const statusFindout = (cookieADM === partsCookies[0].trim())
+                //if (statusFindout === true) {
+                    //sessionStorage.setItem("ADMstatus", partsCookies[1].trim()); 
+                    //if(sessionStorage.getItem("statusConsole") === 'true') {
+                        //console.log("ADM ATIVO COOKIE NAVEGADOR")
+                    //}
+                //}
+            //}    
+
+            // Função auxiliar para obter um parâmetro da URL MAGIC LINK
+            // Usar o pós link para adm: ?set_adm_cookie=true
+            //function getUrlParameter(name) {
+                //name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+                //var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+                //var results = regex.exec(location.search);
+                //return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+            //}
+
+            // Identificando se link inserindo é magic ?set_adm_cookie=true
+            //const setAdmCookieParam = getUrlParameter('set_adm_cookie');
+
+            // Se o parâmetro for encontrado e tiver o valor 'true'
+            //if (setAdmCookieParam === 'true') { 
+                
+                //if (window.history.replaceState) {
+                    //const cleanUrl = window.location.origin + window.location.//pathname + window.location.hash;
+                    //window.history.replaceState({path: cleanUrl}, '', cleanUrl);
+                //} else {
+                    //Fallback para navegadores mais antigos (causará um recarregamento completo)
+                    //window.location.href = window.location.origin + window.//location.pathname + window.location.hash;
+                //}
+
+                //sessionStorage.setItem("ADMstatus", true);
+                //if(sessionStorage.getItem("statusConsole") === 'true') {
+                    //console.log("MAGIC LINK ADM IS UP")
+                //} 
+            //}
+        </script>
+
+        <!-- Session Storage Verification -->
+        <script>
+            //const islocalEnvironment = sessionStorage.getItem('localEnvironment')
+            //const statusADM = sessionStorage.getItem('ADMstatus')
+            //const intlocalEnvironment = parseInt(islocalEnvironment)
+            //const resultInt = (intlocalEnvironment === 1)
+            //const resultADM = (statusADM === 'true');
+
+            //if(sessionStorage.getItem("statusConsole") === 'true') {
+                //console.log("Environment: ", resultInt);
+                //console.log("ADM: ", resultADM);
+            //} 
+            
+            //if (resultInt === true && resultADM === false) {
+                
+                //Tag GA4
+                //const ga4MeasurementId = 'G-28WKJ8L6QV';
+
+                // Head Element GA4
+                //const script1 = document.createElement("script")
+                //script1.async = true
+                //script1.src = `https://www.googletagmanager.com/gtag/js?id=${ga4MeasurementId}`
+                //document.head.appendChild(script1)
+
+                // Data Layer GA4
+                //const script2 = document.createElement("script")
+                //script2.textContent = `
+                    //window.dataLayer = window.dataLayer || [];
+                    //function gtag(){dataLayer.push(arguments);}
+                    //gtag('js', new Date());
+
+                    //gtag('config', '${ga4MeasurementId}')
+                //`;
+                //document.head.appendChild(script2);
+
+                // Google Tag Manager GTM
+                //(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    //new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                    //j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                //})(window,document,'script','dataLayer','G-28WKJ8L6QV');
+
+                //if(sessionStorage.getItem("statusConsole") === 'true') {
+                    //console.log("Index.html: GA4 e GTM habilitados para essa sessão!");
+                //} 
+            //} else {
+                //if(sessionStorage.getItem("statusConsole") === 'true') {
+                    //console.log("Index.html: Ambiente de testes ou ADM em produção, não habilitar TAGS Google!")
+                //} 
+            //}
+        </script>
+        
+        <!-- Título da Página -->
+        <title>Business Coding</title>
+
+        <!-- Exibindo Ícone do Site -->
+        <link 
+            rel="shortcut icon" 
+            type="image/png" 
+            href="assets/IMG/favicon-img.jpg">
+
+        <!-- SEO MECANISMOS DE BUSCAS -->
+        <meta
+            name="description"
+            content="Exemplo: Ewerton Santos é um profissional especializado em criação de sites em Curitiba, PR. Desenvolvemos websites personalizados e responsivos para empresas e indivíduos. Solicite um orçamento!">
+
+        <!-- SEO MECANISMOS DE BUSCAS-->
+        <meta 
+            name="keywords" 
+            content="keyword 1, keyword 2, keyword 3, keyword 4, keyword 5">
+
+        <!-- Link Principal com a Folha de Estilos - Somente index -->
+        <link rel="stylesheet"
+            type="text/css"
+            href="assets/CSS/0-index/0-index.css">
+
+        <!-- JavaScript Iniciando Leitura DOM -->
+        <script 
+            type="module"
+            src="assets/JAVA/0-index.js?v=1.3">
+        </script>
+    </head>
+
+    <body>
+
+        <!-- Renderizando Tela Loading... -->
+        <div id="loading-screen" class="loading-screen">
+            <h1 class="loading-text">Loading...</h1>
+        </div>
+
+        <!-- Monitoramente Iframe envia dados ao G4 Google -->
+        <script>
+            // const islocalEnvironment2 = sessionStorage.getItem('localEnvironment')
+            // const statusADM2 = sessionStorage.getItem('ADMstatus')
+            // const intlocalEnvironment2 = parseInt(islocalEnvironment2)
+            // const resultInt2 = (intlocalEnvironment2 === 1)
+            // const resultADM2 = (statusADM2 === 'true');
+
+            // if (resultInt2 === true && resultADM2 === false) {
+
+                // Google Tag Manager (noscript)
+                // const noScript = document.createElement("noscript")
+                // const eliframe = document.createElement("iframe")
+                // eliframe.src = "https://www.googletagmanager.com/ns.html?id=GTM-KDCXQ28J"
+                // eliframe.height = "0"
+                // eliframe.width = "0"
+                // eliframe.style.display = "none"
+                // eliframe.style.visibility = "hidden"
+                // noScript.appendChild(eliframe)
+                // document.body.prepend(noScript)
+
+                // if(sessionStorage.getItem("statusConsole") === 'true') {
+                    // console.log("Index.html: Iframe GTM ativo!!!")
+                // }
+            // } else {
+                // if(sessionStorage.getItem("statusConsole") === 'true') {
+                    // console.log("Index.html: Iframe noscript GTM desativado!")
+                // }
+            // }
+        </script>
+        
+        <!-- Cabeçalho do Site - NavBar -->
+        <header>
+
+            <a 
+                href="#secao-instagram"
+                class="header-link-insta"
+                target="bloco_central"
+                title="Ir para o Instagram">
+                <i class="fa">&#xf16d;</i>
+            </a>
+
+            <!-- Barra de Navegação -->
+            <!-- <div class="navbar"> -->
+                <!-- <a  
+                    id="navbar-home"
+                    class="navbar-text"
+                    target="bloco_central"
+                    data-link="home"
+                    role="button"
+                    style="color: yellowgreen"
+                    title="Criação de Sites">
+                    HOME
+                </a> -->
+
+                <!-- <a  
+                    id="navbar-historico"
+                    class="navbar-text"
+                    target="bloco_central"
+                    data-link="historico"
+                    role="button"
+                    title="Histórico de Sites">
+                    HISTÓRICO
+                </a> -->
+
+                <!-- <a  
+                    id="navbar-blog"
+                    class="navbar-text"
+                    target="bloco_central"
+                    data-link="blog"
+                    role="button"
+                    title="Gestão & Finanças">
+                    BLOG
+                </a> -->
+
+                <!-- <div 
+                    class="navbar-dropdown"> -->
+                    <!-- <a  
+                        id="navbar-servicos"
+                        class="navbar-text"
+                        target="bloco_central"
+                        data-link="servicos"
+                        role="button"
+                        title="Outros Serviços">
+                            SERVIÇOS
+                            <i class="fa fa-angle-down" id="icon-angle-down"></i>
+                    </a> -->
+
+                    <!-- <div
+                        class="dropdown-content">
+                        <a 
+                            id="dropdown-software"
+                            class="dropdown-content-text" 
+                            target="bloco_central"
+                            data-link="software"
+                            role="button"
+                            style="cursor: pointer"
+                            title="Sistema de Gestão">
+                            Software
+                        </a>
+                    </div> -->
+
+                <!-- </div> -->
+
+                <!-- <a  
+                    id="navbar-updates"
+                    class="navbar-text"
+                    target="bloco_central"
+                    data-link="updates"
+                    role="button"
+                    title="Controle de Atualizações">
+                    UPDATES
+                </a> -->
+
+                <!-- <a  
+                    id="navbar-contato"
+                    class="navbar-text"
+                    target="bloco_central"
+                    data-link="contato"
+                    role="button"
+                    title="Contato Criação de Sites">
+                    CONTATO
+                </a> -->
+            <!-- </div>  -->
+
+            <!-- BTN Open Menu Oculto -->
+            <!-- <button 
+                class="open-menu">
+                &#9776;
+            </button> -->
+
+            <!-- Call To Action Link Principal de Conversão -->
+            
+        </header>
+            
+        <!-- Iframe exibição de conteúdos -->
+        <iframe
+            class="main-iframe"
+            scrolling="no"
+            name="bloco_central"
+            src="assets/HTML/home.html">
+        </iframe>
+
+        <!-- Footer -->
+        <footer>
+
+            <img 
+                class="footer-img"
+                src="assets/IMG/Footer-banner.jpg"
+                alt="Logotipo Ewerton Santos Criação de Sites Curitiba">
+            </img>
+
+            <nav class="footer-links">
+                <a href="#" class="footer-link-a">BlogSpot</a>
+                <a href="#" class="footer-link-b">YouTube</a>
+                <a href="#" class="footer-link-pol">Política de Privacidade</a>
+            </nav>
+
+            <div class="cb-footer-credits">
+                <p class="footer-copy">
+                    © 2026 Business Coding. Todos os direitos reservados. 
+                    <br>
+                    Engineered by Ewerton Santos P&D Labs. <i class="fa" title="@soft.coding">&#xf16d;</i> 
+                    <span>•</span> 
+                    v1.3
+                </p>
+            </div>
+                
+            <!-- <p class="ft-container-direitos-text">
+                Nenhuma parte deste web site poderá ser reproduzida por qualquer meio ou forma sem a prévia autorização do proprietário Ewerton Santos.
+                A violação dos direitos autorais é crime estabelecido na Lei nº 9.610/98 e punido pelo art. 184 do Código Penal.
+            </p> -->
+        </footer>
+    </body>
+</html>

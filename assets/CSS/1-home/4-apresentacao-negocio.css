@@ -1,0 +1,179 @@
+@charset "UTF-8";
+
+@import url('../0-index/variables.css');
+
+/* --- Estilização da Seção (Pai de tudo) --- */
+.apresentacao-negocio {
+    box-sizing: border-box;
+    width: 100%;
+    
+    /* Respiro generoso: 120px topo/base e 5% nas laterais */
+    padding: 280px 5%; 
+    
+    background-color: #121212; /* Seu Iron Dark */
+    
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinha tudo à esquerda por padrão */
+    gap: 60px; /* Espaço entre o Título e o bloco de conteúdo */
+}
+
+.an-h3 {
+    font-family: var(--font-title);
+    color: #FFFFFF;
+    font-size: 2.5rem;
+    margin: 0;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    
+    /* Detalhe opcional: barrinha lateral para dar foco ao título */
+    border-left: 5px solid var(--cor-low); 
+    padding-left: 20px;
+}
+
+/* --- O Contêiner Flex (Image + Caixa de Conteúdo) --- */
+.an-div-infos {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: row; /* Lado a lado */
+    align-items: center; /* Centraliza verticalmente a imagem com a caixa */
+    justify-content: flex-start;
+    gap: 50px;
+    border: var(--cor-bordas-dgt);
+}
+
+/* --- A Imagem (Discreta e Elegante) --- */
+.an-img {
+    flex: 0 0 40%;
+    max-width: 450px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* --- A Camada de Cor (A Caixa de Conteúdo) --- */
+.an-caixa-conteudo {
+    flex: 1;
+    background-color: var(--cor-middle);
+    padding: 45px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+
+.an-p {
+    font-family: var(--font-body);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin: 0;
+    
+    /* O TOQUE DE MESTRE: Alinhamento Justificado */
+    text-align: justify;
+    
+    /* Evita espaços vazios estranhos entre as palavras */
+    hyphens: auto; 
+    
+    /* Melhora a renderização do texto para uma leitura mais fluida */
+    text-rendering: optimizeLegibility;
+}
+
+/* --- O Botão (Cor de Destaque) --- */
+.an-btn-info {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;                /* Espaço entre o ícone e o texto */
+    
+    margin-top: 25px;         /* Empurra o botão para baixo do parágrafo */
+    padding: 12px 30px;
+    
+    background: transparent;  /* Fundo limpo para não pesar visualmente */
+    color: var(--cor-texto);           /* Branco Fumaça */
+    border: 2px solid var(--cor-texto); /* Borda cinza média (sutil) */
+    border-radius: 10px;
+    
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    
+    cursor: pointer;
+    transition: all 0.4s ease;
+    align-self: flex-start;
+}
+
+.an-btn-info:hover {
+    background-color: var(--cor-low);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--cor-low-bright);
+}
+
+/* 6. Limpeza de Float (Importante!) */
+.an-div-infos::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+section#criacao-de-sites {
+    scroll-margin-top: -80px;
+}
+
+/* --- 📱 5. RESPONSIVIDADE (O Toque para Celulares) --- */
+@media (max-width: 1060px) {
+    
+    .apresentacao-negocio {
+        /* Reduzimos o padding gigante para não dar rolagens infinitas */
+        padding: 80px 20px; 
+        gap: 30px; /* Reduz o espaço entre o título e a caixa */
+        /* No celular, centralizamos o fluxo principal */
+        align-items: center; 
+    }
+
+    .an-h3 {
+        font-size: 1.8rem; /* Reduz o título para caber no celular */
+        text-align: center; /* Centraliza o título para não ficar estranho no celular */
+        border-left: none; /* Remove a barra lateral esquerda no mobile */
+        padding-left: 0;
+        
+        /* Adiciona uma bordinha embaixo para manter o estilo de destaque */
+        border-bottom: 3px solid var(--cor-low);
+        padding-bottom: 10px;
+    }
+
+    .an-div-infos {
+        flex-direction: column; /* Empilha imagem e texto no mobile! */
+        gap: 30px; /* Um espaço confortável entre a imagem e o texto */
+    }
+
+    .an-img {
+        flex: 0 0 auto;
+        width: 100%; /* Faz a imagem ocupar a largura disponível do celular */
+        max-width: 100%;
+        /* Garante que a imagem apareça primeiro no topo */
+        order: 1; 
+    }
+
+    .an-caixa-conteudo {
+        padding: 30px 20px; /* Reduz o padding de 45px que estava espremendo o texto */
+        /* Garante que o texto venha depois da imagem */
+        order: 2; 
+    }
+
+    .an-p {
+        font-size: 1rem;
+        /* Em telas muito pequenas, o texto justificado às vezes gera buracos gigantes entre as palavras. 
+           Se você achar que ficou estranho no celular, mude para 'left'. */
+        text-align: justify; 
+    }
+    
+    .an-btn-info {
+        /* Centraliza o botão dentro da caixa de conteúdo no mobile */
+        align-self: center; 
+    }
+}

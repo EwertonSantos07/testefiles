@@ -1,0 +1,174 @@
+@charset "UTF-8";
+
+@import url('../0-index/variables.css');
+
+/* 1. Container Principal (A Base com Imagem Sutil) */
+.section-feedback {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 15px 10%;
+    position: relative; /* Necessário para a imagem de fundo absoluta */
+    background-color: var(--cor-fundo); /* Fundo 30% para contraste */
+    border: var(--cor-bordas-dgt);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* 2. Imagem de Fundo Quase Invisível (A "Marca d'Água") */
+.sf-img {
+    position: absolute;
+    right: -50px; /* Levemente para fora para dar dinamismo */
+    bottom: -20px;
+    width: 450px;
+    height: auto;
+    opacity: 0.05; /* QUASE TRANSPARENTE como você pediu */
+    filter: grayscale(100%);
+    z-index: 0;
+    pointer-events: none;
+    float: none; /* Removemos o float aqui para usar posição absoluta */
+}
+
+/* 3. Título Centralizado e Moderno */
+.sf-h3 {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-title);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: var(--cor-texto);
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 5px;
+    margin-bottom: 10px;
+}
+
+/* 4. O "Card de Vidro" para o Feedback */
+/* 4. O "Card de Vidro" para o Feedback */
+.sf-div-infos {
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    max-width: 850px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.03); 
+    backdrop-filter: blur(10px);           
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+
+    /* --- ADICIONE ESTAS 3 LINHAS AQUI EMBAIXO: --- */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* ALINHA O BOTÃO NO CENTRO! */
+}
+
+/* 5. O Texto do Feedback (Estilo Citação) */
+.sf-p {
+    font-family: var(--font-body);
+    font-style: italic; /* Itálico para indicar depoimento */
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--cor-texto);
+    text-align: center;
+    margin: 0;
+}
+
+/* 6. Detalhe de P&D: Aspas Decorativas */
+.sf-p::before {
+    content: "“";
+    font-family: 'League Gothic', sans-serif;
+    font-size: 5rem;
+    color: #E0E0E0;
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    opacity: 0.2;
+}
+
+/* 1. Estilo Base do Botão de Seção */
+/* 1. Estilo Base do Botão de Seção */
+.sf-btn-info {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;                 
+    
+    margin: 25px auto 0 auto; /* O SEGREDO: 'auto' nas laterais centraliza o botão! */
+    padding: 12px 30px;
+    
+    background: transparent;  
+    color: var(--cor-texto);           
+    border: 2px solid var(--cor-texto); 
+    border-radius: 10px;
+    
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+/* 2. Estilização do Ícone (Font Awesome) */
+.sf-btn-info:hover {
+    background-color: var(--cor-low);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--cor-low-bright);
+}
+
+section#section-das-hospedagens {
+    scroll-margin-top: -80px;
+}
+
+/* --- 📱 7. RESPONSIVIDADE (O Toque para Celulares) --- */
+@media (max-width: 768px) {
+    
+    .section-feedback {
+        /* Padronizado com as seções anteriores para não dar rolagens infinitas */
+        padding: 80px 20px; 
+        gap: 30px;
+    }
+
+    .sf-h3 {
+        /* O clamp já ajudava, mas forçamos um tamanho fixo harmonioso no mobile */
+        font-size: 1.8rem; 
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+        
+        /* Adiciona a bordinha embaixo para manter o padrão das outras seções */
+        border-bottom: 3px solid var(--cor-low);
+        padding-bottom: 10px;
+        display: inline-block; /* Garante que a borda não ocupe a largura toda da tela */
+    }
+
+    /* Ajuste na imagem de marca d'água para não atrapalhar no celular */
+    .sf-img {
+        width: 250px; /* Diminuímos o tamanho para não cobrir o texto */
+        right: -20px;
+        bottom: -10px;
+    }
+
+    .sf-div-infos {
+        padding: 25px 15px; /* Alivia o recuo interno para o texto não ficar espremido */
+    }
+
+    .sf-p {
+        font-size: 1.1rem; /* Reduzimos levemente a fonte do depoimento */
+        line-height: 1.6;
+    }
+
+    /* Ajuste fino nas aspas decorativas */
+    .sf-p::before {
+        font-size: 3.5rem;
+        top: -15px;
+        left: 10px;
+    }
+
+    .sf-btn-info {
+        font-size: 1rem;
+        padding: 10px 25px;
+        align-self: center; /* Garante a centralização perfeita do botão */
+    }
+}

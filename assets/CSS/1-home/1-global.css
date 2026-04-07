@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+@import url('../0-index/variables.css');
+
+/* 1. Reset Universal: O básico do P&D */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. Estrutura de Encaixe */
+html, body {
+    width: 100%;
+    /* Importante: Usamos 100% aqui para o Iframe respirar, 
+       mas deixamos o conteúdo (main) ditar a altura real */
+    min-height: 100%; 
+    
+    /* Garante que o fundo seja transparente para herdar o 
+       background do Index, ou defina o Iron Dark aqui por segurança 
+    */
+    background-color: transparent; 
+    
+    /* O "Cadeado" contra barras de rolagem horizontais fantasmas */
+    overflow-x: hidden; 
+}
+
+body {
+    /* O Body da Home deve ser um trilho vertical. 
+       Tudo o que jogarmos aqui dentro vai empilhando no centro.
+    */
+    display: flex;
+    flex-direction: column;
+    align-items: center;      /* Centraliza tudo horizontalmente */
+    justify-content: flex-start; /* Começa do topo e vai descendo */
+    
+    /* Fonte herdada para manter a consistência */
+    font-family: var(--font-title);
+    color: var(--cor-texto); /* Texto principal do Iron Dark */
+}
+
+/* 3. Ajuste de Imagens e Mídias */
+img, video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}

@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+/* Importação de fontes (Mantenha as que você gosta) */
+@import url('https://fonts.googleapis.com/css2?family=League+Gothic&family=Tangerine:wght@400;700&display=swap');
+
+@import url('variables.css');
+
+header {
+    box-sizing: border-box;
+    width: 100%;
+    height: 40px;
+    
+    /* 1. Transparência: Usamos RGBA para o Iron Dark (#121212) com 80% de opacidade */
+    background-color: var(--cor-fundo-glass); 
+    
+    /* 2. O Efeito de Vidro: Desfoca o que estiver ATRÁS do header */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Suporte para Safari */
+
+    border: var(--cor-bordas-dgt); /* Pode remover a borda de diagnóstico agora se quiser */
+    border-bottom: 1px solid rgba(44, 44, 44, 0.5); /* Divisão ainda mais sutil */
+
+    /* Alinhamento Estratégico */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    
+    padding: 0 40px;
+    
+    /* 3. Fixação: Garantindo que ele flutue sobre o Iframe */
+    position: sticky;
+    top: 0;
+    z-index: 100; /* Mantém acima de qualquer conteúdo do Iframe */
+}
+
+/* Estilo para o ícone puro e flutuante do Instagram */
+.header-link-insta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Tamanho do ícone para dar presença */
+    font-size: 1.8rem; 
+    
+    /* Área de clique invisível e confortável para o dedo/mouse */
+    width: 40px;
+    height: 40px;
+    
+    /* Removemos o fundo e as sombras de bloco */
+    background: transparent; 
+    color: var(--cor-low); /* Cor travada nos seus 10% */
+    
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    
+    text-decoration: none;
+    
+    /* Transição suave para o movimento */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.header-link-insta:hover {
+    /* Mantém a mesma cor do ícone no hover para preservar a identidade */
+    color: var(--cor-low); 
+    transform: translateY(-3px); /* Eleva levemente o ícone */
+    
+    /* Um brilho suave atrás do próprio ícone no hover */
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+}
+
+/* O brilho interno que atravessa o ícone puro */
+.header-link-insta::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right, 
+        rgba(255,255,255,0) 0%, 
+        rgba(255,255,255,0.8) 50%, 
+        rgba(255,255,255,0) 100%
+    );
+    transform: skewX(-25deg);
+    transition: none;
+}
+
+.header-link-insta:hover::after {
+    left: 150%;
+    transition: all 0.5s ease;
+}
+
+
+/* @media only screen and (max-width: 902px) {
+    .navbar {
+        display: none;
+    }
+
+    .media-info-head {
+        order: 0;
+        margin: 0;
+    }
+
+    header {
+        flex-direction: column;
+    }
+} */

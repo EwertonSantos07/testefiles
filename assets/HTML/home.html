@@ -1,0 +1,331 @@
+<!-- Estrutura Inicial da Página-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <!-- Informações Iniciais -->
+        <meta charset="UTF-8">
+
+        <meta 
+            name="viewport" 
+            content="width=device-width, 
+                initial-scale=1.0">
+
+        <!-- Bloco para importar font-awesome icons para usar -->
+        <link rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- Verificando chaves de operação -->
+        <script>
+            const islocalEnvironment = sessionStorage.getItem('localEnvironment')
+            const statusADM = sessionStorage.getItem('ADMstatus')
+            const intlocalEnvironment = parseInt(islocalEnvironment)
+            const resultInt = (intlocalEnvironment === 1)
+            const resultADM = (statusADM === 'true')
+
+            //Se ambiente de produção True && ADM ativo FALSE, monitorar sessão
+            // GA4
+            //if (resultInt === true && resultADM === false) {
+                
+                // Tag GA4
+                //const ga4MeasurementId = 'G-28WKJ8L6QV';
+
+                // Head Element GA4
+                //const script1 = document.createElement("script")
+                //script1.async = true
+                //script1.src = `https://www.googletagmanager.com/gtag/js?id=${ga4MeasurementId}`
+                //document.head.appendChild(script1)
+
+                // Data Layer GA4
+                //const script2 = document.createElement("script")
+                //script2.textContent = `
+                    //window.dataLayer = window.dataLayer || [];
+                    //function gtag(){dataLayer.push(arguments);}
+                    //gtag('js', new Date());
+
+                    //gtag('config', '${ga4MeasurementId}')
+                //`;
+                //document.head.appendChild(script2);
+
+                // Google Tag Manager GTM
+                //(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    //new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                    //j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                //})(window,document,'script','dataLayer','GTM-KDCXQ28J');
+
+                
+                //if(sessionStorage.getItem("statusConsole") === 'true') {
+                    //console.log("home.html: GA4 e GTM habilitados para essa sessão!");
+                //} 
+            //} else {
+                //if(sessionStorage.getItem("statusConsole") === 'true') {
+                    //console.log("home.html: Ambiente de testes ou ADM em produção, não habilitar TAGS Google!")
+                //}
+            //}
+        </script>
+
+        <!-- Criando Link DOC para home acessar CSS-->
+        <script>
+            (function() {
+                const proEnv = parseInt(sessionStorage.getItem("proEnvironment"));
+                const linkElement = document.createElement('link');
+                linkElement.rel = 'stylesheet';
+                linkElement.type = 'text/css';
+
+                let cssPath = "";
+
+                if (proEnv === -1) { // Live Server
+                    // Lógica: Se a home está em /assets/HTML/, o CSS está em ../CSS/
+                    // Usamos o caminho relativo ao arquivo atual para evitar confusão de domínios
+                    cssPath = "../CSS/1-home/0-home.css";
+                } else if (proEnv === 0) { // testefiles apache
+                    cssPath = "../CSS/1-home/0-home.css";
+                } else if (proEnv === 1) { // Produção
+                    cssPath = "/criacao-de-sites/assets/CSS/1-home/0-home.css";
+                }
+
+                linkElement.href = cssPath;
+                document.head.appendChild(linkElement);
+
+                if(sessionStorage.getItem("statusConsole") === 'true') {
+                    console.log("Link CSS Home Definido:", linkElement.href);
+                }
+            })();
+        </script>        
+
+        <!-- Título da Página -->
+        <title>Business Coding</title>
+
+        <!-- SEO Mecanismos de Busca -->
+        <meta
+            name="description"
+            content="Ewerton Santos é um profissional especializado em criação de sites em Curitiba, PR. Desenvolvemos websites personalizados e responsivos para empresas e indivíduos. Solicite um orçamento!">
+
+        <!-- SEO Mecanismos de Busca -->
+        <meta 
+            name="keywords" 
+            content="criação de sites, desenvolvimento web, web designer Curitiba, sites profissionais, orçamento sites">
+    </head>
+
+    <body>
+
+        <!-- Iframe GTM -->
+        <script>
+            //const islocalEnvironment2 = sessionStorage.getItem('localEnvironment')
+            //const statusADM2 = sessionStorage.getItem('ADMstatus')
+            //const intlocalEnvironment2 = parseInt(islocalEnvironment2)
+            //const resultInt2 = (intlocalEnvironment2 === 1)
+            //const resultADM2 = (statusADM2 === 'true');
+
+            //if (resultInt2 === true && resultADM2 === false) {
+
+                // Google Tag Manager (noscript)
+                //const noScript = document.createElement("noscript")
+                //const eliframe = document.createElement("iframe")
+                //eliframe.src = "https://www.googletagmanager.com/ns.html?id=GTM-KDCXQ28J"
+                //eliframe.height = "0"
+                //eliframe.width = "0"
+                //eliframe.style.display = "none"
+                //eliframe.style.visibility = "hidden"
+                //noScript.appendChild(eliframe)
+                //document.body.prepend(noScript)
+
+                //if(sessionStorage.getItem("statusConsole") === 'true') {
+                    //console.log("sobre.html: Iframe GTM ativo!!!")
+                //}
+            //} else {
+                //if(sessionStorage.getItem("statusConsole") === 'true') {
+                    //console.log("sobre.html: Iframe noscript GTM desativado!")
+                //}
+            //}
+        </script>
+        
+        <!-- Conteúdo Principal -->
+        <main>
+
+            <!-- Banner -->
+            <img 
+                class="banner-main-image" 
+                src="../IMG/Banner-main-img.jpg" 
+                alt="Logotipo Ewerton Santos Criação de Sites Curitiba" 
+                aria-hidden="true">
+            </img>
+
+            <!-- Título ou nome do Negócio se não houver no Banner -->
+            <h1 class="h1-main-negocio">
+                Business Coding
+            </h1>
+
+            <!-- Frase de Efeito, Slogam -->
+            <h2 class="h2-main-slogam">
+                Conteúdos de alta performance para mentes que buscam o próximo nível.
+            </h2>
+
+            <!-- Texto de Apoio -->
+            <h2 class="h2-main-apoio">
+                Cansado de sobreviver e querendo vencer? Unimos o mindset de crescimento a ferramentas de gestão de alta performance para você parar de perder tempo e começar a construir seu futuro. Evolua 1% todos os dias.
+            </h2>
+
+            <!-- CTA Conversão -->
+            <button class="btn-main-cta">
+                <i class="fa">
+                    &#xf08e;
+                </i>
+                Confira eBooks disponíveis
+            </button>
+        </main>
+
+        <!-- Section Point Bullets -->
+        <!-- <section class="icones-relevantes"> -->
+
+            <!-- <div class="div-objetos">
+                <i class="fa">
+                    &#xf0e8;
+                </i>
+
+                <p class="p-info">
+                    Sites bem planejados
+                </p>
+            </div> -->
+
+            <!-- <div class="div-objetos">
+                <i class="fa">
+                    &#xf2bc;
+                </i>
+
+                <p class="p-info">
+                    Layout de acordo com suas necessidades
+                </p>
+            </div> -->
+
+            <!-- <div class="div-objetos">
+                <i class="fa">
+                    &#xf200;
+                </i>
+
+                <p class="p-info">
+                    Decisão nos pequenos detalhes
+                    
+                </p>
+            </div> -->
+
+            <!-- <div class="div-objetos">
+                <i class="fa">
+                    &#xf233;
+                </i>
+
+                <p class="p-info">
+                    Hospedagem gratuita
+                </p>
+            </div> -->
+        <!-- </section> -->
+
+        <!-- Section Apresentação Negócio -->
+        <section id="Tipo-do-Negocio" data-link="Tipo-do-Negocio" class="apresentacao-negocio">
+    
+        <h3 class="an-h3">
+            Metodologia real 0% Enrolação.
+        </h3>
+
+        <div class="an-div-infos">
+            <img 
+                class="an-img"
+                src="../IMG/secao-01-img.jpg"
+                alt="Logotipo Modelo do Negócio">
+        
+            <div class="an-caixa-conteudo">
+                <p class="an-p">
+                    Focamos no que gera resultado: habilidades de alto impacto e ferramentas que funcionam. Nossa missão é provar que grandes objetivos são alcançáveis quando você entende e domina seus processos evolutivos, transformando metas complexas em progresso mensurável constante.<br><br>
+                    Acesse o BlogSpot Business Coding >>>
+                </p>
+
+                <button class="an-btn-info">
+                    <i class="fa">&#xf0f6;</i>
+                    Saiba mais
+                </button>
+            </div>
+        </div>
+        </section>
+
+        <!-- Section Contato Business -->
+        <section id="secao-instagram" data-link="Contato-do-Negocio" class="contato-business">
+    
+        <h3 class="cb-h3">
+            Instagram
+        </h3>
+
+        <div class="cb-div-infos">
+            <img 
+                class="cb-img"
+                src="../IMG/secao-02-img.jpg"
+                alt="Logotipo Modelo do Negócio">
+        
+            <div class="cb-caixa-texto">
+                <p class="cb-p">
+                    Para atingir o próximo nível é necessário o uso de ferramentas certas. No Soft Coding, você encontra softwares de gestão simples, funcionais e sem exageros técnicos, configurados para garantir o controle total da sua rotina, dos seus negócios e do seu tempo.<br><br>
+                    Acesse o Instagram e explore as Ferramentas disponíveis >>>
+                </p>
+
+                <button class="cb-btn-info">
+                    <i class="fa">&#xf16d;</i>
+                    Saiba mais
+                </button>
+            </div>
+        </div>
+        </section>
+
+        <!-- Section Feedback -->
+        <section id="Feedback" class="section-feedback">
+            
+            <h3 class="sf-h3">
+                FEEDBACK
+            </h3>
+
+            <div class="sf-div-infos">
+                <img 
+                    class="sf-img"
+                    src="../IMG/secao-03-img.jpg"
+                    alt="Logotipo Modelo do Negócio">
+                
+                <p class="sf-p">
+                    Já utiliza nossas ferramentas ou lê nossos eBooks? Sua percepção é o combustível que mantém nossa estrutura sempre moderna e funcional. Queremos ouvir seus insights para tornar sua experiência ainda mais produtiva e alinhada aos seus sonhos de crescimento.<br><br>
+                    
+                    Deixe suas críticas e/ou sugestões >>>
+                </p>
+
+                <button class="sf-btn-info">
+                    <i class="fa">
+                        &#xf086;
+                    </i>
+                    Abrir formulário
+                </button>
+            </div>
+        </section>
+
+        <script>
+            // Função para notificar o documento pai que o conteúdo do iframe está pronto
+            function notifyParentIframeReady() {
+                
+                // Verifica se a janela atual está dentro de um iframe e se tem um pai
+                if (window.parent && window.parent !== window) {
+                    
+                    //Definindo Domínio Atual
+                    const currentDomain = sessionStorage.getItem("currentDomain")
+
+                    // Permissions Origins
+                    const parentOrigins = [
+                        currentDomain
+                    ];
+
+                    //Enviando sinal para origem
+                    parentOrigins.forEach(origin => {
+                        window.parent.postMessage('iframeContentReady', origin);
+                        console.log("home.html enviando sinal...") 
+                    })
+                }
+            }
+            window.addEventListener('load', notifyParentIframeReady);
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+/* 1. Reset e Tokens */
+@import url('variables.css');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. Estrutura Base */
+html, body {
+    width: 100%;
+    min-height: 100vh; 
+    background-color: var(--cor-fundo); /* Iron Dark */
+    font-family: var(--font-body); 
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-x: hidden; /* Evita rolagem horizontal acidental */
+}
+
+/* 3. Componentes da Casca */
+header, footer {
+    width: 100%;
+    flex-shrink: 0; /* Impede que o header/footer "esmaguem" */
+    z-index: 10;    
+}
+
+/* 4. O Coração do Layout: Iframe */
+iframe {
+    width: 100%;
+    border: none;
+    flex-grow: 1; /* Ocupa todo o espaço entre Header e Footer */
+    display: block;
+    min-height: 500px; /* GARANTIA: Um tamanho mínimo caso o JS demore a carregar */
+}
+
+/* 5. Configuração Global do Footer */
+/* 5. Configuração Global do Footer */
+footer {
+    box-sizing: border-box;
+    width: 100%;
+    
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    border: var(--cor-bordas-dgt);
+    border-top: 1px solid var(--cor-low);
+    
+    min-height: 80px; 
+    padding: 15px 5%; /* Reduzi um pouco o recuo para dar mais espaço para a linha */
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; /* FORÇA: Nada de quebrar linha antes da hora! */
+    align-items: center;
+    justify-content: space-between; /* Imagem na ponta, créditos no meio, links na outra ponta */
+    gap: 20px;
+    
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+/* --- 📱 6. RECURSIVIDADE / RESPONSIVIDADE (O toque de mestre) --- */
+@media (max-width: 852px) { /* Só quebra no celular mesmo! */
+    footer {
+        flex-direction: column; /* No celular vira coluna */
+        flex-wrap: wrap;
+        text-align: center;     
+        justify-content: center;
+        padding: 30px 20px;       
+    }
+}

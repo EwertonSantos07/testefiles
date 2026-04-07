@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+.main-iframe {
+    box-sizing: border-box;
+    width: 100%;
+    
+    /* 1. Reset de Bordas e Margens */
+    border: var(--cor-bordas-dgt); /* Sua borda de diagnóstico */
+    margin: 0;
+    padding: 0;
+
+    /* 2. Comportamento de Fluxo */
+    display: block;       /* Iframes funcionam melhor como block para evitar espaços vazios embaixo */
+    flex-grow: 1;         /* Garante que ele tente ocupar o espaço entre Header e Footer */
+    
+    /* 3. Estabilidade Visual */
+    overflow: hidden;     /* Impede que o Iframe crie sua própria barra de rolagem interna */
+    
+    /* 4. Suavidade (Opcional) */
+    transition: height 0.3s ease; /* Se o conteúdo mudar de tamanho, ele ajusta suavemente */
+}

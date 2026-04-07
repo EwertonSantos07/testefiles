@@ -1,0 +1,207 @@
+@charset "UTF-8";
+
+@import url('../0-index/variables.css');
+
+/* --- Estilização da Seção (Inversão de Fundo) --- */
+.contato-business {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 280px 5%;
+    background-color: var(--cor-low); 
+    
+    display: flex;
+    flex-direction: column;
+    
+    /* MUDANÇA: Alinha os filhos (Título e Container) à DIREITA */
+    align-items: flex-end; 
+    gap: 60px;
+}
+
+.cb-h3 {
+    font-family: var(--font-title);
+    color: #FFFFFF;
+    font-size: 2.5rem;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    
+    /* MUDANÇA: Alinhamento de texto e a barra de destaque agora na DIREITA */
+    text-align: right;
+    border-right: 5px solid var(--cor-fundo); 
+    border-left: none; /* Remove a borda da esquerda */
+    padding-right: 20px;
+    padding-left: 0;
+}
+
+/* --- Contêiner Flex --- */
+.cb-div-infos {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    
+    /* MUDANÇA: Inverte a ordem visual (Caixa de Texto primeiro, Imagem depois) */
+    flex-direction: row-reverse; 
+    
+    align-items: center;
+    gap: 50px;
+}
+
+/* --- A Imagem --- */
+.cb-img {
+    flex: 0 0 40%;
+    max-width: 450px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+/* --- 30% - A Ilha de Contraste --- */
+.cb-caixa-texto {
+    flex: 1;
+    background-color: var(--cor-fundo); 
+    padding: 45px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cb-p {
+    font-family: var(--font-body);
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin: 0;
+    text-align: justify;
+    hyphens: auto;
+}
+
+/* --- O Botão --- */
+/* 1. Estilo Base do Botão de Seção */
+.cb-btn-info {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;                /* Espaço entre o ícone e o texto */
+    
+    margin-top: 25px;         /* Empurra o botão para baixo do parágrafo */
+    padding: 12px 30px;
+    
+    background: transparent;  /* Fundo limpo para não pesar visualmente */
+    color: var(--cor-texto);           /* Branco Fumaça */
+    border: 2px solid var(--cor-texto); /* Borda cinza média (sutil) */
+    border-radius: 10px;
+    
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    
+    cursor: pointer;
+    transition: all 0.4s ease;
+    align-self: flex-start;
+}
+
+.cb-btn-info:hover {
+    background-color: var(--cor-low);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--cor-low-bright);
+}
+
+section#secao-instagram {
+    scroll-margin-top: -190px;
+}
+
+/* Responsividade */
+/* @media (max-width: 768px) {
+    .cb-div-infos {
+        /* No mobile, volta para a ordem normal (Imagem em cima, Texto embaixo) */
+        /* flex-direction: column; 
+    }
+    .cb-h3 {
+        align-self: center; /* Centraliza no mobile para facilitar leitura */
+        /* text-align: center;
+        border-right: none;
+        padding-right: 0;
+    }
+    .cb-img {
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+} */
+
+/* Responsividade para manter o Molde flexível */
+/* @media (max-width: 768px) {
+    .cb-div-infos {
+        flex-direction: column;
+    }
+    .cb-img {
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+} */
+
+/* 6. Limpeza de rastro (Float Reset) */
+.sc-div-infos::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* section#section-dos-clientes {
+    scroll-margin-top: -80px;
+} */
+
+/* --- 📱 5. RESPONSIVIDADE (O Toque para Celulares) --- */
+@media (max-width: 1060px) {
+    
+    .contato-business {
+        /* Reduzimos o padding gigante para o mobile */
+        padding: 80px 20px; 
+        gap: 30px;
+        /* No celular, centralizamos o fluxo principal */
+        align-items: center; 
+    }
+
+    .cb-h3 {
+        font-size: 1.8rem;
+        text-align: center; /* Centraliza o título para não ficar estranho no celular */
+        border-right: none; /* Remove a barra lateral direita no mobile */
+        padding-right: 0;
+        
+        /* Adiciona uma bordinha embaixo para manter o estilo de destaque */
+        border-bottom: 3px solid var(--cor-fundo);
+        padding-bottom: 10px;
+    }
+
+    .cb-div-infos {
+        /* Desfazemos o row-reverse e empilhamos em coluna normal */
+        flex-direction: column; 
+        gap: 30px;
+    }
+
+    .cb-img {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 100%;
+        /* Garante que a imagem apareça primeiro no topo */
+        order: 1; 
+    }
+
+    .cb-caixa-texto {
+        padding: 30px 20px; /* Alivia o recuo interno que esmagava o texto */
+        /* Garante que o texto venha depois da imagem */
+        order: 2; 
+    }
+
+    .cb-p {
+        font-size: 1rem;
+    }
+
+    .cb-btn-info {
+        /* Centraliza o botão dentro da caixa de texto no mobile */
+        align-self: center; 
+    }
+}

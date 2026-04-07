@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+/* Importação de fontes */
+@import url('https://fonts.googleapis.com/css2?family=League+Gothic&family=Tangerine:wght@400;700&family=Truculenta:opsz,wght@12..72,100..900&display=swap');
+
+@import url('variables.css');
+
+.footer-img {
+    height: 55px;             /* Ícone pequeno e elegante */
+    width: auto;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px; /* Um pouquinho mais de respiro para o brilho não embolar */
+}
+
+.footer-links a {
+    text-decoration: none;
+    /* Começa um pouco mais discreto (opacidade 0.7) */
+    color: var(--cor-texto); 
+    font-size: 0.85rem;
+    font-family: var(--font-title); /* Ou sua fonte de preferência */
+    letter-spacing: 1px;
+    
+    /* Transição suave para a "lâmpada" ligar e desligar */
+    transition: all 0.4s ease-in-out; 
+    position: relative;
+}
+
+/* O TRUQUE DA LÂMPADA ACESA */
+.footer-links a:hover {
+    color: var(--cor-low); /* Acende para o branco puro (ou sua variável) */
+    
+    /* O "Glow": Um brilho sutil da mesma cor da sua marca (roxo/lilas) */
+    text-shadow: 
+        0 0 8px rgba(255, 255, 255, 0.4), /* Brilho interno branco */
+        0 0 15px var(--cor-low-bright);    /* A aura da cor do seu tema */
+    
+    transform: translateY(-2px); /* O link "flutua" levemente ao acender */
+}
+
+.cb-footer-credits {
+    max-width: 600px; /* Mantém a trava de segurança */
+    text-align: center; 
+    /* REMOVIDO: width: 100% e display: block para não expulsar os irmãos de linha! */
+}
+
+/* --- O TEXTO (Estilo e Fluidez) --- */
+.footer-copy {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--cor-texto);
+    line-height: 1.6; 
+    margin: 0;
+}
+
+/* O toque roxo Neon (Indigo Cyber Plasma) no seu ícone */
+.footer-copy .fa {
+    color: var(--cor-low); 
+    margin: 0 3px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.footer-copy .fa:hover {
+    transform: scale(1.2);
+}
+
+.footer-copy span {
+    color: var(--cor-texto);
+    margin: 0 5px;
+}

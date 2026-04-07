@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=League+Gothic&family=Tangerine:wght@400;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@400;500;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Lato:wght@400;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=Questrial&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Brawler:wght@400;700&display=swap');
+
+/* /assets/CSS/variables.css */
+:root {
+    /* Identidade Visual - Iron Dark */
+
+    /* Bordas Diagnóstico */
+    --cor-bordas-dgt: 0px solid white;
+
+    /* Efeitos Visuais */
+    --cor-fundo-glass: rgba(18, 18, 18, 0.8);
+
+    /* Bordas */
+    --cor-borda: #2C2C2C;
+
+    /* Cor de 60% */
+    --cor-fundo: #0B0E14;
+    --cor-fundo-opaca: rgba(11, 14, 20, 0.8);
+    
+    /* Cor de 30% */
+    --cor-middle: #1F2937;
+    /* Convertido #1F2937 para RGB e mantida a opacidade de 0.6 */
+    --cor-middle-opaca: rgba(31, 41, 55, 0.60);
+
+    /* Cor de 10% */
+    --cor-low: #A3FF12;
+    /* Um tom levemente mais escuro do verde ácido para o efeito de hover */
+    --cor-low-hover: #8ae600; 
+    
+    /* O mesmo Verde Ácido (#A3FF12) com 30% de opacidade para o efeito Glow */
+    --cor-low-bright: rgba(163, 255, 18, 0.3);
+
+    /* Tipografia - Fontes */
+    --font-title: 'Brawler', serif;
+    /* --font-title: 'DM Serif Display', serif; */
+    /* --font-title: 'Prata', serif; */
+    /* --font-title: 'League Gothic', serif; */
+    /* --font-body: 'Inter', sans-serif; */
+
+    /* --font-title: 'Orbitron', sans-serif;
+    --font-body: 'Rajdhani', sans-serif; */
+
+    /* --font-title: 'Playfair Display', serif;
+    --font-body: 'Lato', sans-serif; */
+
+    /* --font-title: 'Syne', sans-serif; */
+    --font-body: 'Questrial', sans-serif;
+
+    /* Variações dos textos */
+    --cor-texto: #FFFFFF;
+    /* --cor-texto: white; */
+
+    /* Outras Tonalidades */
+    --cor-texto-02: #333333;
+    --cor-texto-03: #444444;
+    --cor-texto-04: #2C2C2C;
+    
+    
+    /* Dimensões do Molde */
+    --height-header: 60px;
+    --blur-efeito: 10px;
+}
