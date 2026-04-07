@@ -31,6 +31,9 @@ import {varsEnvironment} from './2-variaveis-ambientes.js';
         // Ação única para todos os ambientes, pois a baseURL já está calibrada
         history.pushState({ Page: 'home' }, 'Home', `${window.location.origin}${baseURL}`);
 
+        // Definição do padrão para identificar o servidor Apache Local
+        const patternApache = /^http:\/\/(businesscoding\.local|bc\.local)\/.*/;
+
         // Logs apenas para seu controle de P&D
         if(sessionStorage.getItem("statusConsole") === 'true') {
             if(window.location.origin == "http://127.0.0.1:5500") {
