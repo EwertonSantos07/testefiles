@@ -67,6 +67,7 @@
         <!-- Criando Link DOC para home acessar CSS-->
         <script>
             (function() {
+                // Lembre-se: sessionStorage retorna STRING. Vamos garantir a conversão.
                 const proEnv = parseInt(sessionStorage.getItem("proEnvironment"));
                 const linkElement = document.createElement('link');
                 linkElement.rel = 'stylesheet';
@@ -75,15 +76,15 @@
                 let cssPath = "";
 
                 if (proEnv === -1) { // Live Server
-                    // Lógica: Se a home está em /assets/HTML/, o CSS está em ../CSS/
-                    // Usamos o caminho relativo ao arquivo atual para evitar confusão de domínios
                     cssPath = "../CSS/1-home/0-home.css";
-                } else if (proEnv === 0) { // testefiles apache
+                } else if (proEnv === 0) { // Apache Local
                     cssPath = "../CSS/1-home/0-home.css";
-                } else if (proEnv === 1) { // Produção
-                    cssPath = "/criacao-de-sites/assets/CSS/1-home/0-home.css";
+                } else if (proEnv === 1) { // Produção (GitHub testefiles)
+                    // O caminho precisa refletir o nome do repositório atual
+                    cssPath = "/testefiles/assets/CSS/1-home/0-home.css";
                 }
 
+                //Validando URL oficial
                 linkElement.href = cssPath;
                 document.head.appendChild(linkElement);
 
