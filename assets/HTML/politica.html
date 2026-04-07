@@ -81,10 +81,13 @@
                     // Lógica: Se a home está em /assets/HTML/, o CSS está em ../CSS/
                     // Usamos o caminho relativo ao arquivo atual para evitar confusão de domínios
                     cssPath = "../CSS/2-politica/0-politica.css";
+
                 } else if (proEnv === 0) { // testefiles
                     cssPath = "../CSS/2-politica/0-politica.css";
-                } else if (proEnv === 1) { // Produção
-                    cssPath = "/criacao-de-sites/assets/CSS/2-politica/0-politica.css";
+                    
+                } else if (proEnv === 1) { // Produção (GitHub testefiles)
+                    // O caminho precisa refletir o nome do repositório atual
+                    cssPath = "/testefiles/assets/CSS/2-politica/0-politica.css";
                 }
 
                 linkElement.href = cssPath;
