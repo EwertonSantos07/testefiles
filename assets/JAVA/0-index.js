@@ -313,41 +313,46 @@ import {varsEnvironment} from './2-variaveis-ambientes.js';
         }
     }
 
-    // Criamos uma variável de controle para o fôlego do processador
+    // 1. Criamos uma variável para guardar a largura inicial da tela
+    let ultimaLarguraConhecida = window.innerWidth;
     let timeoutIframeResize;
 
     window.addEventListener("resize", function() {
-    
-        // Limpa o cronômetro anterior se o usuário ainda estiver redimensionando/girando
+        
+        // 2. PEGADA DE ÁGUIA: Verificamos se a largura REAL mudou
+        // Se a largura for a mesma, ignoramos o evento (evita bug da barra de URL no mobile)
+        if (window.innerWidth === ultimaLarguraConhecida) {
+            return; 
+        }
+
+        // Se chegou aqui, a largura mudou (ex: girou o celular ou redimensionou janela no PC)
+        ultimaLarguraConhecida = window.innerWidth;
+
         clearTimeout(timeoutIframeResize);
 
-        // Só executa o cálculo 200 milissegundos DEPOIS que o movimento parar
         timeoutIframeResize = setTimeout(async function() {
-        
-        let iframe = document.querySelector(".main-iframe");
-        
-        // 1. Verificação de segurança: O iframe realmente existe na tela?
-        if (!iframe) return;
+            let iframe = document.querySelector(".main-iframe");
+            
+            if (!iframe) return;
 
             try {
                 const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
                 const statusIframeLoad = iframeDoc.readyState === 'complete';
 
-                // 2. Só calcula se o conteúdo interno já estiver totalmente carregado
                 if (statusIframeLoad) {
-                
-                    // Zerando height do iframe para o navegador calcular o novo valor real...
-                    iframe.style.height = "0px"; 
-
-                    // 3. Alterando altura do iframe invocando a sua função original
+                    // Removemos o "0px" que causava o pulo para o topo
+                    // Em vez de zerar, apenas chamamos a função que ajusta a altura
                     const statusIframe = await alteraAlturaIframe();
-                    console.log(statusIframe, "Iframe resize pronto!");
+                    
+                    if(sessionStorage.getItem("statusConsole") === 'true') {
+                        console.log(statusIframe, "Iframe recalibrado após resize de largura!");
+                    }
                 }
-        } catch (error) {
-            console.error("Erro ao tentar recalcular a altura do Iframe:", error);
-        }
-    }, 200); // 200ms de fôlego para o celular respirar
-});
+            } catch (error) {
+                console.error("Erro ao tentar recalcular a altura do Iframe:", error);
+            }
+        }, 250); // Aumentei para 250ms para dar mais estabilidade no mobile
+    });
 
     //window.addEventListener('popstate', (event) => {
         //window.location.reload();
