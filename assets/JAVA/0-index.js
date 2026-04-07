@@ -182,7 +182,7 @@ import {varsEnvironment} from './2-variaveis-ambientes.js';
             // Se usarmos apenas "home", o F5 vai dar 404. 
             // Recomendação: Deixe a URL limpa ou use um parâmetro de busca (?page=home)
             // Para manter a segurança do seu deploy agora, vamos deixar a raiz:
-            window.history.pushState({ pagina: "home" }, "Home", `${baseURL}`); 
+            window.history.pushState({ pagina: "home" }, "Home", `${baseURL}#home`); 
         }
             
         //Declarando elementos index (Header - Iframe - Footer)
