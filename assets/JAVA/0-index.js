@@ -200,8 +200,10 @@ import {varsEnvironment} from './2-variaveis-ambientes.js';
 
         //Capturando largura da tela!!!
         const larguraScreen = screen.width;
+        const alturaScreen = screen.height;
         if(sessionStorage.getItem("statusConsole") === 'true') {
             console.log("Width Screen Start:", larguraScreen, "px");
+            console.log("Height Screen Start:", alturaScreen, "px");
         }
 
         // Verificando ADM session
@@ -327,6 +329,7 @@ import {varsEnvironment} from './2-variaveis-ambientes.js';
 
         // Se chegou aqui, a largura mudou (ex: girou o celular ou redimensionou janela no PC)
         ultimaLarguraConhecida = window.innerWidth;
+        console.log(ultimaLarguraConhecida)
 
         clearTimeout(timeoutIframeResize);
 
