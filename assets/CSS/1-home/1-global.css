@@ -10,7 +10,7 @@
 }
 
 /* 2. Estrutura de Encaixe */
-html, body {
+.home-container {
     width: 100%;
     /* Importante: Usamos 100% aqui para o Iframe respirar, 
        mas deixamos o conteúdo (main) ditar a altura real */
@@ -23,9 +23,7 @@ html, body {
     
     /* O "Cadeado" contra barras de rolagem horizontais fantasmas */
     overflow-x: hidden; 
-}
 
-body {
     /* O Body da Home deve ser um trilho vertical. 
        Tudo o que jogarmos aqui dentro vai empilhando no centro.
     */

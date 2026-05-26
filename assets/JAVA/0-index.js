@@ -11,69 +11,140 @@ import {varsEnvironment} from './2-variaveis-ambientes.js';
 (function(win, doc){
     'use strict';
 
-    //Versão Atual de desenvolvimento do Site!!!
-    console.log("\nIniciando JavaScript Versão 1.3:")
+    //Habilitando prints no console;
     const statusConsole = sessionStorage.getItem("statusConsole") === 'true';
 
-    //Iniciando DOM - Primeira coisa que deve ser carregado junto com INDEX.html
+    //Iniciando DOM - Primeira coisa que deve ser carregado após INDEX.html
     document.addEventListener('DOMContentLoaded', async () => {
-        if(statusConsole) console.log("🏗️ DOM pronto. Iniciando roteamento inicial...");
 
-        // A PRIMEIRA COISA: Garantir que o Loading está visível (se não estiver no HTML por padrão)
-        const loadingScreen = document.querySelector('.loading-screen');
+        // Full Path;
+        console.log("\nFull Path", `${window.location.origin}${baseURL}`)
+
+        // Apache Variável para Roteador;
+        const patternApache = /^http:\/\/(businesscoding\.local|bc\.local)\/.*/;
 
         // 1. Capturamos o final da URL (o que vem depois da última barra)
         //const rotaAtual = window.location.pathname.split('/').pop();
-        let fullPath = window.location.origin;
-        console.log("aqui", fullPath)
+        
+        //let fullPath = window.location.origin;
+        
 
         //Roteador
-        // Ação única para todos os ambientes, pois a baseURL já está calibrada
-        history.pushState({ Page: 'home' }, 'Home', `${window.location.origin}${baseURL}`);
-
-        // Definição do padrão para identificar o servidor Apache Local
-        const patternApache = /^http:\/\/(businesscoding\.local|bc\.local)\/.*/;
-
-        // Logs apenas para seu controle de P&D
         if(sessionStorage.getItem("statusConsole") === 'true') {
             if(window.location.origin == "http://127.0.0.1:5500") {
-                console.log("LiveServer", window.history.state);
+                history.pushState({ Page: 'home' }, 'Home', `${window.location.origin}${baseURL}#home`);
+                console.log("LiveServer Environment", window.history.state);
             } else if(patternApache.test(`${window.location.origin}${window.location.pathname}`)) {
-                console.log("Apache", window.history.state);
+                console.log("Apache Environment", window.history.state);
             } else {
-                console.log("Produção", window.history.state);
+                console.log("Produção Environment", window.history.state);
             }
         }
+        
+        // Sincronizar este código com o de cima na hora de testar o APACHE!!!
+        //if (environment === "-1") {
+            // LiveServer: Usa a hashtag (F5 funciona nativamente)
+            //history.pushState({ pagina: "home" }, "Home", "#home");
+        //} else if (environment === "0") {
+            // Apache Local: O .htaccess cuida do F5, então podemos usar "home" limpo
+            //window.history.pushState({ pagina: "home" }, "Home", "home");
+        //} else {
+            // Produção (GitHub): ATENÇÃO! 
+            // Se usarmos apenas "home", o F5 vai dar 404. 
+            // Recomendação: Deixe a URL limpa ou use um parâmetro de busca (?page=home)
+            // Para manter a segurança do seu deploy agora, vamos deixar a raiz:
+            //window.history.pushState({ pagina: "home" }, "Home", `${baseURL}#home`); 
+        //}
 
-        // Click Botão Header Contato
+        // A PRIMEIRA COISA: Injetar conteúdo HTML na div INDEX;
+        await carregarPagina('assets/HTML/home.html');
+
+        // Declarando Botões INDEX;
+        await declaraBtnsINDEX();
+
+        // Declarando Botões HOME;
+        await declaraBtnsHOME();
+
+        //Declarando elementos index (Header - Div_Container - Footer)
+        const headerLayout = document.querySelector('header');
+        const div_container = document.querySelector('.main-iframe');
+        const footerLayout = document.querySelector('footer');
+
+        //Exibindo elementos index - Debugging...
+        if(sessionStorage.getItem("statusConsole") === 'true') {
+            console.log(headerLayout)
+            console.log(div_container)
+            console.log(footerLayout)
+        }
+
+        //Capturando largura da tela!!!
+        const larguraScreen = screen.width;
+        if(sessionStorage.getItem("statusConsole") === 'true') {
+            console.log("Width Screen Start:", larguraScreen, "px");
+        }
+
+        // End
+        console.log("\n🏗️ DOM pronto. Sistema Versão 1.3 iniciado.");
+
+        // 2. A MÁGICA: Verifica se o navegador já deu o sinal verde
+        if (document.readyState === 'complete') {
+            // Se por acaso o await demorou tanto que já carregou tudo, executa direto
+            await executarTarefasPosCarregamento();
+        } else {
+            // Se ainda não carregou, aí sim ouvimos o evento uma única vez
+            window.addEventListener('load', executarTarefasPosCarregamento, { once: true });
+        }
+
+    })
+
+    // 1. Criamos a função de Segundo Plano (Background Tasks)
+    const executarTarefasPosCarregamento = async () => {
+        console.log("⚙️ Loading tasks: Iniciando processamento em segundo plano...");
+        // Coloque aqui o que deve rodar por último, como Analytics extras ou animações de entrada
+    };
+
+    // Função para Injetar conteúdo HTML na div INDEX;
+    async function carregarPagina(url) {
+        const container = document.getElementById('main-content');
+        try {
+            const response = await fetch(url);
+            const html = await response.text();
+            container.innerHTML = html;
+            console.log("Página Carregada!!!");
+        } catch (error) {
+            container.innerHTML = "<p>Erro ao carregar conteúdo.</p>";
+        }
+    }
+
+    // Ativa Botões INDEX;
+    async function declaraBtnsINDEX() {
+
+        // Click Botão Header Instagram
         let btnHeaderContato = document.querySelector(".header-link-insta");
-
         if (btnHeaderContato) {
             btnHeaderContato.addEventListener("click", function (event) {
                 event.preventDefault(); // Evita qualquer comportamento padrão do HTML
 
-                // 1. Captura o Iframe (ajuste o seletor se ele tiver um ID ou classe específica)
-                let meuIframe = document.querySelector("iframe");
+                // Busca a Seção do Instagram pelo ID que está lá no arquivo HOME
+                let targetInstagram = document.querySelector("#secao-instagram");
+                
+                if (targetInstagram) {
+                    // Executa o scroll suave que você já validou nas versões antigas!
+                    const headerHeight = -225;
+                    const elementPosition = targetInstagram.getBoundingClientRect().top + window.pageYOffset;
+                    const offsetPosition = elementPosition - headerHeight;
 
-                if (meuIframe) {
-                    // 2. Acessa o documento interno do Iframe
-                    let docIframe = meuIframe.contentDocument || meuIframe.contentWindow.document;
-                    
-                    // 3. Busca a Seção do Instagram pelo ID que está lá no arquivo HOME
-                    let targetInstagram = docIframe.querySelector("#secao-instagram");
-                    
-                    if (targetInstagram) {
-                        // 4. Executa o scroll suave que você já validou nas versões antigas!
-                        targetInstagram.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        console.log("Scroll executado com sucesso para o Instagram.");
-                    } else {
-                        console.log("Seção #secao-instagram não encontrada dentro do iframe.");
-                    }
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+
+                    console.log("Scroll ajustado com offset do Header executado.");
                 } else {
-                    console.log("Iframe não encontrado na página principal.");
+                    console.log("Seção #secao-instagram não encontrada dentro do container.");
                 }
             });
-}
+        }
 
         //Click Link A - Footer
         let linkFooterA = document.querySelector(".footer-link-a");
@@ -89,142 +160,135 @@ import {varsEnvironment} from './2-variaveis-ambientes.js';
         if(linkFooterB) {
             linkFooterB.addEventListener("click", async function (event) {
                 event.preventDefault();
-                window.alert("YouTube Business Coding está sendo preparado, volte mais tarde...")
+                window.alert("Business Store está sendo preparado, volte mais tarde...")
             })
         }
 
-        // Click Link Pol - Footer (Ouvinte Inteligente)
-        const iframe = document.querySelector('.main-iframe');
-        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document
+        //Click Link Política - Footer;
         let linkFooterPol = document.querySelector(".footer-link-pol");
-        if(linkFooterPol) {
+        const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+        if (linkFooterPol) {
             linkFooterPol.addEventListener("click", async function (event) {
-                event.preventDefault(); // Não está funcionando...
+                event.preventDefault();
 
-                // 1. Verificamos qual o "estado" atual do link pelo texto dele
-                // Usamos .trim() para evitar problemas com espaços vazios
                 let textoAtual = linkFooterPol.innerText.trim().toUpperCase();
+                let destino = (textoAtual === "POLÍTICA DE PRIVACIDADE") ? 'assets/HTML/politica.html' : 'assets/HTML/home.html';
+                let pathUrl = (textoAtual === "POLÍTICA DE PRIVACIDADE") ? "politica" : "home";
+                let novoTexto = (textoAtual === "POLÍTICA DE PRIVACIDADE") ? "Voltar para Home" : "Política de Privacidade";
 
-                if (textoAtual === "POLÍTICA DE PRIVACIDADE") {
-                    // AÇÃO: Ir para Política
-
-                    //Declarando Loading Abertura...
-                    const loading = document.getElementById('loading-screen').classList.remove('loading-hidden');
-                    if (loading) {
-                        loading.classList.remove('loading-hidden');
-                    }
-
-                    setTimeout(() => {
-                        iframe.src = "assets/HTML/politica.html";
-                        linkFooterPol.innerText = "Voltar para Home"; // O link se transforma
-
-                        // 2. O ROTEADOR: Atualiza a URL no navegador
-                        // history.pushState(estado, titulo, url_exibida)
-                        if(sessionStorage.getItem("proEnvironment") === "-1") {
-                            window.history.pushState({ pagina: "politica" }, "Política", "#politica");
-                        } else if(sessionStorage.getItem("proEnvironment") === "0") {
-                            window.history.pushState({ pagina: "" }, "", "politica");
-                        } else {
-                            // Produção GitHub: URL fica .../testefiles/?p=politica
-                            window.history.pushState({ pagina: "politica" }, "Política", "?p=politica");
-                        }
-                        console.log("Navegando para: Política de Privacidade");
-                    }, 600)
+                try {
+                    // --- INÍCIO DA MÁGICA ---
+                    await animarBarraProgresso('start');
                     
-                } else {
-                    // AÇÃO: Voltar para Home
-                    const loading = document.getElementById('loading-screen').classList.remove('loading-hidden');
-                    if (loading) {
-                        loading.classList.remove('loading-hidden');
+                    // O "Level de Espera" artificial para o usuário apreciar o sistema
+                    await delay(400); 
+
+                    // AÇÃO PRINCIPAL: Busca e injeta o conteúdo
+                    console.log("\n")
+                    await carregarPagina(destino);
+                    
+                    if (destino === 'assets/HTML/home.html') {
+                        await declaraBtnsHOME();
                     }
 
-                    setTimeout(() => {
-                        iframe.src = "assets/HTML/home.html"; 
-                        linkFooterPol.innerText = "Política de Privacidade"; // O link restaura
-                        console.log("Retornando para: Home");
+                    // --- FINALIZAÇÃO DA BARRA ---
+                    await animarBarraProgresso('end');
 
-                        // 2. O ROTEADOR: Atualiza a URL no navegador
-                        // history.pushState(estado, titulo, url_exibida)
-                        if(sessionStorage.getItem("proEnvironment") === "-1") {
-                            window.history.pushState({ pagina: "home" }, "Home", "#home");
-                        } else if(sessionStorage.getItem("proEnvironment") === "0") {
-                            window.history.pushState({ pagina: "" }, "", "home");
-                        } else {
-                            // Produção GitHub: URL fica .../testefiles/?p=politica
-                            window.history.pushState({ pagina: "home" }, "Política", "?p=home");
-                        }
-                    }, 600)
+                    // Atualiza UI e Roteador
+                    linkFooterPol.innerText = novoTexto;
+                    const env = sessionStorage.getItem("proEnvironment");
+                    let finalUrl = env === "-1" ? `#${pathUrl}` : (env === "0" ? pathUrl : `?p=${pathUrl}`);
+                    
+                    window.history.pushState({ pagina: pathUrl }, pathUrl.charAt(0).toUpperCase() + pathUrl.slice(1), finalUrl);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                    console.log(`Navegação concluída para: ${pathUrl}`);
+                    console.log("Page:", window.history.state);
+
+                } catch (error) {
+                    await animarBarraProgresso('end'); // Fecha a barra mesmo em erro
+                    console.error("Erro na transição:", error);
                 }
             });
         }
+        console.log("Botões INDEX ativados!")
+    }
 
-        if(sessionStorage.getItem("statusConsole") === 'true') {
-            console.log("Origem", window.location.origin);
-            console.log("Repositório Atual", window.location.pathname)
+    // Ativa Botões quando for página HOME;
+    async function declaraBtnsHOME() {
+
+        //Click botão Main CTA
+        let btnMainCta = document.querySelector(".btn-main-cta")
+        if(btnMainCta) {
+            btnMainCta.addEventListener("click", async function(event) {
+                window.alert("Página para eBooks está sendo preparada, volte mais tarde...")
+            })
         }
-    })
 
-    //Carregando elementos após coleta inicial...
-    window.addEventListener("load", async function() {
-        if(statusConsole) console.log("🎭 Todos os recursos carregados. Finalizando palco...");
-
-        // 2. O ROTEADOR: Atualiza a URL no navegador
-        const environment = sessionStorage.getItem("proEnvironment");
-
-        if (environment === "-1") {
-            // LiveServer: Usa a hashtag (F5 funciona nativamente)
-            window.history.pushState({ pagina: "#" }, "#", "#home");
-        } else if (environment === "0") {
-            // Apache Local: O .htaccess cuida do F5, então podemos usar "home" limpo
-            window.history.pushState({ pagina: "home" }, "Home", "home");
-        } else {
-            // Produção (GitHub): ATENÇÃO! 
-            // Se usarmos apenas "home", o F5 vai dar 404. 
-            // Recomendação: Deixe a URL limpa ou use um parâmetro de busca (?page=home)
-            // Para manter a segurança do seu deploy agora, vamos deixar a raiz:
-            window.history.pushState({ pagina: "home" }, "Home", `${baseURL}#home`); 
+        //Click Botão Apresentação Info
+        let btnApInfo = document.querySelector(".an-btn-info");
+        if(btnApInfo) {
+            btnApInfo.addEventListener("click", async function(event) {
+                window.alert("BlogSpot Business Coding está sendo preparado, volte mais tarde...");
+            })
         }
+
+        //Click Botão Contato Info
+        let btnCttInfo = document.querySelector(".cb-btn-info");
+        if(btnCttInfo) {
+            btnCttInfo.addEventListener("click", async function(event) {
+                window.alert("Instagram Soft Coding está sendo preparado, volte mais tarde...");
+            })
+        }
+
+        //Click Botão Feedback Info
+        let btnFeedInfo = document.querySelector(".sf-btn-info");
+        if(btnFeedInfo) {
+            btnFeedInfo.addEventListener("click", async function(event) {
+                window.alert("Formulário está sendo preparado, volte mais tarde...");
+            })
+        }
+        console.log("Botões HOME ativados!")
+    }
+
+    // 1. Criamos uma variável para guardar a largura inicial da tela
+    let ultimaLarguraConhecida = window.innerWidth;
+    let timeoutIframeResize;
+
+    // 1. FERRAMENTAS GLOBAIS (Sempre no topo)
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+    // Controle da Barra de Progresso Superior
+    async function animarBarraProgresso(status) {
+        const barContainer = document.getElementById('progress-bar-container');
+        const bar = document.getElementById('progress-bar');
+
+        if (status === 'start') {
+            barContainer.style.display = 'block'; // Garante que o trilho apareça
+            bar.style.opacity = '1';
+            bar.style.width = '0%';
             
-        //Declarando elementos index (Header - Iframe - Footer)
-        const headerLayout = document.querySelector('header');
-        const iframe = document.querySelector('.main-iframe');
-        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document
-        const footerLayout = document.querySelector('footer');
-
-        //Exibindo elementos index - Debugging...
-        if(sessionStorage.getItem("statusConsole") === 'true') {
-            console.log(headerLayout)
-            console.log(iframeDoc)
-            console.log(footerLayout)
+            // Pulo inicial para dar sensação de resposta imediata
+            setTimeout(() => { bar.style.width = '35%'; }, 10);
+            
+            // Caminhada lenta (simulando carregamento em background)
+            setTimeout(() => { bar.style.width = '70%'; }, 200);
+            
+        } else if (status === 'end') {
+            // Dispara para o final
+            bar.style.width = '100%';
+            
+            // Aguarda a transição do CSS terminar e limpa a barra
+            await delay(400); 
+            bar.style.opacity = '0';
+            
+            await delay(300); // Tempo para o fade-out
+            bar.style.width = '0%';
         }
+    }
 
-        //Capturando largura da tela!!!
-        const larguraScreen = screen.width;
-        const alturaScreen = screen.height;
-        if(sessionStorage.getItem("statusConsole") === 'true') {
-            console.log("Width Screen Start:", larguraScreen, "px");
-            console.log("Height Screen Start:", alturaScreen, "px");
-        }
-
-        // Verificando ADM session
-        //const statusADM = sessionStorage.getItem('ADMstatus')
-        //const resultADM = (statusADM === 'true');
-        //if (resultADM === true) {
-            //setTimeout(() => {
-                //alert("ADM Ativo!!!")
-            //}, 2300)
-        //}
-
-    });
-
-    //Recebe sinal quando o HTML filho está pronto no IFRAME...
+    //Recebe sinal do HTML quando houver algum EVENTO definido...
     window.addEventListener('message', async function(event) {
-
-        //Definindo Domínio Atual
-        const currentDomain = sessionStorage.getItem("currentDomain")
-        
-        //Corrigindo Domínio
-        const newDomain = `${event.origin}/`
 
         // Permited Origins
         const allowedOrigins = [
@@ -236,145 +300,24 @@ import {varsEnvironment} from './2-variaveis-ambientes.js';
             console.warn(`%cMensagem bloqueada de origem desconhecida: ${newDomain}`, "color: orange; font-weight: bold;");
 
             return; // Ignora e não processa mensagens de origens não confiáveis.
-        }
+        }   
 
-        //Zerando height do iframe para calcular o novo valor...
-        const iframe = document.querySelector(".main-iframe");
-        if (iframe) {
-            iframe.style.height = "0px"; // Ou "auto"
-        }
-
-        //Alterando altura iframe
-        const statusIframe = await alteraAlturaIframe();
-        console.log(statusIframe, "Altura Inicial Iframe Ajustada");
-
-        // 1. Verificamos qual o "estado" atual do link pelo texto dele
-        // Usamos .trim() para evitar problemas com espaços vazios
-        let linkFooterPol = document.querySelector(".footer-link-pol");
-        let textoAtual = linkFooterPol.innerText.trim().toUpperCase();
-        console.log(textoAtual)
-
-        if (textoAtual === "POLÍTICA DE PRIVACIDADE") {
-            declaraBtnsHOME();
-        } else {
-            console.log("Nada a fazer...")
-        }
-        
-        // 2. Dica de Ouro: Scroll para o topo ao trocar de página
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-
-        // 🚀 O CHECKMATE: Abrir as Cortinas!
-        // Usamos um pequeno timeout opcional de 200ms apenas para garantir que o 
-        // motor de renderização terminou de pintar tudo antes de esmaecer.
-        setTimeout(() => {
-            const loadingScreen = document.getElementById('loading-screen');
-            if (loadingScreen) {
-                loadingScreen.classList.add('loading-hidden');
-                console.log("✨ Palco pronto! Cortinas abertas.");
-            }
-        }, 200);
+        // Console
+        console.log("Recebendo Mensagens...")
     })
 
-    function declaraBtnsHOME() {
-        console.log("Declarando botões HOME...")
-
-        //Declarando iframe e Doc para interação com HTML do iframe...
-        const iframe = document.querySelector('.main-iframe');
-        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document
-
-        //Click botão Main CTA
-        let btnMainCta = iframeDoc.querySelector(".btn-main-cta")
-        if(btnMainCta) {
-            btnMainCta.addEventListener("click", async function(event) {
-                window.alert("Página para eBooks está sendo preparada, volte mais tarde...")
-            })
-        }
-
-        //Click Botão Apresentação Info
-        let btnApInfo = iframeDoc.querySelector(".an-btn-info");
-        if(btnApInfo) {
-            btnApInfo.addEventListener("click", async function(event) {
-                window.alert("BlogSpot Business Coding está sendo preparado, volte mais tarde...");
-            })
-        }
-
-        //Click Botão Contato Info
-        let btnCttInfo = iframeDoc.querySelector(".cb-btn-info");
-        if(btnCttInfo) {
-            btnCttInfo.addEventListener("click", async function(event) {
-                window.alert("Instagram Soft Coding está sendo preparado, volte mais tarde...");
-            })
-        }
-
-        //Click Botão Feedback Info
-        let btnFeedInfo = iframeDoc.querySelector(".sf-btn-info");
-        if(btnFeedInfo) {
-            btnFeedInfo.addEventListener("click", async function(event) {
-                window.alert("Formulário está sendo preparado, volte mais tarde...");
-            })
-        }
-    }
-
-    // 1. Criamos uma variável para guardar a largura inicial da tela
-    let ultimaLarguraConhecida = window.innerWidth;
-    let timeoutIframeResize;
-
+    // Resize da tela, update...
     window.addEventListener("resize", function() {
-        
-        // 2. PEGADA DE ÁGUIA: Verificamos se a largura REAL mudou
-        // Se a largura for a mesma, ignoramos o evento (evita bug da barra de URL no mobile)
-        if (window.innerWidth === ultimaLarguraConhecida) {
-            return; 
-        }
-
-        // Se chegou aqui, a largura mudou (ex: girou o celular ou redimensionou janela no PC)
-        ultimaLarguraConhecida = window.innerWidth;
-        console.log(ultimaLarguraConhecida)
-
-        clearTimeout(timeoutIframeResize);
-
-        timeoutIframeResize = setTimeout(async function() {
-            let iframe = document.querySelector(".main-iframe");
-            
-            if (!iframe) return;
-
-            try {
-                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                const statusIframeLoad = iframeDoc.readyState === 'complete';
-
-                if (statusIframeLoad) {
-                    // 1. O TRUQUE: Em vez de 0px (que joga pro topo), 
-                    // reduzimos para um valor pequeno mas existente, ou apenas removemos a altura fixa
-                    // para permitir que o conteúdo interno dite o novo tamanho.
-                    iframe.style.height = "100px"; 
-
-                    // 2. Aguardamos um micro-milissegundo para o DOM entender o reset
-                    requestAnimationFrame(async () => {
-                        const statusIframe = await alteraAlturaIframe();
-                    
-                        if(sessionStorage.getItem("statusConsole") === 'true') {
-                            console.log(statusIframe, "Iframe recalibrado com sucesso!");
-                        }
-                    });
-                }
-            } catch (error) {
-                console.error("Erro ao tentar recalcular a altura do Iframe:", error);
-            }
-        }, 250); // Aumentei para 250ms para dar mais estabilidade no mobile
+        console.log("Resize foi disparado...")
     });
 
-    //window.addEventListener('popstate', (event) => {
-        //window.location.reload();
-        // console.log('Evento popstate disparado:', event);
-        // if (event.state && event.state.iframePage) {
-        //     const pagina = event.state.iframePage;
-        //     console.log('Voltando para o estado:', pagina);
-        //     atualizarCSS(pagina);
-        //     // O iframe já voltou para o conteúdo anterior automaticamente
-        // } else {
-        //     atualizarCSS('home');
-        // }
-        //window.location.reload();
-    //});
+    window.addEventListener('popstate', (event) => {
+        // 1. Log visual para confirmar a intercepção
+        console.log("↩️ Navegação detectada: Sincronizando sistema via Reload...");
+
+        // 2. O comando que simula o F5
+        // O parâmetro 'true' (opcional) força o recarregamento do servidor, não do cache.
+        window.location.reload();
+    });
 
 })()

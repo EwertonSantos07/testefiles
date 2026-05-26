@@ -5,6 +5,38 @@
 
 @import url('variables.css');
 
+/* Container da barra (O trilho invisível) */
+#progress-bar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px; /* Fina e elegante */
+    background-color: transparent; /* Invisível quando não está carregando */
+    z-index: 2000; /* Acima do Header (que está em 1000) */
+}
+
+/* A barra em si (A parte que cresce) */
+#progress-bar {
+    width: 0%; /* Inicia zerada */
+    height: 100%;
+    
+    /* 1. Cor do Briefing: Verde Limão Ácido vibrante */
+    background: #A3FF12; 
+    
+    /* 2. Brilho Neon Calibrado: Usamos a mesma cor com opacidade no glow */
+    box-shadow: 0 0 15px rgba(163, 255, 18, 0.8), 0 0 5px rgba(163, 255, 18, 1); 
+    
+    /* Transição suave para manter o aspecto premium */
+    transition: width 0.4s ease; 
+    opacity: 0; /* Inicia invisível */
+}
+
+/* Classe para mostrar a barra quando o JS disparar */
+.loading-active #progress-bar {
+    opacity: 1;
+}
+
 header {
     box-sizing: border-box;
     width: 100%;
@@ -28,10 +60,11 @@ header {
     
     padding: 0 40px;
     
-    /* 3. Fixação: Garantindo que ele flutue sobre o Iframe */
-    position: sticky;
+    /* --- A MUDANÇA ESTÁ AQUI --- */
+    position: fixed; /* Fixa o header em relação à tela (viewport) */
     top: 0;
-    z-index: 100; /* Mantém acima de qualquer conteúdo do Iframe */
+    left: 0;         /* Garante que comece do canto esquerdo */
+    z-index: 1000;
 }
 
 /* Estilo para o ícone puro e flutuante do Instagram */

@@ -3,7 +3,7 @@
 @import url('../0-index/variables.css');
 
 /* 1. Body: O Fundo do Papel */
-body {
+.politica-container {
     box-sizing: border-box;
     margin: 0;
     padding: 0 20px; /* Respiro lateral para mobile */

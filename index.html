@@ -1,6 +1,6 @@
 <!-- Estrutura Inicial da LandPage -->
+<!-- Last update: 08/05/2026 as 09:30 -->
 <!-- Last Deploy: 00/00/2026 as 00:00 -->
-<!-- Last update: 20/03/2026 as 09:33 -->
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -13,15 +13,55 @@
             name="viewport"
             content="width=device-width, initial-scale=1.0">
 
+        <!-- Título da Página -->
+        <title>Ewerton Santos | Arquiteto de Sistemas & Business Coding</title>
+
+        <!-- Exibindo Ícone do Site -->
+        <link 
+            rel="shortcut icon" 
+            type="image/jpeg" 
+            href="assets/IMG/favicon-img.jpg">
+
+        <!-- SEO MECANISMOS DE BUSCAS -->
+        <meta
+            name="description"
+            content="Ewerton Santos: Arquiteto de Sistemas em Curitiba. Soluções de P&D, Business Coding e ferramentas de gestão de alta performance para empresas e indivíduos. Evolua seu negócio hoje!">
+
+        <!-- SEO MECANISMOS DE BUSCAS-->
+        <meta 
+            name="keywords" 
+            content="
+                Arquiteto de Sistemas Curitiba, 
+                Business Coding, 
+                Desenvolvimento Full-Stack, 
+                Ferramentas de Gestão Personalizadas, 
+                Consultoria P&D Tecnologia">
+
         <!-- Bloco para importar font-awesome icons para usar -->
         <link rel="preconnect" href="https://cdnjs.cloudflare.com">
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+        <link rel="canonical" href="[https://ewertonsantos07.github.io/business-coding/](https://ewertonsantos07.github.io/business-coding/)"/>
+
+        <!-- Link Principal com a Folha de Estilos - Somente index -->
+        <link rel="stylesheet" type="text/css" href="assets/CSS/0-index/0-index.css">
+
+        <!-- Folha de Estilo da HOME - Carregada no Index para o Fetch -->
+        <link rel="stylesheet" type="text/css" href="assets/CSS/1-home/0-home.css">
+
+        <!-- Folha de Estilo da POLITICA - Carregada no Index para o Fetch -->
+        <link rel="stylesheet" type="text/css" href="assets/CSS/2-politica/0-politica.css">
+
+        <!-- Exibe Cartão Pro ao compartilhar -->
+        <meta property="og:title" content="Ewerton Santos | Business Coding & System Architect">
+        <meta property="og:description" content="Transformando processos complexos em ferramentas de gestão de alta performance.">
+        <meta property="og:image" content="assets/IMG/Footer-banner.jpg">
+
         <!-- Chaves de Operação (Teste Local, Servidor Apache, Servidor Produção) -->
         <script>
             
-            //Legenda statusConsole
+            //Legenda statusConsole - Exibe Prins para Debug;
             //false - No messages in the console
             //true - Print messages status in the console - Debugging
             sessionStorage.setItem("statusConsole", true)
@@ -58,7 +98,9 @@
 
             // Definindo Raiz do Diretório
             const currentEnvironment = sessionStorage.getItem("proEnvironment")
+            const currentLocal = sessionStorage.getItem("localEnvironment")
             const intproEnvironment = parseInt(currentEnvironment)
+            const intcurLocal = parseInt(currentLocal)
             let baseURL = null;
             if (intproEnvironment === -1) {
                 // Pega o caminho da pasta atual dinamicamente
@@ -66,7 +108,13 @@
             } else if (intproEnvironment === 0) {
                 baseURL = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
             } else if (intproEnvironment === 1) {
-                baseURL = "/testefiles/";
+
+                //Verificando se é ambiente de teste ou produção definitiva
+                if (intcurLocal === 0) {
+                    baseURL = "/testefiles/";
+                } else if (intcurLocal === 1) {
+                    baseURL = "/business-coding/"
+                }
             }
 
             // Montando Base URL do Diretório
@@ -79,183 +127,65 @@
             sessionStorage.setItem("currentDomain", `${window.location.origin}${baseURL}`)
         </script>
 
-        <!-- Verificando se COOKIE ADM ESTÁ NO NAVEGADOR -->
         <script>
-            //console.log("Navegador Cookie: Desativado!")
-            //const cookieADM = "GA_EXCLUDE_ADM";
-            //const tipoADM = typeof cookieADM;
-            //const arrayCookies = document.cookie.split(';'); //Array separador
-            //const lenCookies = arrayCookies.length; //Quantidade
+            const COOKIE_NAME = "GA_EXCLUDE_ADM";
+            const cookies = document.cookie.split('; ');
+            const cookieADM = cookies.find(row => row.startsWith(`${COOKIE_NAME}=`));
 
-            //for (let i = 0; i < lenCookies; i++) {
-                //const partsCookies = arrayCookies[i].split('='); //Separa valores
-                //const tipoParts = typeof partsCookies[0]; //Verifica o tipo valor
-                //const statusFindout = (cookieADM === partsCookies[0].trim())
-                //if (statusFindout === true) {
-                    //sessionStorage.setItem("ADMstatus", partsCookies[1].trim()); 
-                    //if(sessionStorage.getItem("statusConsole") === 'true') {
-                        //console.log("ADM ATIVO COOKIE NAVEGADOR")
-                    //}
-                //}
-            //}    
-
-            // Função auxiliar para obter um parâmetro da URL MAGIC LINK
-            // Usar o pós link para adm: ?set_adm_cookie=true
-            //function getUrlParameter(name) {
-                //name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-                //var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-                //var results = regex.exec(location.search);
-                //return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-            //}
-
-            // Identificando se link inserindo é magic ?set_adm_cookie=true
-            //const setAdmCookieParam = getUrlParameter('set_adm_cookie');
-
-            // Se o parâmetro for encontrado e tiver o valor 'true'
-            //if (setAdmCookieParam === 'true') { 
+            // 1. INTERCEPTADOR: Ativação via URL
+            if (window.location.hash === "#adm") {
+                const expiraEm = Date.now() + (365 * 24 * 60 * 60 * 1000); // 1 ano em ms
+                document.cookie = `${COOKIE_NAME}=${expiraEm}; max-age=31536000; path=/`;
                 
-                //if (window.history.replaceState) {
-                    //const cleanUrl = window.location.origin + window.location.//pathname + window.location.hash;
-                    //window.history.replaceState({path: cleanUrl}, '', cleanUrl);
-                //} else {
-                    //Fallback para navegadores mais antigos (causará um recarregamento completo)
-                    //window.location.href = window.location.origin + window.//location.pathname + window.location.hash;
-                //}
+                console.log("🛠️ MODO ADM ATIVADO: Cookie gerado.");
+                history.replaceState(null, null, window.location.pathname);
+                location.reload(); // Recarrega para aplicar a lógica
+            }
 
-                //sessionStorage.setItem("ADMstatus", true);
-                //if(sessionStorage.getItem("statusConsole") === 'true') {
-                    //console.log("MAGIC LINK ADM IS UP")
-                //} 
-            //}
-        </script>
+            // 2. A CHAVE MESTRA: Verificação e Alerta
+            if (cookieADM) {
+                const dataExpira = parseInt(cookieADM.split('=')[1]);
+                const diasRestantes = Math.ceil((dataExpira - Date.now()) / (1000 * 60 * 60 * 24));
 
-        <!-- Session Storage Verification -->
-        <script>
-            //const islocalEnvironment = sessionStorage.getItem('localEnvironment')
-            //const statusADM = sessionStorage.getItem('ADMstatus')
-            //const intlocalEnvironment = parseInt(islocalEnvironment)
-            //const resultInt = (intlocalEnvironment === 1)
-            //const resultADM = (statusADM === 'true');
+                sessionStorage.setItem("ADMstatus", "true");
+                console.log(`%c🙈 AMBIENTE ADM: GTM suspenso. Expira em ${diasRestantes} dias.`, "color: #A3FF12;");
 
-            //if(sessionStorage.getItem("statusConsole") === 'true') {
-                //console.log("Environment: ", resultInt);
-                //console.log("ADM: ", resultADM);
-            //} 
-            
-            //if (resultInt === true && resultADM === false) {
-                
-                //Tag GA4
-                //const ga4MeasurementId = 'G-28WKJ8L6QV';
-
-                // Head Element GA4
-                //const script1 = document.createElement("script")
-                //script1.async = true
-                //script1.src = `https://www.googletagmanager.com/gtag/js?id=${ga4MeasurementId}`
-                //document.head.appendChild(script1)
-
-                // Data Layer GA4
-                //const script2 = document.createElement("script")
-                //script2.textContent = `
-                    //window.dataLayer = window.dataLayer || [];
-                    //function gtag(){dataLayer.push(arguments);}
-                    //gtag('js', new Date());
-
-                    //gtag('config', '${ga4MeasurementId}')
-                //`;
-                //document.head.appendChild(script2);
-
-                // Google Tag Manager GTM
-                //(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                    //new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                    //j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                //})(window,document,'script','dataLayer','G-28WKJ8L6QV');
-
-                //if(sessionStorage.getItem("statusConsole") === 'true') {
-                    //console.log("Index.html: GA4 e GTM habilitados para essa sessão!");
-                //} 
-            //} else {
-                //if(sessionStorage.getItem("statusConsole") === 'true') {
-                    //console.log("Index.html: Ambiente de testes ou ADM em produção, não habilitar TAGS Google!")
-                //} 
-            //}
-        </script>
+                // Alerta visual após o carregamento
+                setTimeout(() => {
+                    alert(`⚠️ MODO ADM ATIVO!\nMonitoramento GTM bloqueado.\nExpiração: ${diasRestantes} dias restantes.`);
+                }, 2300);
+            } else {
+                console.log("👁️ MODO USUÁRIO: Monitoramento GTM ativo.");
         
-        <!-- Título da Página -->
-        <title>Business Coding</title>
-
-        <!-- Exibindo Ícone do Site -->
-        <link 
-            rel="shortcut icon" 
-            type="image/png" 
-            href="assets/IMG/favicon-img.jpg">
-
-        <!-- SEO MECANISMOS DE BUSCAS -->
-        <meta
-            name="description"
-            content="Exemplo: Ewerton Santos é um profissional especializado em criação de sites em Curitiba, PR. Desenvolvemos websites personalizados e responsivos para empresas e indivíduos. Solicite um orçamento!">
-
-        <!-- SEO MECANISMOS DE BUSCAS-->
-        <meta 
-            name="keywords" 
-            content="keyword 1, keyword 2, keyword 3, keyword 4, keyword 5">
-
-        <!-- Link Principal com a Folha de Estilos - Somente index -->
-        <link rel="stylesheet"
-            type="text/css"
-            href="assets/CSS/0-index/0-index.css">
-
-        <!-- JavaScript Iniciando Leitura DOM -->
-        <script 
-            type="module"
-            src="assets/JAVA/0-index.js?v=1.3">
+                //Google Tag Manager - GTM - The Brain;
+                (function(w,d,s,l,i){
+                    w[l]=w[l]||[];
+                    w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+                    var f=d.getElementsByTagName(s)[0],
+                        j=d.createElement(s),
+                        dl=l!='dataLayer'?'&l='+l:'';
+                    j.async=true;
+                    j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+                    f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','GTM-M32CZSXS');
+            }
         </script>
     </head>
 
     <body>
 
-        <!-- Renderizando Tela Loading... -->
-        <div id="loading-screen" class="loading-screen">
-            <h1 class="loading-text">Loading...</h1>
+        <!-- Barra de Progresso Superior (Inicia invisível) -->
+        <div id="progress-bar-container">
+            <div id="progress-bar"></div>
         </div>
-
-        <!-- Monitoramente Iframe envia dados ao G4 Google -->
-        <script>
-            // const islocalEnvironment2 = sessionStorage.getItem('localEnvironment')
-            // const statusADM2 = sessionStorage.getItem('ADMstatus')
-            // const intlocalEnvironment2 = parseInt(islocalEnvironment2)
-            // const resultInt2 = (intlocalEnvironment2 === 1)
-            // const resultADM2 = (statusADM2 === 'true');
-
-            // if (resultInt2 === true && resultADM2 === false) {
-
-                // Google Tag Manager (noscript)
-                // const noScript = document.createElement("noscript")
-                // const eliframe = document.createElement("iframe")
-                // eliframe.src = "https://www.googletagmanager.com/ns.html?id=GTM-KDCXQ28J"
-                // eliframe.height = "0"
-                // eliframe.width = "0"
-                // eliframe.style.display = "none"
-                // eliframe.style.visibility = "hidden"
-                // noScript.appendChild(eliframe)
-                // document.body.prepend(noScript)
-
-                // if(sessionStorage.getItem("statusConsole") === 'true') {
-                    // console.log("Index.html: Iframe GTM ativo!!!")
-                // }
-            // } else {
-                // if(sessionStorage.getItem("statusConsole") === 'true') {
-                    // console.log("Index.html: Iframe noscript GTM desativado!")
-                // }
-            // }
-        </script>
         
         <!-- Cabeçalho do Site - NavBar -->
         <header>
 
+            <!-- Ícone Instagram, elegante - Desliza até a seção; -->
             <a 
                 href="#secao-instagram"
                 class="header-link-insta"
-                target="bloco_central"
                 title="Ir para o Instagram">
                 <i class="fa">&#xf16d;</i>
             </a>
@@ -352,14 +282,11 @@
             <!-- Call To Action Link Principal de Conversão -->
             
         </header>
-            
-        <!-- Iframe exibição de conteúdos -->
-        <iframe
-            class="main-iframe"
-            scrolling="no"
-            name="bloco_central"
-            src="assets/HTML/home.html">
-        </iframe>
+
+        <!-- Container para exibição de conteúdos via Fetch -->
+        <div id="main-content" class="main-iframe">
+            <!-- O conteúdo de home.html e outras páginas será injetado aqui via JS -->
+        </div>
 
         <!-- Footer -->
         <footer>
@@ -372,7 +299,7 @@
 
             <nav class="footer-links">
                 <a href="#" class="footer-link-a">BlogSpot</a>
-                <a href="#" class="footer-link-b">YouTube</a>
+                <a href="#" class="footer-link-b">Loja</a>
                 <a href="#" class="footer-link-pol">Política de Privacidade</a>
             </nav>
 
@@ -391,5 +318,15 @@
                 A violação dos direitos autorais é crime estabelecido na Lei nº 9.610/98 e punido pelo art. 184 do Código Penal.
             </p> -->
         </footer>
+
+        <script>
+            console.log("Index carregado, iniciando JS...")
+        </script>
+
+        <!-- JavaScript Iniciando Leitura DOM -->
+        <script 
+            type="module"
+            src="assets/JAVA/0-index.js?v=1.3">
+        </script>
     </body>
 </html>
