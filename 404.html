@@ -1,0 +1,289 @@
+<!-- Estrutura Inicial da LandPage -->
+<!-- Last update: 04/07/2026 as 10:37 -->
+<!-- Last Deploy: 04/07/2026 as 10:37 -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+
+        <!-- Informações Iniciais -->
+        <meta charset="UTF-8">
+
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0">
+
+        <!-- Título da Página -->
+        <title>RG Transporte Executivo em Curitiba | Roberto Gonçalves - Motorista Executivo</title>
+
+        <!-- Exibindo Ícone do Site -->
+        <link
+            rel="shortcut icon"
+            type="image/png"
+            href="assets/IMG/favicon.png">
+
+        <!-- SEO MECANISMOS DE BUSCAS DESCRIPTION ON SEARCH GOOGLE ENGINE -->
+        <meta
+            name="description"
+            content="Roberto Gonçalves é um motorista especializado em transporte executivo em Curitiba, PR. Receptivo, translado, passeio turístico e transfer. Solicite um orçamento!">
+
+        <!-- SEO MECANISMOS DE BUSCAS KEYSWORDS TO LOCATE THE WEBSITE -->
+        <meta
+            name="keywords"
+            content="
+                Transporte Executivo, 
+                chofer especializado, 
+                motorista em Curitiba, 
+                motorista profissional, 
+                orçamento, 
+                cotações">
+
+        <!-- Bloco para importar font-awesome icons para usar -->
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- SEO: Define a URL oficial da página para evitar conteúdo duplicado no Google -->
+        <link rel="canonical" href="[https://robertogoncalves2025.github.io/RG-transporte-executivo/](https://robertogoncalves2025.github.io/RG-transporte-executivo/)"/>
+
+        <!-- Link Principal com a Folha de Estilos - Somente index -->
+        <link rel="stylesheet" type="text/css" href="assets/02-CSS/00-Index/0-index.css">
+
+        <!-- Folha de Estilo da HOME - Carregada no Index para o Fetch -->
+        <link rel="stylesheet" type="text/css" href="assets/02-CSS/01-home/0-home.css">
+
+        <!-- Folha de Estilo da POLITICA - Carregada no Index para o Fetch -->
+        <link rel="stylesheet" type="text/css" href="assets/02-CSS/02-politica/0-poliltica.css">
+
+        <!-- Exibe Cartão Pro ao compartilhar -->
+        <meta property="og:title" content="Roberto Gonçalves | Transporte Executivo Curitiba">
+        <meta property="og:description" content="Há mais de 8 anos em soluções em transportes de pessoas.">
+        <meta property="og:image" content="assets/IMG/logo-assinatura.png">
+
+        <!-- Chaves de Operação (Teste Local, Servidor Apache, Servidor Produção) -->
+        <script>
+
+            //Legenda statsConsole
+            //false - No messages in the console
+            //true - Print messages status in the console
+            sessionStorage.setItem("statusConsole", true)
+
+            //Legenda proEnvironment
+            // -1 / - live server - URL c/#
+            // 0 / - Apache ***htaccess***
+            // 1 /testefiles/ ***404.html***
+            sessionStorage.setItem("proEnvironment", -1);
+
+            //Legenda localEnvironment
+            // 0 ambiente de testes
+            // 1 ambiente de produção
+            sessionStorage.setItem("localEnvironment", 0);
+
+            //Legenda statusHome
+            //false - Carregamento inicial
+            //true - Operação interna de páginas - Apenas testar páginas específicas!
+            sessionStorage.setItem("statusHome", "false"); //Always keep false
+
+            //Legenda statusADM
+            //false - ADM is not logged
+            //true - ADM is logged
+            sessionStorage.setItem("ADMstatus", null) //Always keep null
+
+            //Legenda scroll status
+            //false - home, carregamento padrão
+            //true - home, carregar e ir para âncora
+            sessionStorage.setItem("scrollStatus", false); //Always keep false
+        </script>
+        
+        <!-- Dominio - ROTEADOR -->
+        <script>
+
+            // Definindo Raiz do Diretório
+            const currentEnvironment = sessionStorage.getItem("proEnvironment")
+            const currentLocal = sessionStorage.getItem("localEnvironment")
+            const intproEnvironment = parseInt(currentEnvironment)
+            const intcurLocal = parseInt(currentLocal)
+            let baseURL = null;
+            if (intproEnvironment === -1) {
+                // Pega o caminho da pasta atual dinamicamente
+                baseURL = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+            } else if (intproEnvironment === 0) {
+                baseURL = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+            } else if (intproEnvironment === 1) {
+
+                //Verificando se é ambiente de teste ou produção definitiva
+                if (intcurLocal === 0) {
+                    baseURL = "/testefiles/";
+                } else if (intcurLocal === 1) {
+                    baseURL = "/RG-transporte-executivo/"
+                }
+            }
+
+            // Montando Base URL do Diretório
+            let baseTag = document.createElement('base');
+            baseTag.href = baseURL; 
+            document.head.prepend(baseTag);
+            sessionStorage.setItem("pathDomain", baseURL);
+            
+            // Montando Domínio
+            sessionStorage.setItem("currentDomain", `${window.location.origin}${baseURL}`)
+        </script>
+
+        <!-- Check ADM Session: Se True monitoring GA4/GTM OFF || Se False monitoring GA4/GTM on -->
+        <!-- URL + /#adm -->
+        <script>
+            const COOKIE_NAME = "GA_EXCLUDE_ADM";
+            const cookies = document.cookie.split('; ');
+            const cookieADM = cookies.find(row => row.startsWith(`${COOKIE_NAME}=`));
+
+            // 1. INTERCEPTADOR: Ativação via URL
+            if (window.location.hash === "#adm") {
+                const expiraEm = Date.now() + (365 * 24 * 60 * 60 * 1000); // 1 ano em ms
+                document.cookie = `${COOKIE_NAME}=${expiraEm}; max-age=31536000; path=/`;
+                
+                console.log("🛠️ MODO ADM ATIVADO: Cookie gerado.");
+                history.replaceState(null, null, window.location.pathname);
+                location.reload(); // Recarrega para aplicar a lógica
+            }
+
+            // 2. A CHAVE MESTRA: Verificação e Alerta
+            if (cookieADM) {
+                const dataExpira = parseInt(cookieADM.split('=')[1]);
+                const diasRestantes = Math.ceil((dataExpira - Date.now()) / (1000 * 60 * 60 * 24));
+
+                sessionStorage.setItem("ADMstatus", "true");
+                console.log(`%c🙈 AMBIENTE ADM: GTM suspenso. Expira em ${diasRestantes} dias.`, "color: #A3FF12;");
+
+                // Alerta visual após o carregamento
+                setTimeout(() => {
+                    alert(`⚠️ MODO ADM ATIVO!\nMonitoramento GTM bloqueado.\nExpiração: ${diasRestantes} dias restantes.`);
+                }, 2300);
+            } else {
+                console.log("👁️ MODO USUÁRIO: Monitoramento GTM ativo.");
+        
+                //Google Tag Manager - GTM - The Brain;
+                console.log("Ativar tag, descomentar só no final com a tag GA4/GTM...")
+                //(function(w,d,s,l,i){
+                    //w[l]=w[l]||[];
+                    //w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+                    //var f=d.getElementsByTagName(s)[0],
+                        //j=d.createElement(s),
+                        //dl=l!='dataLayer'?'&l='+l:'';
+                    //j.async=true;
+                    //j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+                    //f.parentNode.insertBefore(j,f);
+                //})(window,document,'script','dataLayer','GTM-M32CZSXS');
+            }
+        </script>
+    </head>
+
+    <body>
+
+        <!-- Barra de Progresso Superior (Inicia invisível) -->
+        <div id="progress-bar-container">
+            <div id="progress-bar"></div>
+        </div>
+
+        <div class="menu-oculto-backdrop" id="menu-mobile-container">
+            <section class="menu-oculto-painel" role="dialog" aria-modal="true" aria-label="Menu principal de navegação">
+                
+                <button class="close-menu" id="btn-close-menu" aria-label="Fechar menu de navegação" title="Fechar Menu">
+                    <span class="icon-close-symbol">&times;</span>
+                </button>
+
+                <nav class="menu-oculto-nav">
+                    <a href="#home" id="menu-oculto-home" class="menu-oculto-link" title="Ir para o Início">HOME</a>
+                    <a href="#transfer-aeroporto" id="menu-oculto-trans" class="menu-oculto-link" title="Serviço de Transfer para o Aeroporto">TRANSFER AEROPORTO</a>
+                    <a href="#viagens-executivas" id="menu-oculto-viagens" class="menu-oculto-link" title="Serviços de Viagens Executivas">VIAGENS EXECUTIVAS</a>
+                    <a href="#pacotes-turisticos" id="menu-oculto-pacotes" class="menu-oculto-link" title="Pacotes Turísticos no Brasil">PACOTES TURÍSTICOS NO BRASIL</a>
+                    <a href="#passagens-aereas" id="menu-oculto-passagens" class="menu-oculto-link" title="Consulta e Emissão de Passagens Aéreas">PASSAGENS AÉREAS</a>
+                </nav>
+
+            </section>
+        </div>
+
+        <!-- Cabeçalho do Site - NavBar -->
+        <header>
+            
+            <!-- Logotipo Principal (Extrema Esquerda) -->
+            <img
+                src="assets/IMG/logo-assinatura.png"
+                alt="Logotipo Roberto Gonçalves Transporte Executivo em Curitiba"
+                title="Roberto Gonçalves Transporte Executivo em Curitiba"
+                class="header-img"
+                loading="eager">
+
+            <!-- Botão invisível para abrir o menu oculto em telas menores -->
+            <button class="open-menu" aria-label="Menu de navegação" aria-expanded="false" aria-controls="navbar-menu" title="Abrir Menu">
+                <span class="icon-hamburger">&#9776;</span>
+            </button>
+
+            <!-- NavBar Opções de Navegação Principal -->
+            <nav class="navbar">
+                <a href="#home" id="navbar-home" class="navbar-link-home" title="Ir para o Início">HOME</a>
+                <a href="#transfer-aeroporto" id="navbar-transfer" class="navbar-link-transfer" title="Serviço de Transfer para o Aeroporto">TRANSFER AEROPORTO</a>
+                <a href="#viagens-executivas" id="navbar-viagens" class="navbar-link-viagens" title="Serviços de Viagens Executivas">VIAGENS EXECUTIVAS</a>
+                <a href="#pacotes-turisticos" id="navbar-pacotes" class="navbar-link-pacotes" title="Pacotes Turísticos no Brasil">PACOTES TURÍSTICOS NO BRASIL</a>
+                <a href="#passagens-aereas" id="navbar-passagens" class="navbar-link-passagens" title="Consulta e Emissão de Passagens Aéreas">PASSAGENS AÉREAS</a>
+            </nav>
+
+            <!-- Button Link Effect scroll to agendamento section -->
+            <a
+                href="#section-agendamento"
+                class="header-link-whats"
+                title="Ir para Seção Agendamento">
+                    <i class="fa">&#xf232;</i>
+            </a>
+
+        </header>
+
+        <!-- Container para exibição de conteúdos via Fetch -->
+        <div id="main-content" class="main-content-injector">
+            <!-- O conteúdo de home.html e outras páginas será injetado aqui via JS -->
+        </div>
+
+        <!-- Rodapé da página-->
+        <footer>
+
+            <!-- Ilustração LOGO oficial da empresa -->
+            <img 
+                class="footer-img"
+                src="assets/IMG/logo-assinatura.png"
+                alt="Logotipo Roberto Gonçalves Transporte Executivo em Curitiba"
+                title="Roberto Gonçalves Transporte Executivo em Curitiba">
+
+            <!-- NavBar Footer, opção Globais do Negócios -->
+            <nav class="footer-links">
+                <a href="#" class="footer-link-home" title="Ir para o Início">HOME</a>
+                <a href="#" class="footer-link-agendamento" title="Página de Agendamentos">AGENDAMENTO</a>
+                <a href="#" class="footer-link-transfer" title="Serviço de Transfer para o Aeroporto">TRANSFER AEROPORTO</a>
+                <a href="#" class="footer-link-viagens" title="Serviços de Viagens Executivas">VIAGENS EXECUTIVAS</a>
+                <a href="#" class="footer-link-pacotes" title="Pacotes Turísticos no Brasil">PACOTES TURÍSTICOS NO BRASIL</a>
+                <a href="#" class="footer-link-passagens" title="Consulta e Emissão de Passagens Aéreas">PASSAGENS AÉREAS</a>
+                <a href="#" class="footer-link-politica" title="Termos de Política & Privacidade">POLÍTICA & PRIVACIDADE</a>
+            </nav>
+             
+            <div class="cb-footer-credits">
+                <p class="footer-copy">
+                    © 2025-2026 RG Transporte Executivo.<br>
+                    Todos os direitos reservados.<br>
+                    Engineered by Ewerton Santos<br>
+                    @soft.coding <i class="fa" title="@soft.coding">&#xf16d;</i> 
+                    <span>•</span> 
+                    v1.3
+                </p>
+            </div>
+
+        </footer>
+
+        <script>
+            console.log("Index carregado, iniciando JS...")
+        </script>
+
+        <!-- JavaScript Iniciando Leitura DOM -->
+        <script 
+            type="module"
+            src="assets/03-JAVASCRIPT/0-index.js">
+        </script>
+    </body>
+</html>

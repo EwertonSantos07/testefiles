@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   CONFIGURAÇÕES GLOBAIS E RESET ESTRUTURAL (VISUAL 2026)
+   ========================================================================== */
+
+/* Reset Universal do Modelo de Caixa */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh; /* Garante que o body ocupe sempre a altura total da tela */
+    
+    /* Sistema de Empilhamento Vertical de Alta Performance */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch; /* Estica os filhos (Header, Injetor, Footer) para ocuparem 100% da largura */
+    
+    /* Travas de Segurança */
+    overflow-x: hidden; /* Impede completamente a rolagem horizontal indesejada (vazamentos) */
+    
+    /* Estilizações de Fundo Iniciais (Opcional - Alinhado à identidade) */
+    background-color: var(--background-glass);
+    font-family: Arial, sans-serif; /* Alinharemos as fontes oficiais nas próximas missões */
+}

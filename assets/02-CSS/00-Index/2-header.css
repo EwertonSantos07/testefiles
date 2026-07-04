@@ -1,0 +1,481 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   SISTEMA PREMIUM DE PROGRESSO ASSÍNCRONO (LOADING BAR)
+   ========================================================================== */
+
+/* Container da barra (O trilho invisível) */
+#progress-bar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;          /* Fina e elegante */
+    background: transparent; /* Invisível por padrão */
+    z-index: 2000;        /* Camada absoluta acima do Header (1000) */
+    pointer-events: none; /* 🛡️ TRAVA DE UX: Impede que o container intercepte cliques do usuário enquanto carrega */
+}
+
+/* A barra em si (A parte que cresce) */
+#progress-bar {
+    width: 0%;            /* Inicia zerada */
+    height: 100%;
+    opacity: 0;           /* Inicia invisível */
+    
+    /* 1. Cor Premium do Briefing: Verde Limão Ácido vibrante */
+    background-color: var(--progressbar-color); 
+    
+    /* 2. Brilho Neon Calibrado: Glow limpo e sem ruídos de renderização */
+    box-shadow: var(--progressbar-shadow);
+    
+    /* 3. Otimização de Performance e Transição */
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease; 
+    will-change: width, opacity; /* 🚀 ACELERAÇÃO DE HARDWARE: Avisa o navegador para preparar a GPU, evitando engasgos */
+}
+
+/* Classe de disparo controlada pelo JavaScript */
+.loading-active #progress-bar {
+    opacity: 1;
+}
+
+/* ==========================================================================
+   📱 DESIGN PREMIUM DO MENU OCULTO MOBILE (OVERLAY & GLASSMORPHISM)
+   ========================================================================== */
+
+/* 1. O Pano de Fundo (Backdrop) - Flutuação e Cobertura Total */
+.menu-oculto-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(4, 38, 55, 0.4); /* Azul escuro do cliente com transparência */
+    
+    /* Efeito Blur de Vidro Luxuoso (2026 UX Trend) */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    
+    /* Empilhamento: Fica acima de todo o conteúdo da página */
+    z-index: 9999; 
+    
+    /* Alinhamento Flex: Empurra o painel interno para surgir da direita */
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+
+    /* 🔒 ESTADO INICIAL: Começa 100% invisível e bloqueado para cliques */
+    opacity: 0;
+    pointer-events: none;
+    
+    /* Transição Suave de Entrada/Saída */
+    transition: opacity 0.4s ease-in-out;
+}
+
+/* 2. O Painel Interno (Onde ficam os links) */
+.menu-oculto-painel {
+    box-sizing: border-box;
+    width: 80%;
+    max-width: 320px;
+    height: 100%;
+    background-color: #042637; /* Fundo sólido no tom corporativo para máxima leitura */
+    padding: 40px 30px;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.3);
+    
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    /* 🛠️ ENGENHARIA DE MOVIMENTO: Começa deslocado para a direita (fora da tela) */
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   ⚙️ CONFIGURAÇÃO DE ATIVAÇÃO DO GATILHO (JS CLASS)
+   ========================================================================== */
+/* Quando o JS adicionar a classe ".active" no backdrop, o menu acende e desliza! */
+.menu-oculto-backdrop.active {
+    opacity: 1;
+    pointer-events: auto; /* Libera os cliques internos */
+}
+
+.menu-oculto-backdrop.active .menu-oculto-painel {
+    transform: translateX(0); /* Painel desliza suavemente para dentro da tela */
+}
+
+/* ==========================================================================
+   3. BOTÃO DE FECHAR INTERNO (CLOSE MENU)
+   ========================================================================== */
+.close-menu {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 2.5rem; /* Ícone de fechar grande e imponente para fácil toque */
+    line-height: 1;
+    cursor: pointer;
+    align-self: flex-end; /* Empurra o "X" para o topo direito do painel */
+    margin-bottom: 40px;
+    padding: 10px; /* Generosa área de toque para evitar fadiga do usuário */
+    
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.close-menu:hover {
+    color: var(--second-color, #d2aa70); /* Acende no dourado nobre */
+    transform: rotate(90deg); /* Charmosa micro-interação de rotação */
+}
+
+/* ==========================================================================
+   4. LINKS DE NAVEGAÇÃO VERTICAL (MENU LIST)
+   ========================================================================== */
+.menu-oculto-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 25px; /* Espaçamento confortável entre os links para toque mobile */
+    width: 100%;
+}
+
+.menu-oculto-link {
+    text-decoration: none;
+    font-family: Arial, sans-serif; /* Puxará a sua fonte global da mesa */
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+    width: 100%;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Linha divisória ultra sutil */
+    
+    transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+/* Hover e Foco nos Links Mobile - 🔒 Aplicado APENAS se o link NÃO estiver desativado */
+.menu-oculto-link:not(.disabled-link):hover,
+.menu-oculto-link.active:not(.disabled-link) {
+    color: var(--second-color, #d2aa70); /* Dourado na página ativa ou hover */
+    padding-left: 8px; /* Leve recuo para a direita ao passar o dedo/mouse */
+}
+
+/* ==========================================================================
+   ⚙️ COMPORTAMENTO SWITCH: ESTADOS DESATIVADOS (BLOQUEIO LÓGICO-VISUAL MOBILE)
+   ========================================================================== */
+.menu-oculto-link.disabled-link {
+    color: var(--second-color, #d2aa70) !important; /* Força o dourado elegante da página ativa */
+    opacity: 0.5;                                  /* Ligeiramente esmaecido (Contraste de inativo UX) */
+    pointer-events: none;                          /* 🛡️ Barreira física: bloqueia cliques e toques nativos */
+    cursor: default;                               /* Remove qualquer indicador de clique */
+    padding-left: 0 !important;                    /* Garante que o link não dance para o lado se for tocado */
+}
+
+/* ==========================================================================
+   CONFIGURAÇÕES DO HEADER (VISUAL PREMIUM GLASS & FIXED TO TOPO)
+   ========================================================================== */
+/* ==========================================================================
+   CABEÇALHO PRINCIPAL FIXO (PREMIUM GLASSMORPHISM DESIGN)
+   ========================================================================== */
+header {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0 4%; /* Espaçamento interno lateral confortável */
+    
+    /* Alinhamento Estrutural Flexbox */
+    display: flex; 
+    flex-direction: row;
+    flex-wrap: nowrap; 
+    align-items: center;
+    justify-content: space-between; /* Mantém as pontas e o centro alinhados */
+    
+    /* Dimensionamento */
+    width: 100%;
+    height: 90px; /* 📐 CALIBRAGEM EXATA: Substitui o auto para casar com o padding-top do injetor */
+    
+    /* --- ENGENHARIA DE TRANSPARÊNCIA E EFEITO VIDRO (GLASSMORPHISM) --- */
+    background-color: var(--background-header);
+    
+    /* Desfoca o conteúdo que estiver passando ATRÁS do header */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px); /* Suporte nativo e obrigatório para Safari/iOS */
+    
+    /* Linha divisória inferior sutil e elegante */
+    border-bottom: 1px solid rgba(210, 170, 112, 0.15); /* Dourado translúcido bem suave */
+    
+    /* --- FIXAÇÃO ABSOLUTA E BLINDADA NO TOPO --- */
+    position: fixed; 
+    top: 0;
+    left: 0;         
+    z-index: 1000;   /* Camada soberana, abaixo apenas da barra de progresso (2000) */
+    
+    /* Sombra de profundidade tridimensional otimizada para GPU */
+    box-shadow: var(--header-shadow);
+    
+    /* 🚀 PERFORMANCE: Força o navegador a criar uma nova camada de renderização, deixando o scroll liso */
+    transform: translateZ(0); 
+}
+
+/* ==========================================================================
+   ⚠️ COMPENSAÇÃO DE ALTURA NO CONTÊINER PRINCIPAL (INJETOR ASSÍNCRONO)
+   ========================================================================== */
+.main-content-injector {
+    padding-top: 90px; /* Casamento perfeito e milimétrico com a altura fixa do header */
+}
+
+/* ==========================================================================
+   LOGOTIPO PRINCIPAL (EXTREMA ESQUERDA)
+   ========================================================================== */
+.header-img {
+    /* Dimensões Responsivas de Alta Performance */
+    width: 100%;
+    max-width: 160px; /* Tamanho ideal máximo na tela */
+    height: auto;     /* Mantém a proporção perfeita e evita achatamento */
+    
+    /* Alinhamento Fino */
+    display: block;
+    margin-left: 0;   /* O respiro lateral é controlado pelo padding de 4% do header */
+    
+    /* Suavidade de Transição e Otimização Gráfica */
+    transition: opacity 0.3s ease-in-out;
+    will-change: opacity; /* 🚀 PERFORMANCE: Avisa a GPU para processar a mudança de opacidade sem engasgos */
+    
+    /* Prevenção de arrasto nativo do navegador (UX Premium) */
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+/* Efeito Hover Sutil (Elegância Executiva) */
+.header-img:hover {
+    opacity: 0.85; /* Calibrado para um feedback visual elegante e sutil */
+}
+
+/* ==========================================================================
+   🎛️ BOTÃO DO MENU HAMBÚRGUER (CORRIGIDO - 100% INVISÍVEL NO DESKTOP)
+   ========================================================================== */
+.open-menu {
+    /* 1. Reset de Fábrica e Comportamento Inicial */
+    display: none; /* 🔒 Trancado: Remove o botão do fluxo no desktop */
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+    border-radius: 6px;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    
+    /* 2. Dimensionamento e Área de Toque Perfeita (UX Mobile) */
+    width: 42px;
+    height: 42px;
+    
+    /* 3. Alinhamento Central dos Ícones Internos */
+    /* 📐 CORREÇÃO: inline-flex removido daqui para não anular o display: none */
+    align-items: center;
+    justify-content: center;
+    
+    /* 4. Estilização dos Ícones (Herdando as variáveis do cliente) */
+    color: #ffffff; 
+    font-size: 1.6rem; 
+    line-height: 1;
+    
+    /* 5. Transições de Alta Performance */
+    transition: background-color 0.3s ease, 
+                border-color 0.3s ease, 
+                color 0.3s ease, 
+                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: background-color, transform;
+}
+
+/* 🌟 Interação Hover (Feedback Executivo) */
+.open-menu:hover {
+    color: var(--second-color, #d2aa70); 
+    border-color: rgba(210, 170, 112, 0.4); 
+    background-color: rgba(255, 255, 255, 0.05); 
+    transform: scale(1.05); 
+}
+
+/* 📱 Estado Ativo / Pressionado (Feedback de Clique) */
+.open-menu:active {
+    transform: scale(0.95); 
+}
+
+/* Ajuste dos Spans internos para transições limpas */
+.open-menu .icon-hamburger,
+.open-menu .icon-close {
+    display: block;
+    font-style: normal;
+    font-weight: normal;
+    speak-as: none; 
+}
+
+/* ==========================================================================
+   NAVBAR PRINCIPAL: LINKS LINEARES (CENTRO DO HEADER)
+   ========================================================================== */
+.navbar {
+    /* Alinhamento Flexbox de Alta Performance */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; /* Mantém os links estritamente na mesma linha no desktop */
+    align-items: center;
+    justify-content: center;
+    
+    /* Espaçamento Inteligente 2026 */
+    gap: 15px; /* Controla o espaço exato entre os links sem precisar de margens isoladas */
+    height: auto;
+    margin: 0;
+    padding: 0;
+}
+
+/* Links Individuais da Navbar */
+.navbar a {
+    text-decoration: none;
+    font-size: var(--header-menu-size); /* Sutilmente menor para dar um visual mais executivo e Premium */
+    font-family: var(--header-font-style); /* Usando a fonte global temporária até definirmos as oficiais */
+    font-weight: 600; /* Texto ligeiramente mais encorpado para facilitar a leitura */
+    letter-spacing: 0.5px; /* Nobreza visual: pequeno espaço entre as letras */
+    text-transform: uppercase; /* Garante que o menu fique todo em maiúsculo automaticamente */
+    
+    /* Área de Clique Confortável (UX) */
+    padding: 8px 12px;
+    color: var(--background-glass);
+    
+    /* Suavidade Veludo no Hover e Transições Avançadas */
+    transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out;
+    will-change: color, background-color; /* 🚀 PERFORMANCE: Aceleração Gráfica para as transições */
+}
+
+/* Link Ativo (Indica a seção atual onde o usuário se encontra - Ex: HOME) */
+.navbar a.active {
+    color: var(--second-color); /* O dourado elegante da Agência/Cliente */
+}
+
+/* ==========================================================================
+   ⚙️ COMPORTAMENTO SWITCH: TRAVAS LÓGICAS E VISUAIS (MELHORES PRÁTICAS UX)
+   ========================================================================== */
+
+/* Efeito de Interação (Hover) - 🔒 Aplicado APENAS se o link NÃO estiver desativado */
+.navbar a:not(.disabled-home-link):not(.disabled-link):hover {
+    color: var(--second-color);
+    background-color: var(--second-color-rgba) /* Cria um leve fundo dourado translúcido super moderno */
+}
+
+/* Estado Desativado (Estilo Switch Trancado) 
+   Garante que o cursor mude para "padrão" e remove qualquer ponteiro de clique */
+.navbar a.disabled-home-link,
+.navbar a.disabled-link {
+    cursor: default; /* Remove a mãozinha de clique (UX Perfeito) */
+    color: var(--second-color);  /* Mantém em dourado indicando que é a tela visualizada no momento */
+    pointer-events: none; /* Segunda barreira física: bloqueia cliques nativos no elemento */
+}
+
+/* ==========================================================================
+   BOTÃO DO WHATSAPP COM EFEITO BRILHO CONTÍNUO (EXTREMA DIREITA)
+   ========================================================================== */
+.header-link-whats {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Formato Circular Premium (Mantido em 45px estritos) */
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 0; /* Alinhado pelo padding de 4% do header */
+    
+    /* Identidade Visual: Verde Oficial WhatsApp em Degradê Alta Performance */
+    background: var(--button-scroll);
+    border: var(--button-border);
+    
+    /* 📐 RECALIBRAGEM: Ícone maior no centro para equilíbrio perfeito de pesos */
+    color: var(--background-glass);
+    font-size: var(--header-whats-size); 
+    text-decoration: none;
+    
+    /* Controle de Camadas e Isolamento para o Efeito de Brilho */
+    position: relative;
+    overflow: hidden; /* Corta o brilho estritamente na borda do círculo */
+    
+    /* Transições de Interação Base e Performance */
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
+    will-change: transform, box-shadow; /* 🚀 PERFORMANCE: Joga o efeito hover direto para a GPU */
+    cursor: pointer;
+}
+
+/* --- A ENGENHARIA DO EFEITO BRILHO (SHIMMER EFFECT CORRIGIDO E ATIVO) --- */
+.header-link-whats::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%; /* Começa totalmente invisível à esquerda */
+    width: 80%;  /* Feixe maior para dar a ilusão de que o botão expandiu */
+    height: 100%;
+    
+    /* 🛠️ SINTAXE CORRIGIDA: O feixe de luz cortante agora renderiza perfeitamente */
+    background: var(--button-effect);
+    
+    /* Inclinação diagonal charmosa do reflexo */
+    transform: skewX(-25deg); 
+    
+    /* Dispara a animação infinita de 3 em 3 segundos */
+    animation: shineEffect 3s infinite ease-in-out;
+}
+
+/* Linha do Tempo da Animação do Brilho (Travessia Fluida) */
+@keyframes shineEffect {
+    0% {
+        left: -150%;
+    }
+    30% {
+        left: 150%; /* Atravessa o botão de forma nítida e visível */
+    }
+    100% {
+        left: 150%; /* Tempo de repouso antes do próximo disparo */
+    }
+}
+
+/* Interação Hover do Botão (Upgrade Flutuante 2026) */
+.header-link-whats:hover {
+    transform: scale(1.06) translateY(-2px); /* Efeito flutuante moderno sem distorção */
+    box-shadow: var(--button-shadow); /* Glow verde de profundidade */
+}
+
+/* ==========================================================================
+   📱 ENGENHARIA DE RESPONSIVIDADE (MEDIA QUERIES)
+   ========================================================================== */
+
+/* 📐 BREAKPOINT CRÍTICO: De 994px para baixo (Tablets e Smartphones) */
+@media only screen and (max-width: 994px) {
+    
+    /* 1. Oculta a Navbar Linear padrão do Desktop */
+    .navbar {
+        display: none !important; /* Garante que a lista linear saia do fluxo visual */
+    }
+
+    /* Oculta Botão Whats */
+    .header-link-whats {
+        display: none;
+    }
+
+    /* 2. Ativa e exibe o botão do Menu Hambúrguer */
+    .open-menu {
+        display: inline-flex; /* Transforma o botão em flex para centralizar o ícone ☰ */
+    }
+}
+
+/* 📐 OUTROS PONTOS DE AJUSTE (Herança da sua versão anterior refinada) */
+
+/* Smartphones pequenos: Ajuste estrutural do cabeçalho */
+@media only screen and (max-width: 529px) {
+    header {
+        flex-direction: column;
+        gap: 15px; 
+        height: 136px;
+        /* Adiciona 
+        espaçamento saudável quando os itens empilharem */
+    }
+
+    .header-imglink {
+        margin-left: 0;
+        margin-top: 2%;
+    }
+}

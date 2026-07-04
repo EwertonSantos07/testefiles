@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   SEÇÃO: AGENDAMENTO (PRODUÇÃO PREMIUM COM QUEBRA DE LAYOUT)
+   ========================================================================= */
+.section-agendamento {
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    margin: 80px 0 0 0;
+    padding: 0 4%; /* Respiro lateral essencial para dispositivos móveis */
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    
+    /* Configuração Robusta do Background Banner */
+    background-size: cover;
+    background-position: center; /* 📐 MELHORIA UX: Centraliza a imagem impedindo cortes bizarros */
+    background-repeat: no-repeat;
+    background-attachment: scroll; /* Mantém a rolagem fluida e leve em navegadores mobile */
+    position: relative;
+}
+
+/* Título de Impacto (H1) */
+.sa-h1 {
+    box-sizing: border-box;
+    font-size: var(--home-h1-global-size);
+    color: var(--background-glass);
+    font-family: var(--home-h1-global-font);
+    font-weight: 700;
+    /* Sombra projetada estrategicamente para destacar o texto sobre fundos claros ou complexos */
+    text-shadow: var(--agend-text-shadow); 
+    margin: 80px 0 50px 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Subtítulo de Apoio (H2) */
+.sa-h2 {
+    box-sizing: border-box;
+    font-size: var(--main-h2-slogan-size);
+    color: var(--background-glass);
+    font-family: var(--main-h2-slogan-font);
+    font-weight: 400;
+    text-shadow: var(--agend-text-shadow);
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* 📱 BOTÃO DE CHAMADA PARA AÇÃO (CTA) - ALINHADO COM A MAIN */
+.sa-btn {
+    box-sizing: border-box;
+    color: var(--background-glass);
+    font-family: inherit;
+    font-weight: 700;
+    font-size: var(--main-btn-size);
+    letter-spacing: 2px;
+    
+    width: 260px;
+    height: 38px; /* Ajuste milimétrico para dar respiro ao texto com o padding interno */
+    border-radius: 20px;
+    border: var(--button-border-02); /* Linha suave ao invés do cinza dimgray */
+    
+    /* Gradiente Nobre */
+    background: var(--gradient-nobre);
+    padding: 0 1.5em;
+    margin: 50px 0 80px 0; /* Aumentado a margem inferior para equilibrar o respiro da seção */
+    
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
+    
+    /* Engenharia de Transição de Alta Performance */
+    transition: var(--transition-effect);
+    will-change: transform, box-shadow;
+}
+
+/* Efeito Hover Sincronizado com a Main */
+.sa-btn:hover {
+    background: var(--gradient-inverso);
+    border-color: var(--background-glass);
+    transform: translateY(-2px); /* Elevação elegante de botão ativo */
+    box-shadow: 0 4px 15px rgba(216, 174, 114, 0.4); /* Brilho dourado sutil no disparo */
+}

@@ -1,0 +1,155 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   SEÇÃO: PRINCIPAIS FERRAMENTAS (LOGICA INTEGRADA E UNIFICADA)
+   ========================================================================== */
+.principais-ferramentas {
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0 4%;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* Título da Seção */
+.pf-h1 {
+    box-sizing: border-box;
+    font-size: var(--home-h1-global-size);
+    color: var(--first-color);
+    font-family: var(--home-h1-global-font);
+    font-weight: 700;
+    text-shadow: var(--h1-text-shadow);
+    margin: 80px 0 30px 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Parágrafo Descritivo (Centralizado conforme original) */
+.pf-p {
+    box-sizing: border-box;
+    font-size: var(--home-p-global-size);
+    font-family: var(--home-p-global-font);
+    font-weight: 400;
+    text-align: center;
+    line-height: 1.6; /* 📐 Proporção fluida para leitura confortável */
+    max-width: 600px;
+    color: var(--first-color);
+    margin: 0 0 20px 0;
+    padding: 0 5px;
+    cursor: text;
+}
+
+/* Grelha Contêiner dos Cards de Ferramentas */
+.pf-container-frames {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 1200px; /* Mantido os 1200px originais para acomodar a fileira maior */
+    height: auto;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 16px; /* Substitui margens individuais por controle fluído */
+}
+
+/* ==========================================================================
+   🛠️ COMPACTAÇÃO MASTER: CLASSE UNIFICADA PARA OS CARDS (01 A 06)
+   ========================================================================== */
+.pf-container-frame {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-decoration: none;
+    
+    /* Dimensões Estritas dos Cards */
+    width: 380px;
+    height: 280px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* Acabamento Executivo Premium (Substituindo o antigo Inset Black) */
+    border: var(--frame-border-color);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Tarjeta de Texto Absoluta na Base do Card */
+.pf-container-frame-p {
+    box-sizing: border-box;
+    border-top: var(--border-frame-text);
+    border-bottom: var(--border-frame-text);
+    background-color: var(--first-color);
+    color: var(--background-glass);
+    font-weight: 700;
+    font-family: var(--home-textframe-global-font);
+    font-size: var(--home-textframe-global-size);
+    text-align: left;
+    
+    width: 100%;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 3px; /* Calibrado para legibilidade e elegância */
+    
+    margin: 0;
+    padding: 5px 0 5px 15px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+}
+
+/* RECURSIVIDADE PRINCIPAIS FERRAMENTAS */
+@media only screen and (max-width: 412px) {
+    #pf-container-frame-01 {
+        width: 280px;
+        height: 180px;
+    }  
+    
+    #pf-container-frame-02 {
+        width: 280px;
+        height: 180px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: bottom center;
+    }   
+
+    #pf-container-frame-03 {
+        width: 280px;
+        height: 180px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }  
+    
+    #pf-container-frame-04 {
+        width: 280px;
+        height: 180px;
+    }  
+    
+    #pf-container-frame-05 {
+        width: 280px;
+        height: 180px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+    } 
+
+    #pf-container-frame-06 {
+        width: 280px;
+        height: 180px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+    } 
+}
