@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Kapakana:wght@300..400&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap');
+
+/* /assets/CSS/variables.css */
+
+/* Identidade Visual - Iron Dark */
+
+:root {
+
+    /* Bordas Diagnóstico */
+    --cor-bordas-dgt: 0px solid red;
+
+    --background-glass: #ffffff;
+
+    --progressbar-color: #d2aa70;
+
+    --progressbar-shadow: 0 0 15px rgba(210, 170, 112, 0.8), 0 0 5px rgba(210, 170, 112, 1);
+
+    --background-header: rgba(4, 38, 55, 0.85); 
+
+    --header-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+
+    --first-color: #042637;
+
+    --second-color: #d2aa70;
+
+    --second-color-rgba: rgba(210, 170, 112, 0.08);
+
+    --button-scroll: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+
+    --button-border: 1px solid rgba(255, 255, 255, 0.25);
+
+    --button-border-02: 1px solid rgba(255, 255, 255, 0.3); /* Linha suave idêntica ao agendamento */
+
+    --button-effect: linear-gradient(
+        to right, 
+        rgba(255, 255, 255, 0) 0%, 
+        rgba(255, 255, 255, 0.5) 50%, 
+        rgba(255, 255, 255, 0) 100%
+    );
+
+    --gradient-nobre: linear-gradient(to right, #635648 3%, #c69f68 25%, #d8ae72 100%);
+
+    --gradient-inverso: linear-gradient(to right, #d8ae72 3%, #c69f68 75%, #635648 100%);
+
+    -button-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+
+    --transition-effect: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+
+    --footer-bordertop: 1px solid rgba(210, 170, 112, 0.15);
+
+    --footer-a-color: rgba(255, 255, 255, 0.7);
+
+    --footer-text-copy: rgba(255, 255, 255, 0.45);
+
+    --footer-fa-color: rgba(210, 170, 112, 0.6);
+
+    --footer-span-color: rgba(210, 170, 112, 0.4);
+
+    --main-text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
+    --text-shadow-02: 2px 2px 5px rgba(0, 0, 0, 0.65);
+
+    --text-nicho-color: white;
+
+    --golden-light: 0 4px 15px rgba(216, 174, 114, 0.4); /* Brilho dourado sutil no disparo */
+
+    --frame-border-color: 1px solid rgba(5, 36, 58, 0.15);
+
+    --frame-border-hover: 0 8px 24px rgba(5, 36, 58, 0.15);
+
+    --border-frame-text: 1px solid rgba(255, 255, 255, 0.2);
+
+    --h1-text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15); /* Sombra suavizada para títulos claros */
+
+    --agend-text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+
+    --grey-premium: #f8f9fa; /* Um leve fundo cinza premium para destacar as marcas */
+
+    --borda-ultra-suave: 1px solid rgba(4, 38, 55, 0.05); /* Borda cirúrgica ultra suave */
+
+    --transition-carrossel: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+
+    --float-shadow: 0 8px 20px rgba(5, 36, 58, 0.08); /* Sombra em harmonia com os tons de azul do projeto */
+
+    --filter-scale: grayscale(100%); /* Deixa as marcas em tons de cinza corporativo */
+
+    --fiter-scale-0: grayscale(0%); /* Ganha cor total quando o usuário passa o mouse */
+
+    --rgba-fundo-dot: rgba(4, 38, 55, 0.2); 
+
+    --rgba-first-color: rgba(4, 38, 55, 0.5);
+
+    /* Efeitos Visuais */
+    /* --cor-fundo-glass: rgba(18, 18, 18, 0.8); */
+
+    /* Bordas */
+    /* --cor-borda: #2C2C2C; */
+
+    /* Cor de 60% */
+    /* --cor-fundo: #0B0E14;
+    --cor-fundo-opaca: rgba(11, 14, 20, 0.8); */
+    
+    /* Cor de 30% */
+    /* --cor-middle: #1F2937; */
+    /* Convertido #1F2937 para RGB e mantida a opacidade de 0.6 */
+    /* --cor-middle-opaca: rgba(31, 41, 55, 0.60); */
+
+    /* Cor de 10% */
+    /* --cor-low: #A3FF12; */
+    /* Um tom levemente mais escuro do verde ácido para o efeito de hover */
+    /* --cor-low-hover: #8ae600;  */
+    
+    /* O mesmo Verde Ácido (#A3FF12) com 30% de opacidade para o efeito Glow */
+    /* --cor-low-bright: rgba(163, 255, 18, 0.3); */
+
+    /* Tipografia - Fontes */
+    /* --font-title: 'Brawler', serif; */
+    /* --font-title: 'DM Serif Display', serif; */
+    /* --font-title: 'Prata', serif; */
+    /* --font-title: 'League Gothic', serif; */
+    /* --font-body: 'Inter', sans-serif; */
+
+    /* --font-title: 'Orbitron', sans-serif;
+    --font-body: 'Rajdhani', sans-serif; */
+
+    /* --font-title: 'Playfair Display', serif;
+    --font-body: 'Lato', sans-serif; */
+
+    /* --font-title: 'Syne', sans-serif; */
+    /* --font-body: 'Questrial', sans-serif; */
+
+    /* Variações dos textos */
+    /* --cor-texto: #FFFFFF; */
+    /* --cor-texto: white; */
+
+    /* Outras Tonalidades */
+    /* --cor-texto-02: #333333;
+    --cor-texto-03: #444444;
+    --cor-texto-04: #2C2C2C; */
+    
+    
+    /* Dimensões do Molde */
+    /* --height-header: 60px;
+    --blur-efeito: 10px; */
+}

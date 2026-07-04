@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   CONFIGURAÇÕES GLOBAIS E FLUXO DA HOME (CONTEÚDO INJETADO 2026)
+   ========================================================================== */
+
+/* Contêiner Principal que envelopa todas as seções do arquivo home.html */
+.home-wrapper {
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;         /* Permite o crescimento de acordo com as seções adicionadas */
+    padding-bottom: 40px; /* Respiro confortável antes de encostar no Footer */
+    
+    /* Sistema de Empilhamento de Blocos de Alta Performance */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch; /* Faz com que cada seção ocupe 100% da largura útil automaticamente */
+    
+    /* 🛡️ TRAVA ANTI-VAZAMENTO OTIMIZADA: Evita quebras de scroll e preserva efeitos */
+    overflow-x: hidden;   /* Bloqueia estritamente vazamentos laterais (horizontal) */
+    overflow-y: visible;  /* Garante que o scroll vertical principal do navegador corra liso */
+}

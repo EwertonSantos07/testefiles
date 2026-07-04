@@ -1,0 +1,86 @@
+@charset "UTF-8";
+
+/***** SEÇÃO: ÍCONES RELEVANTES (DIFERENCIAIS) *****/
+.relevant-icon {
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0 20px;
+    
+    /* Engenharia Fluida Flexbox */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px; /* 📐 GARANTIA RESPONSIVA: Evita colisão de blocos quando a tela encolher */
+}
+
+.rel-infos {
+    box-sizing: border-box;
+    height: auto;
+    
+    /* Alinhamento Interno Fino (Ícone ao lado do Texto) */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; /* Garante que o ícone e o texto fiquem estritamente lado a lado */
+    align-items: center;
+    justify-content: center;
+    
+    /* 📐 ENGENHARIA DE CAIXA: Distribuição uniforme no mobile */
+    flex: 1 1 250px; 
+    gap: 15px; /* Espaço perfeito entre o ícone e o parágrafo de texto */
+}
+
+/* Configuração Avançada dos Ícones (FontAwesome) */
+.rel-infos .fa {
+    box-sizing: border-box;
+    color: var(--second-color);
+    font-size: var(--rel-fa-size);
+    margin: 0;
+    padding: 0;
+    cursor: context-menu;
+    
+    /* 🚀 PERFORMANCE: Suavização dos vetores do ícone */
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    flex-shrink: 0; /* Impede o Flexbox de esmagar o ícone em telas menores */
+}
+
+/* 📐 CALIBRAGEM PROPORCIONAL DE PESOS VISUAIS */
+#fa-carro, 
+#fa-id {
+    font-size: var(--rel-especific-fa-size);
+}
+
+/* Estilização Nobre do Texto Descritivo */
+.rel-p {
+    box-sizing: border-box;
+    text-decoration: none;
+    font-size: var(--rel-p-size);
+    font-family: var(--rel-p-font);
+    font-weight: 400; /* 📐 PADRONIZAÇÃO: Peso numexcel estrito */
+    text-align: left;
+    color: var(--first-color);
+    margin: 0;
+    padding: 0;
+    cursor: text;
+    
+    /* Nitidez Tipográfica */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   📱 COMPENSAÇÃO VISUAL PARA TELAS MENORES (MOBILE UX)
+   ========================================================================== */
+@media (max-width: 480px) {
+    .relevant-icon {
+        padding: 0 15px;
+    }
+    .rel-infos {
+        flex: 1 1 100%; /* Em celulares pequenos, cada diferencial ganha uma linha exclusiva */
+        justify-content: flex-start; /* Alinha o bloco à esquerda de forma elegante */
+    }
+}
