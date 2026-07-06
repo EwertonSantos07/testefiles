@@ -79,6 +79,7 @@ main {
     color: var(--text-nicho-color);
     font-family: var(--main-h1-nicho-font);  
     font-weight: bold;
+    text-transform: uppercase;
     text-shadow: var(--main-text-shadow);
     margin: 0;
     margin-bottom: 100px;
