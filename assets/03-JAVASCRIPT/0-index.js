@@ -373,7 +373,14 @@
         let btnMainCta = document.querySelector(".main-btn")
         if(btnMainCta) {
             btnMainCta.addEventListener("click", async function(event) {
-                window.alert("Botão Main CTA, redirecionar para whats...")
+                //window.alert("Botão Main CTA, redirecionar para whats...")
+
+                // Link oficial da API do WhatsApp com o número e mensagem padrão do cliente
+                // Substitua pelo número e texto real configurado na produção!
+                const whatsappUrl = "https://wa.me/5541991495750?text=Seja%20bem-vindo(a)%20a%20RG%20Transporte%20Executivo.%20Fa%C3%A7a%20suas%20cota%C3%A7%C3%B5es";
+
+                // Abre em uma nova aba garantindo a segurança do navegador contra invasão de contexto
+                window.open(whatsappUrl, "_blank", "noopener,noreferrer");
             })
         }
 
@@ -381,7 +388,14 @@
         let btnAGENDAMENTO = document.querySelector(".sa-btn")
         if(btnAGENDAMENTO) {
             btnAGENDAMENTO.addEventListener("click", async function(event) {
-                window.alert("Botão Agendamento, redirecionar para whats...")
+                //window.alert("Botão Agendamento, redirecionar para whats...")
+
+                // Link oficial da API do WhatsApp com o número e mensagem padrão do cliente
+                // Substitua pelo número e texto real configurado na produção!
+                const whatsappUrl = "https://wa.me/5541991495750?text=Seja%20bem-vindo(a)%20a%20RG%20Transporte%20Executivo.%20Fa%C3%A7a%20suas%20cota%C3%A7%C3%B5es";
+
+                // Abre em uma nova aba garantindo a segurança do navegador contra invasão de contexto
+                window.open(whatsappUrl, "_blank", "noopener,noreferrer");
             })
         }
     }
