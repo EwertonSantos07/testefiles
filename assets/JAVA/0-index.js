@@ -127,19 +127,22 @@
             })
         }
 
-        //Click Botão avançar seção four
+        // Click Botão avançar seção four
         let btnAvancar = document.querySelector(".btn-sec-four");
-        console.log(btnAvancar)
+
         if (btnAvancar) {
-            btnAvancar.addEventListener("click", async function (event) {
+            btnAvancar.addEventListener("click", function (event) {
                 event.preventDefault();
                 
-                // Rola suavemente até o final absoluto da página (footer)
-                window.scrollTo({
-                    top: document.body.scrollHeight,
-                    behavior: 'smooth'
-                });
+                let targetSection = document.querySelector(".conversion-section");
                 
+                if (targetSection) {
+                    // Rola suavemente centralizando a seção de conversão na tela
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
             });
         }
 
