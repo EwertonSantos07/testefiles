@@ -1,0 +1,112 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   RODAPÉ DO SITE (FOOTER)
+   ========================================================================== */
+
+footer {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 80px; 
+    padding: 20px 5%;
+    
+    background-color: var(--cor-fundo); 
+    border-top: 1px solid var(--cor-low);
+    /* border: var(--cor-bordas-dgt); */
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; /* Linha única em telas desktop */
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 10;
+}
+
+/* --- Imagem / Logo do Rodapé --- */
+.footer-img {
+    max-height: 40px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+/* --- Links de Apoio (Navegação do Footer) --- */
+.footer-btns {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.footer-btns a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--cor-texto-suave, #a0a0a0);
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.footer-btns a:hover {
+    color: var(--cor-contra, #ffffff);
+    transform: translateY(-2px);
+}
+
+.footer-btns a i {
+    font-size: 0.9rem;
+}
+
+/* --- Créditos e Copyright --- */
+.cb-footer-credits {
+    max-width: 600px;
+    text-align: center;
+}
+
+.footer-copy {
+    color: var(--cor-texto-suave, #888888);
+    font-size: 0.8rem;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.footer-copy i {
+    margin: 0 4px;
+    font-size: 0.85rem;
+    color: var(--cor-texto-suave, #888888);
+}
+
+/* --- 📱 RESPONSIVIDADE --- */
+@media (max-width: 900px) {
+    footer {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        padding: 30px 20px;
+        gap: 20px;
+    }
+
+    .footer-btns {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    footer {
+        padding: 5px 5px 5px 5px;
+    }
+    
+    .footer-btns {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .footer-copy {
+        font-size: 0.75rem;
+    }
+}

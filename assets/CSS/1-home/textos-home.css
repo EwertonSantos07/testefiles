@@ -1,0 +1,152 @@
+@charset "UTF-8";
+
+/* --- Estilização Rápida do Conteúdo (Para visualização) --- */
+.h1-main-title {
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-family: var(--font-principal);
+    color: var(--cor-contra);
+}
+
+/* Subtítulo, slogam, efeito */
+.h2-main-sub {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    color: var(--cor-contra);
+}
+
+/* Matriz Caça-Palavras / Palavra Cruzada */
+.marca-crossword {
+    display: grid;
+    /* Colunas padronizadas em 2.6rem | Linhas em 2.0rem */
+    grid-template-columns: repeat(6, 2.6rem);
+    grid-template-rows: repeat(4, 2.0rem);
+    
+    justify-items: center;
+    align-items: center;
+    gap: 4px;
+    
+    /* === DESLOCAMENTO PARA A ESQUERDA === */
+    /* Empurra o centro do grid para a esquerda, alinhando a coluna S-O-F-T abaixo do 'I' de CRIAÇÃO */
+    margin-right: 8.5rem; 
+    
+    font-family: var(--font-body);
+    font-size: 1.15rem;
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+/* Estilo geral das letras (Formato Retangular) */
+.cross-letter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    color: var(--cor-contra);
+    
+    border: 1px solid var(--cor-contra); 
+    border-radius: 4px;
+    background-color: var(--cor-fundo-glass);
+    box-sizing: border-box;
+}
+
+/* === ALINHAMENTO VERTICAL (S - O - F - T) === */
+.letter-s { grid-row: 1; grid-column: 2; }
+
+.letter-o-pivot { 
+    grid-row: 2; 
+    grid-column: 2; 
+    color: var(--cor-low); 
+    border-color: var(--cor-contra);
+    background-color: var(--cor-fundo-glass);
+}
+
+.letter-f { grid-row: 3; grid-column: 2; }
+.letter-t { grid-row: 4; grid-column: 2; }
+
+/* === ALINHAMENTO HORIZONTAL (C - O - D - I - N - G) === */
+.letter-c { grid-row: 2; grid-column: 1; color: var(--cor-contra); border-color: var(--cor-contra); }
+.letter-d { grid-row: 2; grid-column: 3; color: var(--cor-contra); border-color: var(--cor-contra); }
+.letter-i { grid-row: 2; grid-column: 4; color: var(--cor-contra); border-color: var(--cor-contra); }
+.letter-n { grid-row: 2; grid-column: 5; color: var(--cor-contra); border-color: var(--cor-contra); }
+.letter-g { grid-row: 2; grid-column: 6; color: var(--cor-contra); border-color: var(--cor-contra); }
+
+.barra-destaque {
+    color: var(--cor-low);
+    font-weight: 800;
+    margin-right: 0.2rem; /* Espaçamento fino entre a barra e o texto */
+    
+    /* Opcional: Adiciona o brilho sutil na própria barra */
+    text-shadow: 0 0 8px var(--cor-low-bright); 
+}
+
+/* === ENCAIXE DO SUBTÍTULO === */
+.efeito-sub {
+    grid-row: 3; 
+    grid-column: 3 / -1; 
+    
+    justify-self: start;
+    align-self: center;
+    padding-left: 0.6rem;
+    
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    font-weight: 555;
+    text-transform: none;
+    letter-spacing: 0.5px;
+    color: var(--cor-contra);
+    white-space: nowrap;
+}
+
+.h2-main-apoio {
+    font-size: 1.3rem;
+    font-weight: 333;
+    max-width: 700px;
+    margin-top: 77px;
+    margin-bottom: 101px;
+    color: var(--cor-contra);
+    line-height: 1.6;
+    font-family: var(--font-read);
+    line-height: 1.9;
+    font-style: italic
+}
+
+.destaque-texto {
+  color: var(--cor-contra);
+  font-weight: 555;
+  /* Opcional: borda inferior fina tática */
+  border-bottom: 0px solid var(--cor-low); 
+}
+
+/* --- Título H3 Default --- */
+.H3 {
+    font-family: var(--font-principal);
+    color: var(--cor-contra);
+    font-size: 2.2rem;
+    margin: 0;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    
+    /* Barrinha lateral de foco */
+    border-left: 5px solid var(--cor-low); 
+    padding-left: 20px;
+}
+
+/* --- Stilo Parágrafo Default -- */
+.P {
+    font-family: var(--font-read);
+    color: var(--cor-contra);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin: 0;
+    max-width: 850px; /* Evita que a frase fique esticada demais em monitores ultrawide */
+    text-align: left;
+}

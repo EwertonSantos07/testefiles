@@ -1,0 +1,223 @@
+@charset "UTF-8";
+
+/* --- 1. Estilização da Seção Tecnologias, Controle, Bastidores --- */
+.section-two {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 100px 5% 120px 5%;
+    background-color: var(--cor-fundo);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Alinhamento à direita no desktop */
+    gap: 40px;
+    
+    position: relative;
+    overflow: hidden;
+    padding-top: 107px;
+    padding-bottom: 166px;
+}
+
+/* Compensação para Navegação Suave (Header Fixo) */
+#tecnologias-bastidores {
+    scroll-margin-top: 80px;
+}
+
+/* --- 2. Tipografia da Seção --- */
+.section-two .H3 {
+    color: var(--cor-contra);
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    padding-right: 15px;
+    margin: 0;
+    
+    /* 1. Alinhamento de Texto e Fluxo */
+    display: block;
+    text-align: left;
+    
+    /* 2. Trava de Posição no Container Pai */
+    width: 100%;             /* Ocupa toda a largura do container */
+    align-self: flex-start;  /* Garante o alinhamento à esquerda se o pai for Flexbox */
+    margin-right: auto;      /* Empurra o bloco de volta para a esquerda */
+    margin-left: 0;
+    margin-bottom: 33px;
+}
+
+/* --- 3. Textura Técnica Estilo Mural / Backdrop --- */
+.section-two::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    background-image: conic-gradient(
+        var(--cor-low) 90deg, 
+        rgba(255, 255, 255, 0.08) 90deg 180deg, 
+        var(--cor-low) 180deg 270deg, 
+        rgba(255, 255, 255, 0.08) 270deg
+    );
+    background-size: 240px 240px;
+    
+    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+    mask-image: linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+    
+    pointer-events: none;
+    z-index: 1;
+}
+
+.section-two > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* --- 4. Grade de Quadros/Tecnologias --- */
+.tech-grid {
+    width: 100%;
+    max-width: 1100px;
+    display: grid;
+    /* Ajustado para preencher de forma fluida manter o alinhamento alinhado à direita */
+    grid-template-columns: repeat(auto-fit, minmax(80px, 80px)); 
+    justify-content: end; 
+    gap: 45px 25px;
+}
+
+/* --- 5. Estilo Base dos Cards --- */
+.tech-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    
+    background: var(--cor-low); 
+    border: 1px solid var(--cor-contra);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.tech-card i {
+    font-size: 2.2rem;
+    color: var(--cor-contra);
+    transition: all 0.3s ease;
+}
+
+/* --- Legenda Flutuante (Tooltip) --- */
+.tech-label {
+    position: absolute;
+    bottom: -34px;
+    left: 50%;
+    transform: translateX(-50%) translateY(5px);
+    
+    padding: 6px 12px;
+    background-color: var(--cor-preta);
+    color: var(--cor-contra);
+    border: 1px solid var(--cor-contra);
+    border-radius: 6px;
+    
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.25s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+    z-index: 20;
+}
+
+.tech-label::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 0 6px 6px 6px;
+    border-style: solid;
+    border-color: transparent transparent var(--cor-preta) transparent;
+}
+
+/* Efeito Hover (Desktop) */
+.tech-card:hover {
+    background: var(--cor-preta);
+    border-color: var(--cor-contra);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 255, 136, 0.4);
+    z-index: 10;
+}
+
+.tech-card:hover i {
+    color: var(--cor-low);
+    transform: scale(1.1);
+}
+
+.tech-card:hover .tech-label {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* --- 📱 6. RESPONSIVIDADE (Ajustes Mobile) --- */
+
+@media (max-width: 768px) {
+    .section-two {
+        padding: 100px 5% 120px 5%;
+        align-items: center; /* Centraliza a seção no mobile */
+        gap: 35px;
+        margin-bottom: 66px;
+    }
+
+    .section-two .H3 {
+        text-align: center;
+        border-left: none !important;    /* Garante que a barra vertical esquerda suma */
+        border-right: none !important;   /* Garante que a barra vertical direita suma */
+        border-bottom: 3px solid var(--cor-low); /* Aplica a linha inferior estilo sublinhado */
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 10px;
+        font-size: 1.8rem;
+        width: 100%;                     /* Faz a linha acompanhar a largura no mobile */
+        display: block;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        width: fit-content;
+    }
+
+    .tech-grid {
+        justify-content: center; /* Centraliza os cards no mobile */
+        gap: 35px 20px;
+    }
+}
+
+/* Ajustes para telas pequenas/smartphones (Exibição estática legível dos labels) */
+@media (max-width: 480px) {
+    .section-two {
+        padding: 100px 5% 120px 5%;
+    }
+
+    .section-two .H3 {
+        font-size: 1.4rem;
+    }
+
+    .tech-grid {
+        gap: 40px 15px; /* Mais espaço vertical para os labels visíveis */
+    }
+
+    /* No touch, exibimos os nomes de forma suave e legível sem precisar clicar */
+    .tech-label {
+        opacity: 0.9;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+        font-size: 0.7rem;
+        padding: 4px 8px;
+        bottom: -28px;
+    }
+}

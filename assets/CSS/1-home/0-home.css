@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+/* #7b68ee cor default*/
+
+/* 1. Import Configs global */
+@import url('1-global.css');
+
+/* 2. Import Configs Mains */
+@import url('2-main.css');
+
+/* 3. Import Configs Bullets Points */
+/* @import url('3-section-bullet-points.css'); */
+
+/* 4. Import Configs Seção de Apresentação */
+@import url('4-section-one.css');
+
+/* 5. Import Seção de Desenvolvimento */
+@import url('5-section-two.css');
+
+/* 6. Import Seção de Depoimentos */
+/* Será Inserido no futuro section-three */
+
+/* 7. Import Seção de Comparação */
+@import url('7-section-four.css');
+
+/* 8. Import Seção de Conversão */
+@import url('10-conversion-section.css');
+
+/* 9. Import Seção de Feedback */
+/* @import url('6-section-feedback.css'); */
+
+
+
+/* Import Configs Section Contato */
+/* @import url('7-section-contato.css'); */
+
+/* Import Configs Sobre Mim */
+/* @import url('8-sobre-mim.css'); */
+
+
+
+
+
+@import url('botoes-home.css');
+
+@import url('textos-home.css');
+
+@import url('img-home.css');
+
