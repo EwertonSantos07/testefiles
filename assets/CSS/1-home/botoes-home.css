@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+/* Botões HOME */
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--cor-contra);
+    color: var(--cor-contra);          /* Força a cor do texto/ícone igual à borda */
+    text-decoration: none;             /* Remove o sublinhado do link */
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    display: inline-flex;              /* inline-flex evita que o <a> ocupe a largura toda se estiver solto */
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-body);
+}
+
+.btn-outline:hover {
+    background-color: var(--cor-low);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px var(--cor-low-bright);
+}
+
+.btn-outline * {
+    pointer-events: none;
+}

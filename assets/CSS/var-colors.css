@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+/* /assets/CSS/variables.css */
+:root {
+
+    /* Bordas Diagnóstico */
+    --cor-bordas-dgt: 0px solid white;
+
+
+
+    /* Esquema de Cores Principais */
+
+    /* Cor de 60% Vinho Tático Matte */
+    --cor-fundo: #1C0E10;
+
+    /* Cor de 30% Carbono Avermelhado */
+    --cor-medium: #2F1317;
+
+    /* Cor de 10% Vermelho Crimson */
+    --cor-low: #FF0033;
+
+
+
+    /* Efeitos Visuais */
+
+    /* 60% (Glassmorphism) */
+    --cor-fundo-glass: rgba(28, 14, 16, 0.75);
+
+    /* Brilho/Sombra Neon de 10% (30% de opacidade) */
+    --cor-low-bright: rgba(255, 0, 51, 0.3);
+
+    /* Cinza extremamente escuro (Fundo Opaco Glass) */
+    --cor-fundo-opaca: rgba(18, 18, 18, 0.85);
+
+    /* Cinza intermediário/card (Middle Opaco Glass) */
+    --cor-middle-opaca: rgba(35, 35, 38, 0.60);
+
+
+    /* CONTRASTES */
+
+    /* Contraste Principal Pérola Suave */
+    --cor-contra: #F4F1EA;
+
+    /* Cor Preta Automático */
+    --cor-preta: #000000;
+
+    /* Cor Amarelo Sóbrio */
+    --cor-asobrio: #D4A017; 
+
+    /* Cor Amarelo Elétrico */
+    --cor-aeletrico: #FFE600;
+
+    /* Cor Verde Militar / Floresta (Sólido) */
+    --cor-vnatural: #2E7D32;
+
+    /* Cor Verde Neon Elétrico (Hover / Sucesso) */
+    --cor-verde: #00FF66;
+}

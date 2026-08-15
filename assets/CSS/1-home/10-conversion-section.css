@@ -1,0 +1,207 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   SEÇÃO ORÇAMENTO & CALL TO ACTION (BANNER HORIZONTAL)
+   ========================================================================== */
+
+.conversion-section {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 100px 5% 33px 5%;
+    background-color: var(--cor-fundo);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Compensação para Navegação Suave (Header Fixo) */
+#orcamento {
+    scroll-margin-top: 80px;
+}
+
+/* --- Container Principal do Banner --- */
+.orc-banner-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    min-height: 340px;
+    border-radius: 24px;
+    overflow: hidden;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    border: 1px solid var(--cor-low);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+/* --- Imagem de Fundo (Corrigida) --- */
+.orc-bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+/* --- Overlay Transparente Tingido --- */
+.orc-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Fallback legível e gradiente fluido */
+    background: radial-gradient(
+        circle, 
+        rgba(15, 15, 15, 0.75) 0%, 
+        rgba(10, 10, 10, 0.92) 100%
+    );
+    
+    /* Suporte moderno para misturas de variáveis caso disponível */
+    background: radial-gradient(
+        circle, 
+        color-mix(in srgb, var(--cor-fundo, #0a0a0a) 75%, transparent) 0%, 
+        color-mix(in srgb, var(--cor-fundo, #0a0a0a) 95%, transparent) 100%
+    );
+    
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* --- Conteúdo Centralizado --- */
+.orc-content {
+    position: relative;
+    z-index: 3;
+    padding: 50px 30px;
+    text-align: center;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    max-width: 700px;
+}
+
+.orc-content .H3 {
+    color: var(--cor-contra);
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.orc-content .P {
+    color: var(--cor-texto-suave, #cccccc);
+    font-size: 1.15rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* --- Botão WhatsApp (Chamada Final) --- */
+.btn-orc {
+    margin-top: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 32px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.btn-orc i {
+    font-size: 1.3rem;
+}
+
+/* --- 📱 RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+    .conversion-section {
+        padding: 80px 5% 33px 5%;
+    }
+
+    .orc-banner-wrapper {
+        min-height: 320px;
+        border-radius: 16px;
+    }
+
+    .orc-content {
+        padding: 40px 20px;
+        gap: 14px;
+    }
+
+    .orc-content .H3 {
+        text-align: center;
+        border-left: none !important;    /* Garante que a barra vertical esquerda suma */
+        border-right: none !important;   /* Garante que a barra vertical direita suma */
+        border-bottom: 3px solid var(--cor-low); /* Aplica a linha inferior estilo sublinhado */
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 10px;
+        font-size: 1.8rem;
+        width: 100%;                     /* Faz a linha acompanhar a largura no mobile */
+        display: block;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        width: fit-content;
+    }
+    
+    .orc-content .P {
+        font-size: 1rem;
+    }
+    
+    .btn-orc {
+        width: 100%;
+        max-width: 320px;
+        box-sizing: border-box;
+        padding: 14px 20px;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* 1. Reduz os paddings externos da seção para aproximar do footer */
+    .conversion-section {
+        padding: 40px 15px 13px 15px; /* Apenas 20px no bottom (em vez de 70px) */
+    }
+
+    /* 2. Ajusta o card interno para não ter altura sobrando no fundo */
+    .orc-banner-wrapper {
+        min-height: auto; /* Remove altura mínima engessada no mobile */
+        border-radius: 16px;
+    }
+
+    /* 3. Espaçamento interno do conteúdo dentro do card */
+    .orc-content {
+        padding: 30px 15px 25px 15px; /* Reduz o respiro interno do card */
+        gap: 12px;
+    }
+
+    .orc-content .H3 {
+        font-size: 1.35rem;
+        line-height: 1.25;
+    }
+
+    .orc-content .P {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    /* 4. Botão WhatsApp: Mantém área de toque confortável sem afundar o card */
+    .btn-orc {
+        width: 100%;
+        max-width: 280px;
+        padding: 12px 20px; /* Restaura o respiro interno do botão */
+        margin-top: 6px;
+        font-size: 0.9rem;
+    }
+}
